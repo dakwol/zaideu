@@ -1,0 +1,141 @@
+@use '../shared/styles/variables.scss' as variables;
+
+.screen {
+  min-height: 100vh;
+  background: variables.$auth-background;
+  color: variables.$auth-text-primary;
+  font-family: variables.$auth-font-family;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(320px, 520px) minmax(280px, 420px);
+  gap: clamp(32px, 7vw, 96px);
+  align-items: center;
+  width: min(100%, 1120px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 48px 28px;
+}
+
+.authColumn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.workspaceNote {
+  display: grid;
+  gap: 18px;
+  align-self: center;
+  border-left: 1px solid variables.$auth-border;
+  padding-left: clamp(28px, 4vw, 48px);
+}
+
+.noteLabel {
+  margin: 0;
+  color: variables.$auth-accent;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.noteTitle {
+  max-width: 25rem;
+  margin: 0;
+  color: variables.$auth-text-primary;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 760;
+  letter-spacing: 0;
+  line-height: 1.08;
+}
+
+.noteText {
+  max-width: 28rem;
+  margin: 0;
+  color: variables.$auth-text-secondary;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.noteChecklist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+
+  span {
+    border: 1px solid variables.$auth-border;
+    border-radius: 999px;
+    background: variables.$auth-surface;
+    color: variables.$auth-text-secondary;
+    font-size: 0.8125rem;
+    font-weight: 650;
+    line-height: 1;
+    padding: 9px 12px;
+  }
+}
+
+@media (max-width: 860px) {
+  .screen {
+    min-height: 100dvh;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+    min-height: 100dvh;
+    padding: 28px 0 40px;
+  }
+
+  .workspaceNote {
+    order: -1;
+    width: min(100% - 40px, 470px);
+    margin: 0 auto;
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .noteTitle,
+  .noteText {
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .content {
+    gap: 22px;
+    padding-top: 20px;
+  }
+
+  .workspaceNote {
+    width: min(100% - 32px, 470px);
+    gap: 12px;
+  }
+
+  .noteLabel {
+    font-size: 0.6875rem;
+  }
+
+  .noteTitle {
+    font-size: 1.45rem;
+    line-height: 1.12;
+  }
+
+  .noteText {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+
+  .noteChecklist {
+    gap: 6px;
+
+    span {
+      font-size: 0.75rem;
+      padding: 8px 10px;
+    }
+  }
+}

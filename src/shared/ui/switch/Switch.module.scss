@@ -1,0 +1,64 @@
+.switch {
+  display: inline-flex;
+  width: 2rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  outline: none;
+  transition: all 150ms ease;
+
+  &[data-state='checked'] {
+    background-color: var(--primary);
+  }
+
+  &[data-state='unchecked'] {
+    background-color: var(--input);
+  }
+
+  &:focus-visible {
+    border-color: var(--ring);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 50%, transparent);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  :global(.dark) & {
+    &[data-state='unchecked'] {
+      background-color: color-mix(in oklch, var(--input) 80%, transparent);
+    }
+  }
+}
+
+.thumb {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  background-color: var(--background);
+  pointer-events: none;
+  transition: transform 150ms ease;
+
+  &[data-state='checked'] {
+    transform: translateX(calc(100% - 2px));
+  }
+
+  &[data-state='unchecked'] {
+    transform: translateX(0);
+  }
+
+  :global(.dark) & {
+    &[data-state='unchecked'] {
+      background-color: var(--foreground);
+    }
+
+    &[data-state='checked'] {
+      background-color: var(--primary-foreground);
+    }
+  }
+}

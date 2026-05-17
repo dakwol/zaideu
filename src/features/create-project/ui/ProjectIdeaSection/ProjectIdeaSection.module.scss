@@ -1,0 +1,63 @@
+@use '../../../../shared/styles/variables.scss' as variables;
+
+.section {
+  display: grid;
+  gap: 22px;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-large;
+  background: variables.$auth-surface;
+  padding: 28px;
+}
+
+.formGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.label {
+  color: variables.$auth-text-primary;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.textarea {
+  min-height: 116px;
+  border-color: variables.$auth-border !important;
+  border-radius: variables.$auth-radius-small !important;
+  background: variables.$auth-surface !important;
+  box-shadow: none !important;
+  color: variables.$auth-text-primary !important;
+  font-family: variables.$auth-font-family;
+  resize: vertical;
+}
+
+.select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-small;
+  background: variables.$auth-surface;
+  color: variables.$auth-text-primary;
+  font-family: variables.$auth-font-family;
+  font-size: 0.9375rem;
+  outline: none;
+  padding: 0 14px;
+
+  &:focus {
+    border-color: variables.$auth-accent;
+    box-shadow: 0 0 0 3px rgb(47 111 235 / 0.12);
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    border-radius: variables.$auth-radius-medium;
+    padding: 20px;
+  }
+}

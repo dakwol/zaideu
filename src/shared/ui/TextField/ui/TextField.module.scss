@@ -1,0 +1,67 @@
+@use '../../../styles/variables.scss' as variables;
+
+.field {
+  display: grid;
+  gap: 8px;
+  color: variables.$auth-text-primary;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-small;
+  background: variables.$auth-surface;
+  color: variables.$auth-text-primary;
+  font-family: variables.$auth-font-family;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  outline: none;
+  padding: 0 14px;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+
+  &::placeholder {
+    color: variables.$auth-text-muted;
+  }
+
+  &:hover {
+    border-color: variables.$auth-border-strong;
+  }
+
+  &:focus {
+    border-color: variables.$auth-accent;
+    box-shadow: 0 0 0 3px rgb(47 111 235 / 0.12);
+  }
+
+  &[aria-invalid='true'] {
+    border-color: variables.$auth-error;
+    background-color: variables.$auth-error-soft;
+  }
+}
+
+.errorMessage {
+  color: variables.$auth-error;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+
+@media (max-width: 560px) {
+  .field {
+    gap: 7px;
+  }
+
+  .input {
+    min-height: 46px;
+    font-size: 1rem;
+    padding-inline: 13px;
+  }
+}

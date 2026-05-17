@@ -1,0 +1,146 @@
+@use '../../../../shared/styles/variables.scss' as variables;
+
+.section {
+  display: grid;
+  gap: 22px;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-large;
+  background: variables.$auth-surface;
+  padding: 28px;
+}
+
+.headerRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: start;
+}
+
+.headerActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.secondaryButton,
+.addButton {
+  border-radius: variables.$auth-radius-small;
+  background: variables.$auth-surface !important;
+  color: variables.$auth-text-primary !important;
+  font-family: variables.$auth-font-family;
+}
+
+.tasksList {
+  display: grid;
+  gap: 10px;
+}
+
+.taskRow {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 132px auto;
+  gap: 12px;
+  align-items: end;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-medium;
+  background: variables.$auth-background;
+  padding: 14px;
+}
+
+.taskNumber {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: variables.$auth-accent-soft;
+  color: variables.$auth-accent;
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.taskTitleField,
+.estimateField {
+  display: grid;
+  gap: 6px;
+}
+
+.fieldLabel {
+  color: variables.$auth-text-muted;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.input,
+.select {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-small;
+  background: variables.$auth-surface;
+  color: variables.$auth-text-primary;
+  font-family: variables.$auth-font-family;
+  font-size: 0.9375rem;
+  outline: none;
+  padding: 0 12px;
+
+  &:focus {
+    border-color: variables.$auth-accent;
+    box-shadow: 0 0 0 3px rgb(47 111 235 / 0.12);
+  }
+}
+
+.deleteButton {
+  min-height: 42px;
+  border: 0;
+  background: transparent;
+  color: variables.$auth-error;
+  cursor: pointer;
+  font-family: variables.$auth-font-family;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0 4px;
+}
+
+.addButton {
+  justify-self: start;
+}
+
+@media (max-width: 860px) {
+  .headerRow {
+    grid-template-columns: 1fr;
+  }
+
+  .headerActions {
+    justify-content: flex-start;
+  }
+
+  .taskRow {
+    grid-template-columns: 32px minmax(0, 1fr);
+  }
+
+  .estimateField,
+  .deleteButton {
+    grid-column: 2;
+  }
+
+  .deleteButton {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    border-radius: variables.$auth-radius-medium;
+    padding: 20px;
+  }
+
+  .headerActions,
+  .secondaryButton,
+  .addButton {
+    width: 100%;
+  }
+}

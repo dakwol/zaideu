@@ -1,0 +1,9 @@
+@use './variables.scss' as variables;
+
+:root {
+  --zaideu-auth-background: #{variables.$auth-background};
+  --zaideu-auth-surface: #{variables.$auth-surface};
+  --zaideu-auth-text-primary: #{variables.$auth-text-primary};
+  --zaideu-auth-text-secondary: #{variables.$auth-text-secondary};
+  --zaideu-auth-accent: #{variables.$auth-accent};
+}

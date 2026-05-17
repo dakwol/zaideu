@@ -1,0 +1,123 @@
+@use '../../../../shared/styles/variables.scss' as variables;
+
+.screen {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background: variables.$auth-background;
+  color: variables.$auth-text-primary;
+  font-family: variables.$auth-font-family;
+  padding: 32px 20px;
+}
+
+.card {
+  display: grid;
+  gap: 28px;
+  width: min(100%, 560px);
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-large;
+  background: variables.$auth-surface;
+  box-shadow: variables.$auth-shadow-subtle;
+  padding: 34px;
+}
+
+.wordmark {
+  display: inline-grid;
+  justify-self: start;
+  color: variables.$auth-text-primary;
+  font-size: 1.55rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 0.9;
+  text-transform: lowercase;
+}
+
+.copy {
+  display: grid;
+  gap: 10px;
+}
+
+.eyebrow,
+.title,
+.subtitle,
+.nextBlock h2,
+.nextBlock p {
+  margin: 0;
+}
+
+.eyebrow {
+  color: variables.$auth-accent;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.title {
+  color: variables.$auth-text-primary;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 780;
+  line-height: 1.05;
+}
+
+.subtitle,
+.nextBlock p {
+  color: variables.$auth-text-secondary;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.nextBlock {
+  display: grid;
+  gap: 8px;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-medium;
+  background: variables.$auth-background;
+  padding: 18px;
+
+  h2 {
+    color: variables.$auth-text-primary;
+    font-size: 1rem;
+    font-weight: 760;
+    line-height: 1.35;
+  }
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 48px;
+  border-radius: variables.$auth-radius-medium;
+  font-family: variables.$auth-font-family;
+  font-weight: 800;
+}
+
+.primaryButton {
+  background: variables.$auth-accent !important;
+  color: #ffffff !important;
+}
+
+.secondaryButton {
+  background: variables.$auth-surface !important;
+  color: variables.$auth-text-primary !important;
+}
+
+@media (max-width: 560px) {
+  .screen {
+    align-items: start;
+    padding: 0;
+  }
+
+  .card {
+    min-height: 100dvh;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 26px 20px;
+  }
+}

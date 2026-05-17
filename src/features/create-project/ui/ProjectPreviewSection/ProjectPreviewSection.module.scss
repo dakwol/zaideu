@@ -1,0 +1,129 @@
+@use '../../../../shared/styles/variables.scss' as variables;
+
+.section {
+  display: grid;
+  gap: 22px;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-large;
+  background: variables.$auth-surface;
+  padding: 28px;
+}
+
+.validationBox {
+  display: grid;
+  gap: 6px;
+  border: 1px solid rgb(180 35 24 / 0.18);
+  border-radius: variables.$auth-radius-small;
+  background: variables.$auth-error-soft;
+  color: variables.$auth-error;
+  padding: 14px;
+
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+}
+
+.previewGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.previewCard,
+.tasksCard {
+  display: grid;
+  gap: 8px;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-medium;
+  background: variables.$auth-background;
+  padding: 16px;
+}
+
+.previewLabel {
+  margin: 0;
+  color: variables.$auth-text-muted;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.previewValue,
+.previewDescription {
+  margin: 0;
+}
+
+.previewValue {
+  color: variables.$auth-text-primary;
+  font-size: 0.96875rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.previewDescription {
+  color: variables.$auth-text-secondary;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  span {
+    border: 1px solid variables.$auth-border;
+    border-radius: 999px;
+    background: variables.$auth-surface;
+    color: variables.$auth-text-secondary;
+    font-size: 0.8125rem;
+    font-weight: 650;
+    line-height: 1;
+    padding: 8px 10px;
+  }
+}
+
+.taskList {
+  display: grid;
+  gap: 8px;
+}
+
+.taskItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: variables.$auth-text-primary;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+
+  strong {
+    flex: 0 0 auto;
+    color: variables.$auth-text-secondary;
+    font-size: 0.875rem;
+  }
+}
+
+.createButton {
+  width: 100%;
+  min-height: 50px;
+  border-radius: variables.$auth-radius-medium;
+  background: variables.$auth-accent !important;
+  color: #ffffff !important;
+  font-family: variables.$auth-font-family;
+  font-size: 0.9375rem;
+  font-weight: 800;
+}
+
+@media (max-width: 640px) {
+  .section {
+    border-radius: variables.$auth-radius-medium;
+    padding: 20px;
+  }
+
+  .previewGrid {
+    grid-template-columns: 1fr;
+  }
+}

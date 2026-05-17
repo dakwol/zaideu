@@ -1,0 +1,45 @@
+.root {
+  position: relative;
+}
+
+.viewport {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  outline: none;
+  transition:
+    color 150ms ease,
+    box-shadow 150ms ease;
+
+  &:focus-visible {
+    outline: 1px solid currentColor;
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 50%, transparent);
+  }
+}
+
+.scrollbar {
+  display: flex;
+  touch-action: none;
+  user-select: none;
+  padding: 1px;
+  transition: color 150ms ease;
+}
+
+.vertical {
+  width: 0.625rem;
+  height: 100%;
+  border-left: 1px solid transparent;
+}
+
+.horizontal {
+  height: 0.625rem;
+  flex-direction: column;
+  border-top: 1px solid transparent;
+}
+
+.thumb {
+  position: relative;
+  flex: 1;
+  border-radius: 9999px;
+  background-color: var(--border);
+}

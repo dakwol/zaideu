@@ -1,0 +1,41 @@
+.group {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: var(--radius-md);
+
+  &[data-variant='outline'] {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+}
+
+.item {
+  min-width: 0;
+  flex: 1 1 0%;
+  flex-shrink: 0;
+  border-radius: 0;
+  box-shadow: none;
+
+  &:first-child {
+    border-top-left-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+  }
+
+  &:last-child {
+    border-top-right-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+  }
+
+  &:focus,
+  &:focus-visible {
+    z-index: 10;
+  }
+
+  &[data-variant='outline'] {
+    border-left-width: 0;
+
+    &:first-child {
+      border-left-width: 1px;
+    }
+  }
+}

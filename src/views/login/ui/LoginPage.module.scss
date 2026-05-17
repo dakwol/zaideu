@@ -1,0 +1,118 @@
+@use '../../../shared/styles/variables.scss' as variables;
+
+.form {
+  display: grid;
+  gap: 18px;
+}
+
+.fields {
+  display: grid;
+  gap: 16px;
+}
+
+.errorMessage {
+  margin: 0;
+  border: 1px solid rgb(180 35 24 / 0.18);
+  border-radius: variables.$auth-radius-small;
+  background: variables.$auth-error-soft;
+  color: variables.$auth-error;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  padding: 12px 14px;
+}
+
+.formActions {
+  display: grid;
+  gap: 12px;
+}
+
+.submitButton {
+  width: 100%;
+  min-height: 48px;
+  border-radius: variables.$auth-radius-medium;
+  background: variables.$auth-accent !important;
+  color: #ffffff !important;
+  font-family: variables.$auth-font-family;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.linkButton,
+.inlineButton {
+  border: 0;
+  background: transparent;
+  color: variables.$auth-accent;
+  cursor: pointer;
+  font-family: variables.$auth-font-family;
+  font-size: 0.875rem;
+  font-weight: 650;
+  padding: 0;
+}
+
+.linkButton {
+  justify-self: center;
+}
+
+.oauthBlock {
+  display: grid;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.divider {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+  color: variables.$auth-text-muted;
+  font-size: 0.8125rem;
+
+  &::before,
+  &::after {
+    content: '';
+    height: 1px;
+    background: variables.$auth-border;
+  }
+}
+
+.oauthActions {
+  display: grid;
+  gap: 10px;
+}
+
+.oauthButton {
+  width: 100%;
+  min-height: 46px;
+  border-radius: variables.$auth-radius-medium;
+  background: variables.$auth-surface !important;
+  color: variables.$auth-text-primary !important;
+  font-family: variables.$auth-font-family;
+}
+
+.switchText {
+  margin: 0;
+  color: variables.$auth-text-secondary;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .form,
+  .fields {
+    gap: 14px;
+  }
+
+  .submitButton {
+    min-height: 46px;
+  }
+
+  .oauthBlock {
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .oauthButton {
+    min-height: 44px;
+  }
+}

@@ -1,0 +1,33 @@
+@use '../../../../shared/styles/variables.scss' as variables;
+
+.section {
+  display: grid;
+  gap: 22px;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-large;
+  background: variables.$auth-surface;
+  padding: 28px;
+}
+
+.rolesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 820px) {
+  .rolesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    border-radius: variables.$auth-radius-medium;
+    padding: 20px;
+  }
+
+  .rolesGrid {
+    grid-template-columns: 1fr;
+  }
+}

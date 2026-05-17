@@ -1,0 +1,113 @@
+@use '../../../../shared/styles/variables.scss' as variables;
+
+.selector {
+  display: grid;
+  gap: 12px;
+  min-inline-size: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.legend {
+  margin: 0;
+  color: variables.$auth-text-primary;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option {
+  position: relative;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 12px;
+  align-items: start;
+  min-height: 82px;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-medium;
+  background: variables.$auth-surface;
+  cursor: pointer;
+  padding: 16px;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+
+  &:hover {
+    border-color: variables.$auth-border-strong;
+  }
+
+  &[data-selected='true'] {
+    border-color: variables.$auth-accent;
+    background: variables.$auth-accent-soft;
+    box-shadow: 0 0 0 3px rgb(47 111 235 / 0.08);
+  }
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radioMark {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border: 1px solid variables.$auth-border-strong;
+  border-radius: 999px;
+  background: variables.$auth-surface;
+  box-shadow: inset 0 0 0 4px variables.$auth-surface;
+
+  .option[data-selected='true'] & {
+    border-color: variables.$auth-accent;
+    background: variables.$auth-accent;
+  }
+}
+
+.optionContent {
+  display: grid;
+  gap: 5px;
+}
+
+.optionTitle {
+  color: variables.$auth-text-primary;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.optionDescription {
+  color: variables.$auth-text-secondary;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 560px) {
+  .selector {
+    gap: 10px;
+  }
+
+  .options {
+    gap: 8px;
+  }
+
+  .option {
+    min-height: auto;
+    padding: 14px;
+  }
+
+  .optionTitle {
+    font-size: 0.9rem;
+  }
+
+  .optionDescription {
+    font-size: 0.8125rem;
+  }
+}

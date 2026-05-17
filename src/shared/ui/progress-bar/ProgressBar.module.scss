@@ -1,0 +1,39 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.track {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 9999px;
+  background-color: var(--secondary);
+}
+
+.sm {
+  height: 0.25rem;
+}
+
+.md {
+  height: 0.5rem;
+}
+
+.lg {
+  height: 0.75rem;
+}
+
+.indicator {
+  height: 100%;
+  border-radius: 9999px;
+  background-color: var(--accent);
+  transition: width 300ms ease-out;
+}
+
+.label {
+  min-width: 3ch;
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+}

@@ -1,0 +1,11 @@
+.skeleton {
+  border-radius: var(--radius-md);
+  background-color: var(--accent);
+  animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.5;
+  }
+}

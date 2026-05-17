@@ -1,0 +1,67 @@
+@use '../../../shared/styles/variables.scss' as variables;
+
+.form {
+  display: grid;
+  gap: 18px;
+}
+
+.fields {
+  display: grid;
+  gap: 16px;
+}
+
+.errorMessage {
+  margin: 0;
+  border: 1px solid rgb(180 35 24 / 0.18);
+  border-radius: variables.$auth-radius-small;
+  background: variables.$auth-error-soft;
+  color: variables.$auth-error;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  padding: 12px 14px;
+}
+
+.submitButton {
+  width: 100%;
+  min-height: 50px;
+  border-radius: variables.$auth-radius-medium;
+  background: variables.$auth-accent !important;
+  color: #ffffff !important;
+  font-family: variables.$auth-font-family;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.inlineButton {
+  border: 0;
+  background: transparent;
+  color: variables.$auth-accent;
+  cursor: pointer;
+  font-family: variables.$auth-font-family;
+  font-size: 0.875rem;
+  font-weight: 650;
+  padding: 0;
+}
+
+.switchText {
+  margin: 0;
+  color: variables.$auth-text-secondary;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .form,
+  .fields {
+    gap: 14px;
+  }
+
+  .submitButton {
+    min-height: 48px;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    padding-block: 10px;
+  }
+}

@@ -1,0 +1,89 @@
+@use '../../../styles/variables.scss' as variables;
+
+.card {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 12px;
+  align-items: start;
+  min-height: 72px;
+  border: 1px solid variables.$auth-border;
+  border-radius: variables.$auth-radius-medium;
+  background: variables.$auth-surface;
+  cursor: pointer;
+  padding: 16px;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+
+  &:hover {
+    border-color: variables.$auth-border-strong;
+  }
+
+  &[data-checked='true'] {
+    border-color: variables.$auth-accent;
+    background: variables.$auth-accent-soft;
+    box-shadow: 0 0 0 3px rgb(47 111 235 / 0.08);
+  }
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border: 1px solid variables.$auth-border-strong;
+  border-radius: 6px;
+  background: variables.$auth-surface;
+
+  &::after {
+    content: '';
+    width: 9px;
+    height: 5px;
+    border-bottom: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    opacity: 0;
+    transform: rotate(-45deg) translateY(-1px);
+  }
+
+  .card[data-checked='true'] & {
+    border-color: variables.$auth-accent;
+    background: variables.$auth-accent;
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+.content {
+  display: grid;
+  gap: 5px;
+}
+
+.title {
+  color: variables.$auth-text-primary;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.description {
+  color: variables.$auth-text-secondary;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 560px) {
+  .card {
+    min-height: auto;
+    padding: 14px;
+  }
+}

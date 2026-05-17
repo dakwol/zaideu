@@ -1,0 +1,73 @@
+.carousel {
+  position: relative;
+}
+
+.viewport {
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+}
+
+.horizontalContent {
+  margin-left: -1rem;
+}
+
+.verticalContent {
+  flex-direction: column;
+  margin-top: -1rem;
+}
+
+.item {
+  min-width: 0;
+  flex: 0 0 100%;
+}
+
+.horizontalItem {
+  padding-left: 1rem;
+}
+
+.verticalItem {
+  padding-top: 1rem;
+}
+
+.control {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+}
+
+.previousHorizontal {
+  top: 50%;
+  left: -3rem;
+  transform: translateY(-50%);
+}
+
+.nextHorizontal {
+  top: 50%;
+  right: -3rem;
+  transform: translateY(-50%);
+}
+
+.previousVertical {
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+}
+
+.nextVertical {
+  bottom: -3rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
