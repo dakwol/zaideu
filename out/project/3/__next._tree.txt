@@ -1,0 +1,3 @@
+:HL["/zaideu/_next/static/chunks/16sy1xywytv~..css","style"]
+:HL["/zaideu/_next/static/chunks/0yix2k0epuov~.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"project","param":null,"prefetchHints":0,"slots":{"children":{"name":"id","param":{"type":"d","key":"3","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"TOBEtaa0jM9qgpBFD1NQV"}

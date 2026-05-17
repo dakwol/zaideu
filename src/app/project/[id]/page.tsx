@@ -1,7 +1,19 @@
-import { ProjectDetailPage } from '@/views/ProjectDetailPage'
+import { ProjectDetailPage } from '@/views/ProjectDetailPage';
 
-export default async function Page({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = await params
+import { getProjectStaticParams } from './model/projectStaticParams';
 
-  return <ProjectDetailPage params={resolvedParams} />
+interface ProjectPageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export function generateStaticParams() {
+  return getProjectStaticParams();
+}
+
+export default async function Page({ params }: ProjectPageProps) {
+  const resolvedParams = await params;
+
+  return <ProjectDetailPage params={resolvedParams} />;
 }
