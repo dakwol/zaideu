@@ -1,0 +1,79 @@
+.section {
+  display: grid;
+  gap: 14px;
+}
+
+.heading h2 {
+  margin: 0;
+  color: var(--foreground);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.card {
+  display: grid;
+  gap: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--card);
+  padding: 18px;
+}
+
+.stageTitleRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+
+  h3,
+  p {
+    margin: 0;
+  }
+
+  h3 {
+    color: var(--foreground);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  p {
+    color: var(--muted-foreground);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    margin-top: 6px;
+  }
+
+  span {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--secondary);
+    color: var(--secondary-foreground);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 5px 8px;
+    white-space: nowrap;
+  }
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  span {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--secondary);
+    color: var(--secondary-foreground);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 5px 8px;
+  }
+}
+
+.rule {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}

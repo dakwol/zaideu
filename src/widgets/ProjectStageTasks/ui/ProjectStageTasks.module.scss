@@ -1,0 +1,145 @@
+.section,
+.groups,
+.group,
+.list {
+  display: grid;
+}
+
+.section {
+  gap: 16px;
+}
+
+.heading {
+  display: grid;
+  gap: 4px;
+
+  h2,
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    color: var(--foreground);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  p {
+    color: var(--muted-foreground);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+}
+
+.groups {
+  gap: 18px;
+}
+
+.group {
+  gap: 10px;
+
+  h3 {
+    margin: 0;
+    color: var(--foreground);
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+}
+
+.list {
+  gap: 10px;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 14px;
+}
+
+.cardMain {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+
+  h4,
+  p {
+    margin: 0;
+  }
+
+  h4 {
+    color: var(--foreground);
+    font-size: 0.975rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  p {
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+.status {
+  justify-self: start;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 7px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.actionText {
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+
+  span {
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+}
+
+.actionTextOnly {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .actionText {
+    justify-items: stretch;
+  }
+}

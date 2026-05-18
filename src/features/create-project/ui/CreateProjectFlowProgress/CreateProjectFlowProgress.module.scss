@@ -1,0 +1,57 @@
+.progressBlock {
+  display: grid;
+  gap: 12px;
+}
+
+.progressMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.progressList {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 4px;
+}
+
+.progressItem {
+  flex: 0 0 auto;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.35;
+  transition:
+    color 150ms ease,
+    font-weight 150ms ease;
+
+  &:not(:last-child)::after {
+    content: '—';
+    color: var(--border);
+    font-weight: 400;
+    margin-left: 8px;
+  }
+}
+
+.progressItemDone {
+  color: var(--foreground);
+}
+
+.progressItemActive {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .progressMeta {
+    flex-direction: column;
+    gap: 4px;
+  }
+}

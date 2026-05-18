@@ -1,0 +1,117 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 28px;
+  align-items: start;
+}
+
+.copy {
+  display: grid;
+  gap: 14px;
+
+  p {
+    max-width: 720px;
+    margin: 0;
+    color: var(--muted-foreground);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+}
+
+.titleRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+
+  h1 {
+    margin: 0;
+    color: var(--foreground);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+}
+
+.tags,
+.teamRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.tags span {
+  border-radius: var(--radius-md);
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 8px;
+}
+
+.teamRow {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.progressCard {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--card);
+  padding: 18px;
+}
+
+.progressHeader,
+.progressRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+
+  strong {
+    color: var(--foreground);
+    font-weight: 700;
+  }
+}
+
+.progressHeader {
+  margin-bottom: 8px;
+}
+
+.healthBlock {
+  display: grid;
+  gap: 4px;
+  border: 1px solid color-mix(in oklch, var(--accent) 22%, var(--border));
+  border-radius: var(--radius-lg);
+  background: color-mix(in oklch, var(--accent) 5%, var(--card));
+  padding: 14px;
+
+  h2,
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    color: var(--foreground);
+    font-size: 0.975rem;
+    font-weight: 700;
+  }
+
+  p,
+  span {
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}

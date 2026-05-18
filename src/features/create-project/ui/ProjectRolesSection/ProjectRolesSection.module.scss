@@ -1,33 +1,108 @@
-@use '../../../../shared/styles/variables.scss' as variables;
-
 .section {
   display: grid;
-  gap: 22px;
-  border: 1px solid variables.$auth-border;
-  border-radius: variables.$auth-radius-large;
-  background: variables.$auth-surface;
-  padding: 28px;
+  gap: 24px;
 }
 
-.rolesGrid {
+.rolesBlock {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: 14px;
 }
 
-@media (max-width: 820px) {
-  .rolesGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.roleTokens,
+.rolePicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.roleToken,
+.roleChoice,
+.addRoleButton {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  color: var(--foreground);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.roleToken {
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 10px;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    color: var(--muted-foreground);
+  }
+
+  &:hover {
+    border-color: color-mix(in oklch, var(--destructive) 28%, var(--border));
+    background: color-mix(in oklch, var(--destructive) 6%, var(--card));
   }
 }
 
-@media (max-width: 640px) {
-  .section {
-    border-radius: variables.$auth-radius-medium;
-    padding: 20px;
+.addRoleButton {
+  justify-self: start;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 11px;
+  color: var(--accent);
+
+  svg {
+    width: 15px;
+    height: 15px;
   }
 
-  .rolesGrid {
-    grid-template-columns: 1fr;
+  &:hover {
+    border-color: color-mix(in oklch, var(--accent) 35%, var(--border));
+    background: color-mix(in oklch, var(--accent) 6%, var(--card));
+  }
+}
+
+.rolePicker {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--secondary);
+  padding: 12px;
+  animation: rolePickerEnter 150ms ease both;
+}
+
+.roleChoice {
+  min-height: 34px;
+  padding: 0 10px;
+
+  &:hover {
+    border-color: color-mix(in oklch, var(--accent) 35%, var(--border));
+    background: var(--card);
+    color: var(--accent);
+  }
+}
+
+.emptyText {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+@keyframes rolePickerEnter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -1,0 +1,171 @@
+.flow {
+  display: grid;
+  gap: 16px;
+}
+
+.progress {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+
+  span:not(:last-child)::after {
+    content: '—';
+    color: var(--border);
+    margin-left: 8px;
+  }
+}
+
+.card {
+  display: grid;
+  gap: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--card);
+  padding: 28px;
+  animation: stepEnter 180ms ease both;
+}
+
+.heading {
+  display: grid;
+  gap: 8px;
+
+  h1,
+  p {
+    margin: 0;
+  }
+
+  h1 {
+    color: var(--foreground);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.15;
+  }
+
+  p {
+    max-width: 620px;
+    color: var(--muted-foreground);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+.taskSummary,
+.resourceCard {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 16px;
+
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+
+  h2,
+  h3 {
+    color: var(--foreground);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  p {
+    color: var(--muted-foreground);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  span {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--secondary);
+    color: var(--secondary-foreground);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 4px 8px;
+  }
+}
+
+.resourceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.commands {
+  overflow-x: auto;
+  margin: 0;
+  border-radius: var(--radius-md);
+  background: var(--secondary);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  padding: 12px;
+}
+
+.commitmentOptions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.commitmentOption,
+.commitmentOptionActive {
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  color: var(--foreground);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.commitmentOption:hover,
+.commitmentOptionActive {
+  border-color: color-mix(in oklch, var(--accent) 45%, var(--border));
+  background: color-mix(in oklch, var(--accent) 8%, var(--card));
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@keyframes stepEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .card {
+    padding: 20px;
+  }
+
+  .resourceGrid,
+  .commitmentOptions {
+    grid-template-columns: 1fr;
+  }
+}

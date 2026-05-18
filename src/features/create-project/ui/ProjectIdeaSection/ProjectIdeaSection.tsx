@@ -1,8 +1,6 @@
 import { PROJECT_TYPE_LABELS, PROJECT_TYPE_OPTIONS } from '@/entities/project/model/constants'
 import { ProjectType } from '@/entities/project/model/types'
-import { StepHeader } from '@/shared/ui/StepHeader'
-import { TextField } from '@/shared/ui/TextField'
-import { Textarea } from '@/shared/ui/textarea'
+import { CreateProjectStepHeading } from '../CreateProjectStepHeading'
 import type { ProjectIdeaSectionProps } from '../../model/types'
 import styles from './ProjectIdeaSection.module.scss'
 
@@ -28,22 +26,25 @@ function ProjectIdeaSection({
 
   return (
     <section className={styles.section}>
-      <StepHeader
+      <CreateProjectStepHeading
         eyebrow="Идея"
-        title="Расскажите об идее"
-        subtitle="Не нужно продумывать всё сразу. Достаточно описать, что вы хотите создать."
+        title="Что хотите создать?"
+        subtitle="Опишите идею в двух словах. Этого достаточно, чтобы начать."
       />
       <div className={styles.formGrid}>
-        <TextField
-          id="project-title"
-          label="Название проекта"
-          value={title}
-          onValueChange={handleTitleChange}
-          placeholder="Например, сервис для поиска напарников"
-        />
+        <label className={styles.field}>
+          <span className={styles.label}>Название проекта</span>
+          <input
+            className={styles.input}
+            id="project-title"
+            value={title}
+            placeholder="Например, сервис для поиска напарников"
+            onChange={handleTitleChange}
+          />
+        </label>
         <label className={styles.field}>
           <span className={styles.label}>Короткое описание</span>
-          <Textarea
+          <textarea
             className={styles.textarea}
             value={description}
             onChange={handleDescriptionChange}

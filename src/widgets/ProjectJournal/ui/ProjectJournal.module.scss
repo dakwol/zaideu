@@ -1,0 +1,86 @@
+.section {
+  display: grid;
+  gap: 14px;
+}
+
+.heading {
+  display: grid;
+  gap: 4px;
+
+  h2,
+  p {
+    margin: 0;
+  }
+
+  h2 {
+    color: var(--foreground);
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  p {
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+.list {
+  display: grid;
+  gap: 10px;
+}
+
+.entry {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 14px;
+}
+
+.entryHeader {
+  display: grid;
+  gap: 3px;
+
+  h3 {
+    margin: 0;
+    color: var(--foreground);
+    font-size: 0.975rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  span {
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+  }
+}
+
+.entryBlock {
+  display: grid;
+  gap: 3px;
+
+  strong {
+    color: var(--foreground);
+    font-size: 0.8125rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+.emptyText {
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  padding: 14px;
+}

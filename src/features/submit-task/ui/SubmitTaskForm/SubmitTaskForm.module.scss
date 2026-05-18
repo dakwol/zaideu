@@ -1,0 +1,103 @@
+.card {
+  display: grid;
+  gap: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--card);
+  padding: 28px;
+}
+
+.heading {
+  display: grid;
+  gap: 8px;
+
+  p,
+  h1,
+  span {
+    margin: 0;
+  }
+
+  h1 {
+    color: var(--foreground);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  p,
+  span {
+    color: var(--muted-foreground);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+.eyebrow {
+  color: var(--accent) !important;
+  font-size: 0.75rem !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+
+  span {
+    color: var(--foreground);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--card);
+    color: var(--foreground);
+    font: inherit;
+    outline: none;
+    padding: 12px;
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+
+    &::placeholder {
+      color: var(--muted-foreground);
+    }
+
+    &:focus {
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 18%, transparent);
+    }
+  }
+
+  input {
+    min-height: 44px;
+  }
+
+  textarea {
+    min-height: 132px;
+    resize: vertical;
+  }
+}
+
+.errorMessage {
+  margin: 0;
+  border: 1px solid color-mix(in oklch, var(--destructive) 25%, var(--border));
+  border-radius: var(--radius-lg);
+  background: color-mix(in oklch, var(--destructive) 7%, var(--card));
+  color: var(--destructive);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.45;
+  padding: 12px 14px;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 20px;
+  }
+}

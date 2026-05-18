@@ -1,30 +1,27 @@
 import { FOUNDATION_STAGE } from '@/entities/project/model/constants'
-import { StepHeader } from '@/shared/ui/StepHeader'
+import { CreateProjectStepHeading } from '../CreateProjectStepHeading'
+import type { ProjectStageSectionProps } from '../../model/types'
 import styles from './ProjectStageSection.module.scss'
 
-function ProjectStageSection() {
+function ProjectStageSection({ taskCount }: ProjectStageSectionProps) {
   return (
     <section className={styles.section}>
-      <StepHeader
+      <CreateProjectStepHeading
         eyebrow="Первый этап"
-        title="Первый этап проекта"
+        title="Мы подготовили первый этап"
         subtitle="Короткий этап помогает быстрее начать и не потерять фокус."
       />
       <article className={styles.stageCard}>
-        <div>
-          <p className={styles.stageLabel}>Название</p>
+        <div className={styles.stageHeader}>
+          <span className={styles.stageLabel}>Milestone</span>
           <h3 className={styles.stageTitle}>{FOUNDATION_STAGE.title}</h3>
         </div>
-        <div>
-          <p className={styles.stageLabel}>Цель</p>
-          <p className={styles.stageText}>{FOUNDATION_STAGE.goal}</p>
-        </div>
-        <div>
-          <p className={styles.stageLabel}>Длительность</p>
-          <p className={styles.stageText}>{FOUNDATION_STAGE.duration}</p>
+        <p className={styles.stageText}>{FOUNDATION_STAGE.goal}</p>
+        <div className={styles.stageStats}>
+          <span>{FOUNDATION_STAGE.duration}</span>
+          <span>{taskCount} задач</span>
         </div>
       </article>
-      <p className={styles.rule}>Этап не может быть длиннее 7 дней.</p>
     </section>
   )
 }

@@ -1,69 +1,66 @@
-@use '../../../../shared/styles/variables.scss' as variables;
-
 .section {
   display: grid;
-  gap: 22px;
-  border: 1px solid variables.$auth-border;
-  border-radius: variables.$auth-radius-large;
-  background: variables.$auth-surface;
-  padding: 28px;
+  gap: 24px;
 }
 
 .stageCard {
   display: grid;
-  grid-template-columns: 1fr 1.6fr auto;
-  gap: 18px;
-  align-items: start;
-  border: 1px solid variables.$auth-border;
-  border-radius: variables.$auth-radius-medium;
-  background: variables.$auth-background;
-  padding: 18px;
-}
+  gap: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  padding: 20px;
 
-.stageLabel {
-  margin: 0 0 6px;
-  color: variables.$auth-text-muted;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
-.stageTitle,
-.stageText,
-.rule {
-  margin: 0;
-}
-
-.stageTitle {
-  color: variables.$auth-text-primary;
-  font-size: 1.1rem;
-  font-weight: 760;
-  line-height: 1.25;
-}
-
-.stageText {
-  color: variables.$auth-text-secondary;
-  font-size: 0.9375rem;
-  line-height: 1.5;
-}
-
-.rule {
-  color: variables.$auth-text-muted;
-  font-size: 0.875rem;
-  line-height: 1.45;
-}
-
-@media (max-width: 760px) {
-  .stageCard {
-    grid-template-columns: 1fr;
+  p,
+  h3 {
+    margin: 0;
   }
 }
 
-@media (max-width: 640px) {
-  .section {
-    border-radius: variables.$auth-radius-medium;
-    padding: 20px;
+.stageHeader {
+  display: grid;
+  gap: 8px;
+}
+
+.stageLabel {
+  justify-self: start;
+  border: 1px solid color-mix(in oklch, var(--accent) 25%, var(--border));
+  border-radius: var(--radius-md);
+  background: color-mix(in oklch, var(--accent) 7%, var(--card));
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 6px 8px;
+  text-transform: uppercase;
+}
+
+.stageTitle {
+  color: var(--foreground);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.stageText {
+  max-width: 560px;
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.stageStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  span {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--secondary);
+    color: var(--foreground);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 7px 9px;
   }
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
 
 import { FOUNDATION_STAGE } from '@/entities/project/model/constants'
 import {
@@ -9,26 +10,33 @@ import {
   ProjectTaskEstimate,
   ProjectType,
   type CreatedProjectPayload,
-  type ProjectTask,
 } from '@/entities/project/model/types'
-import { CreateProjectSuccess } from '@/features/create-project/ui/CreateProjectSuccess/CreateProjectSuccess'
-import { ProjectGoalSection } from '@/features/create-project/ui/ProjectGoalSection/ProjectGoalSection'
-import { ProjectIdeaSection } from '@/features/create-project/ui/ProjectIdeaSection/ProjectIdeaSection'
-import { ProjectPreviewSection } from '@/features/create-project/ui/ProjectPreviewSection/ProjectPreviewSection'
-import { ProjectRolesSection } from '@/features/create-project/ui/ProjectRolesSection/ProjectRolesSection'
-import { ProjectStageSection } from '@/features/create-project/ui/ProjectStageSection/ProjectStageSection'
-import { ProjectTasksSection } from '@/features/create-project/ui/ProjectTasksSection/ProjectTasksSection'
+import { getStepValidationMessages } from '@/features/create-project/lib/getStepValidationMessages'
 import { getSuggestedRoles } from '@/features/create-project/lib/getSuggestedRoles'
 import { getSuggestedTasks } from '@/features/create-project/lib/getSuggestedTasks'
 import {
+  CREATE_PROJECT_FLOW_STEPS,
   CREATE_PROJECT_NEXT_ACTION,
-  CREATE_PROJECT_VALIDATION_MESSAGES,
   NEW_TASK_TEMPLATE,
 } from '@/features/create-project/model/constants'
-import type { CreateProjectFormValues } from '@/features/create-project/model/types'
+import {
+  CreateProjectStep,
+  type CreateProjectFormValues,
+} from '@/features/create-project/model/types'
+import { CreateProjectFlowProgress } from '@/features/create-project/ui/CreateProjectFlowProgress'
+import { CreateProjectSuccess } from '@/features/create-project/ui/CreateProjectSuccess/CreateProjectSuccess'
+import { ProjectGoalSection } from '@/features/create-project/ui/ProjectGoalSection'
+import { ProjectIdeaSection } from '@/features/create-project/ui/ProjectIdeaSection'
+import { ProjectPreviewSection } from '@/features/create-project/ui/ProjectPreviewSection'
+import { ProjectRolesSection } from '@/features/create-project/ui/ProjectRolesSection'
+import { ProjectStageSection } from '@/features/create-project/ui/ProjectStageSection'
+import { ProjectTasksSection } from '@/features/create-project/ui/ProjectTasksSection'
+import { Button } from '@/shared/ui/button'
+import { AppHeader } from '@/widgets/AppHeader'
 import styles from './CreateProjectPage.module.scss'
 
 function CreateProjectPage() {
+  const [activeStepIndex, setActiveStepIndex] = useState(0)
   const [formValues, setFormValues] = useState<CreateProjectFormValues>(() => ({
     title: '',
     description: '',
@@ -40,9 +48,17 @@ function CreateProjectPage() {
   const [tasksEditedManually, setTasksEditedManually] = useState(false)
   const [hasTemplateTaskUpdateAvailable, setHasTemplateTaskUpdateAvailable] =
     useState(false)
-  const [hasCreateAttempt, setHasCreateAttempt] = useState(false)
+  const [attemptedSteps, setAttemptedSteps] = useState<CreateProjectStep[]>([])
+  const [rolePickerIsOpen, setRolePickerIsOpen] = useState(false)
   const [createdProject, setCreatedProject] =
     useState<CreatedProjectPayload | null>(null)
+
+  const activeStep = CREATE_PROJECT_FLOW_STEPS[activeStepIndex]
+  const activeStepId = activeStep.id
+  const userHasAttemptedActiveStep = attemptedSteps.includes(activeStepId)
+  const validationMessages = userHasAttemptedActiveStep
+    ? getStepValidationMessages(activeStepId, formValues)
+    : []
 
   const projectPreview = useMemo<CreatedProjectPayload>(
     () => ({
@@ -57,10 +73,6 @@ function CreateProjectPage() {
     }),
     [formValues],
   )
-
-  const validationMessages = hasCreateAttempt
-    ? getValidationMessages(formValues)
-    : []
 
   function handleTitleChange(nextTitle: string) {
     setFormValues((currentFormValues) => ({
@@ -112,10 +124,6 @@ function CreateProjectPage() {
         selectedRoles: nextSelectedRoles,
       }
     })
-  }
-
-  function markTasksAsEdited() {
-    setTasksEditedManually(true)
   }
 
   function handleTaskTitleChange(taskId: string, nextTitle: string) {
@@ -179,16 +187,34 @@ function CreateProjectPage() {
     setHasTemplateTaskUpdateAvailable(false)
   }
 
-  function handleTemplateTasksApply() {
-    handleTasksRegenerate()
+  function handleBackClick() {
+    setActiveStepIndex((currentStepIndex) => Math.max(currentStepIndex - 1, 0))
+  }
+
+  function handleNextClick() {
+    const nextValidationMessages = getStepValidationMessages(
+      activeStepId,
+      formValues,
+    )
+
+    if (nextValidationMessages.length > 0) {
+      markActiveStepAsAttempted()
+      return
+    }
+
+    setActiveStepIndex((currentStepIndex) =>
+      Math.min(currentStepIndex + 1, CREATE_PROJECT_FLOW_STEPS.length - 1),
+    )
   }
 
   function handleProjectCreate() {
-    setHasCreateAttempt(true)
-
-    const nextValidationMessages = getValidationMessages(formValues)
+    const nextValidationMessages = getStepValidationMessages(
+      CreateProjectStep.FinalReview,
+      formValues,
+    )
 
     if (nextValidationMessages.length > 0) {
+      markActiveStepAsAttempted()
       return
     }
 
@@ -196,98 +222,126 @@ function CreateProjectPage() {
     setCreatedProject(projectPreview)
   }
 
+  function markActiveStepAsAttempted() {
+    setAttemptedSteps((currentAttemptedSteps) =>
+      currentAttemptedSteps.includes(activeStepId)
+        ? currentAttemptedSteps
+        : [...currentAttemptedSteps, activeStepId],
+    )
+  }
+
+  function markTasksAsEdited() {
+    setTasksEditedManually(true)
+  }
+
+  function renderActiveStep() {
+    if (activeStepId === CreateProjectStep.Idea) {
+      return (
+        <ProjectIdeaSection
+          title={formValues.title}
+          description={formValues.description}
+          projectType={formValues.projectType}
+          onTitleChange={handleTitleChange}
+          onDescriptionChange={handleDescriptionChange}
+          onProjectTypeChange={handleProjectTypeChange}
+        />
+      )
+    }
+
+    if (activeStepId === CreateProjectStep.FirstResult) {
+      return (
+        <ProjectGoalSection
+          firstResult={formValues.firstResult}
+          onFirstResultChange={handleFirstResultChange}
+        />
+      )
+    }
+
+    if (activeStepId === CreateProjectStep.Team) {
+      return (
+        <ProjectRolesSection
+          rolePickerIsOpen={rolePickerIsOpen}
+          selectedRoles={formValues.selectedRoles}
+          onRolePickerToggle={() =>
+            setRolePickerIsOpen((currentValue) => !currentValue)
+          }
+          onRoleToggle={handleRoleToggle}
+        />
+      )
+    }
+
+    if (activeStepId === CreateProjectStep.FirstStage) {
+      return <ProjectStageSection taskCount={formValues.tasks.length} />
+    }
+
+    if (activeStepId === CreateProjectStep.StarterTasks) {
+      return (
+        <ProjectTasksSection
+          tasks={formValues.tasks}
+          hasTemplateTaskUpdateAvailable={hasTemplateTaskUpdateAvailable}
+          onTaskTitleChange={handleTaskTitleChange}
+          onTaskEstimateChange={handleTaskEstimateChange}
+          onTaskDelete={handleTaskDelete}
+          onTaskAdd={handleTaskAdd}
+          onTasksRegenerate={handleTasksRegenerate}
+          onTemplateTasksApply={handleTasksRegenerate}
+        />
+      )
+    }
+
+    return <ProjectPreviewSection projectPreview={projectPreview} />
+  }
+
   if (createdProject) {
     return <CreateProjectSuccess createdProject={createdProject} />
   }
 
   return (
-    <main className={styles.screen}>
-      <div className={styles.pageShell}>
-        <header className={styles.pageHeader}>
-          <div className={styles.wordmark} aria-label="За Идею">
-            <span>за</span>
-            <span>идею_</span>
+    <div className="min-h-screen bg-background">
+      <AppHeader />
+      <main className={styles.main}>
+        <section className={styles.onboardingShell}>
+          <CreateProjectFlowProgress activeStepIndex={activeStepIndex} />
+          <div className={styles.flowCard}>
+            <div key={activeStepId} className={styles.stepTransition}>
+              {renderActiveStep()}
+            </div>
+
+            {validationMessages.length > 0 ? (
+              <div className={styles.validationBox} role="alert">
+                {validationMessages.map((validationMessage) => (
+                  <p key={validationMessage}>{validationMessage}</p>
+                ))}
+              </div>
+            ) : null}
+
+            <div className={styles.navigation}>
+              <Button
+                type="button"
+                variant="ghost"
+                disabled={activeStepIndex === 0}
+                onClick={handleBackClick}
+              >
+                <ArrowLeft aria-hidden="true" />
+                Назад
+              </Button>
+              {activeStepId === CreateProjectStep.FinalReview ? (
+                <Button type="button" onClick={handleProjectCreate}>
+                  Создать проект
+                  <Check aria-hidden="true" />
+                </Button>
+              ) : (
+                <Button type="button" onClick={handleNextClick}>
+                  Продолжить
+                  <ArrowRight aria-hidden="true" />
+                </Button>
+              )}
+            </div>
           </div>
-          <div className={styles.pageHeaderCopy}>
-            <p className={styles.eyebrow}>новый проект</p>
-            <h1 className={styles.title}>Создать проект</h1>
-            <p className={styles.subtitle}>
-              Опишите идею — мы поможем превратить её в первый понятный шаг.
-            </p>
-          </div>
-        </header>
-
-        <div className={styles.sections}>
-          <ProjectIdeaSection
-            title={formValues.title}
-            description={formValues.description}
-            projectType={formValues.projectType}
-            onTitleChange={handleTitleChange}
-            onDescriptionChange={handleDescriptionChange}
-            onProjectTypeChange={handleProjectTypeChange}
-          />
-          <ProjectGoalSection
-            firstResult={formValues.firstResult}
-            onFirstResultChange={handleFirstResultChange}
-          />
-          <ProjectRolesSection
-            selectedRoles={formValues.selectedRoles}
-            onRoleToggle={handleRoleToggle}
-          />
-          <ProjectStageSection />
-          <ProjectTasksSection
-            tasks={formValues.tasks}
-            hasTemplateTaskUpdateAvailable={hasTemplateTaskUpdateAvailable}
-            onTaskTitleChange={handleTaskTitleChange}
-            onTaskEstimateChange={handleTaskEstimateChange}
-            onTaskDelete={handleTaskDelete}
-            onTaskAdd={handleTaskAdd}
-            onTasksRegenerate={handleTasksRegenerate}
-            onTemplateTasksApply={handleTemplateTasksApply}
-          />
-          <ProjectPreviewSection
-            projectPreview={projectPreview}
-            validationMessages={validationMessages}
-            onProjectCreate={handleProjectCreate}
-          />
-        </div>
-      </div>
-    </main>
+        </section>
+      </main>
+    </div>
   )
-}
-
-function getValidationMessages(
-  formValues: CreateProjectFormValues,
-): string[] {
-  const validationMessages: string[] = []
-
-  if (!formValues.title.trim()) {
-    validationMessages.push(CREATE_PROJECT_VALIDATION_MESSAGES.missingTitle)
-  }
-
-  if (!formValues.description.trim()) {
-    validationMessages.push(
-      CREATE_PROJECT_VALIDATION_MESSAGES.missingDescription,
-    )
-  }
-
-  if (formValues.selectedRoles.length === 0) {
-    validationMessages.push(CREATE_PROJECT_VALIDATION_MESSAGES.missingRoles)
-  }
-
-  if (formValues.tasks.length === 0) {
-    validationMessages.push(CREATE_PROJECT_VALIDATION_MESSAGES.missingTasks)
-  }
-
-  const hasEmptyTaskTitle = formValues.tasks.some(
-    (projectTask) => !projectTask.title.trim(),
-  )
-
-  if (hasEmptyTaskTitle) {
-    validationMessages.push(CREATE_PROJECT_VALIDATION_MESSAGES.missingTaskTitle)
-  }
-
-  return validationMessages
 }
 
 export { CreateProjectPage }

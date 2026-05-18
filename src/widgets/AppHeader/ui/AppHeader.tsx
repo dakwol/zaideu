@@ -6,7 +6,7 @@ import { cn } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
 import { LocaleSwitcher } from '@/shared/ui/locale-switcher'
 import { useTranslation } from '@/shared/hooks/use-locale'
-import { Layers, Compass, LayoutDashboard, Activity, User, Plus } from 'lucide-react'
+import { Compass, LayoutDashboard, Activity, User, Plus } from 'lucide-react'
 
 const navItems = [
   { href: '/', labelKey: 'nav.explore', icon: Compass },
@@ -25,11 +25,9 @@ export function AppHeader() {
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <Layers className="w-4 h-4 text-primary-foreground" />
-              </div>
-              <span className="font-semibold text-foreground hidden sm:block">
-                {t('appName')}
+              <span className="grid text-foreground text-xl font-black leading-[0.88] tracking-normal lowercase">
+                <span>за</span>
+                <span>идею_</span>
               </span>
             </Link>
 
@@ -59,9 +57,11 @@ export function AppHeader() {
 
           <div className="flex items-center gap-2">
             <LocaleSwitcher />
-            <Button size="sm" className="gap-1.5">
-              <Plus className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('buttons.newProject')}</span>
+            <Button size="sm" className="gap-1.5" asChild>
+              <Link href="/create-project">
+                <Plus className="w-4 h-4" />
+                <span className="hidden sm:inline">{t('buttons.newProject')}</span>
+              </Link>
             </Button>
           </div>
         </div>
@@ -69,4 +69,3 @@ export function AppHeader() {
     </header>
   )
 }
-

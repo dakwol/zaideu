@@ -1,7 +1,10 @@
+import { Pencil, Plus, RefreshCw, Trash2 } from 'lucide-react'
+
 import { PROJECT_TASK_ESTIMATE_OPTIONS } from '@/entities/project/model/constants'
 import { ProjectTaskEstimate } from '@/entities/project/model/types'
+import { getTaskImportanceDescription } from '@/features/create-project/lib/getTaskImportanceDescription'
 import { Button } from '@/shared/ui/button'
-import { StepHeader } from '@/shared/ui/StepHeader'
+import { CreateProjectStepHeading } from '../CreateProjectStepHeading'
 import type { ProjectTasksSectionProps } from '../../model/types'
 import styles from './ProjectTasksSection.module.scss'
 
@@ -21,53 +24,43 @@ function ProjectTasksSection({
 
   return (
     <section className={styles.section}>
-      <div className={styles.headerRow}>
-        <StepHeader
-          eyebrow="Стартовые задачи"
-          title="Стартовые задачи"
-          subtitle="Это первые маленькие шаги. Каждая задача должна занимать от 30 до 120 минут."
-        />
-        <div className={styles.headerActions}>
-          {hasTemplateTaskUpdateAvailable ? (
-            <Button
-              className={styles.secondaryButton}
-              type="button"
-              variant="outline"
-              onClick={onTemplateTasksApply}
-            >
-              Обновить задачи по шаблону
-            </Button>
-          ) : null}
+      <CreateProjectStepHeading
+        eyebrow="Стартовые задачи"
+        title="С чего можно начать уже сегодня"
+        subtitle="Мы подготовили маленькие задачи, чтобы проект сразу начал двигаться."
+      />
+      <div className={styles.headerActions}>
+        {hasTemplateTaskUpdateAvailable ? (
           <Button
-            className={styles.secondaryButton}
+            className={styles.actionButton}
             type="button"
             variant="outline"
-            onClick={onTasksRegenerate}
+            onClick={onTemplateTasksApply}
           >
-            Сгенерировать заново
+            <RefreshCw aria-hidden="true" />
+            Обновить по типу проекта
           </Button>
-        </div>
+        ) : null}
+        <Button
+          className={styles.actionButton}
+          type="button"
+          variant="outline"
+          onClick={onTasksRegenerate}
+        >
+          <RefreshCw aria-hidden="true" />
+          Сгенерировать заново
+        </Button>
       </div>
 
       <div className={styles.tasksList}>
-        {tasks.map((projectTask, taskIndex) => (
-          <article className={styles.taskRow} key={projectTask.id}>
-            <div className={styles.taskNumber}>{taskIndex + 1}</div>
-            <label className={styles.taskTitleField}>
-              <span className={styles.fieldLabel}>Задача</span>
-              <input
-                className={styles.input}
-                value={projectTask.title}
-                onChange={(event) =>
-                  onTaskTitleChange(projectTask.id, event.target.value)
-                }
-              />
-            </label>
-            <label className={styles.estimateField}>
-              <span className={styles.fieldLabel}>Оценка</span>
+        {tasks.map((projectTask) => (
+          <article className={styles.taskCard} key={projectTask.id}>
+            <div className={styles.taskTopline}>
+              <Pencil aria-hidden="true" />
               <select
-                className={styles.select}
+                className={styles.estimateSelect}
                 value={projectTask.estimateMinutes}
+                aria-label="Оценка задачи"
                 onChange={(event) =>
                   handleTaskEstimateChange(projectTask.id, event.target.value)
                 }
@@ -77,18 +70,32 @@ function ProjectTasksSection({
                     key={taskEstimateMinutes}
                     value={taskEstimateMinutes}
                   >
-                    {taskEstimateMinutes} мин
+                    {taskEstimateMinutes} минут
                   </option>
                 ))}
               </select>
-            </label>
-            <button
-              className={styles.deleteButton}
-              type="button"
-              onClick={() => onTaskDelete(projectTask.id)}
-            >
-              Удалить
-            </button>
+              <Button
+                className={styles.deleteButton}
+                type="button"
+                variant="ghost"
+                size="icon-sm"
+                aria-label="Удалить задачу"
+                onClick={() => onTaskDelete(projectTask.id)}
+              >
+                <Trash2 aria-hidden="true" />
+              </Button>
+            </div>
+            <input
+              className={styles.taskTitleInput}
+              value={projectTask.title}
+              aria-label="Название задачи"
+              onChange={(event) =>
+                onTaskTitleChange(projectTask.id, event.target.value)
+              }
+            />
+            <p className={styles.taskReason}>
+              {getTaskImportanceDescription(projectTask.title)}
+            </p>
           </article>
         ))}
       </div>
@@ -99,6 +106,7 @@ function ProjectTasksSection({
         variant="outline"
         onClick={onTaskAdd}
       >
+        <Plus aria-hidden="true" />
         Добавить задачу
       </Button>
     </section>

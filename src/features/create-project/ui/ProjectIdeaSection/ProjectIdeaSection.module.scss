@@ -1,12 +1,6 @@
-@use '../../../../shared/styles/variables.scss' as variables;
-
 .section {
   display: grid;
-  gap: 22px;
-  border: 1px solid variables.$auth-border;
-  border-radius: variables.$auth-radius-large;
-  background: variables.$auth-surface;
-  padding: 28px;
+  gap: 24px;
 }
 
 .formGrid {
@@ -20,44 +14,49 @@
 }
 
 .label {
-  color: variables.$auth-text-primary;
+  color: var(--foreground);
   font-size: 0.875rem;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.35;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  color: var(--foreground);
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    background-color 150ms ease;
+
+  &::placeholder {
+    color: var(--muted-foreground);
+  }
+
+  &:hover {
+    border-color: color-mix(in oklch, var(--accent) 30%, var(--border));
+  }
+
+  &:focus {
+    border-color: var(--ring);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 18%, transparent);
+  }
+}
+
+.input,
+.select {
+  min-height: 44px;
+  padding: 0 12px;
 }
 
 .textarea {
-  min-height: 116px;
-  border-color: variables.$auth-border !important;
-  border-radius: variables.$auth-radius-small !important;
-  background: variables.$auth-surface !important;
-  box-shadow: none !important;
-  color: variables.$auth-text-primary !important;
-  font-family: variables.$auth-font-family;
+  min-height: 112px;
   resize: vertical;
-}
-
-.select {
-  width: 100%;
-  min-height: 48px;
-  border: 1px solid variables.$auth-border;
-  border-radius: variables.$auth-radius-small;
-  background: variables.$auth-surface;
-  color: variables.$auth-text-primary;
-  font-family: variables.$auth-font-family;
-  font-size: 0.9375rem;
-  outline: none;
-  padding: 0 14px;
-
-  &:focus {
-    border-color: variables.$auth-accent;
-    box-shadow: 0 0 0 3px rgb(47 111 235 / 0.12);
-  }
-}
-
-@media (max-width: 640px) {
-  .section {
-    border-radius: variables.$auth-radius-medium;
-    padding: 20px;
-  }
+  padding: 12px;
 }

@@ -1,12 +1,6 @@
-@use '../../../../shared/styles/variables.scss' as variables;
-
 .section {
   display: grid;
-  gap: 22px;
-  border: 1px solid variables.$auth-border;
-  border-radius: variables.$auth-radius-large;
-  background: variables.$auth-surface;
-  padding: 28px;
+  gap: 24px;
 }
 
 .optionsGrid {
@@ -15,12 +9,48 @@
   gap: 12px;
 }
 
-@media (max-width: 640px) {
-  .section {
-    border-radius: variables.$auth-radius-medium;
-    padding: 20px;
-  }
+.optionCard {
+  display: grid;
+  gap: 6px;
+  min-height: 118px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  color: var(--foreground);
+  cursor: pointer;
+  font: inherit;
+  padding: 16px;
+  text-align: left;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease;
 
+  &:hover {
+    border-color: color-mix(in oklch, var(--accent) 35%, var(--border));
+    background: color-mix(in oklch, var(--accent) 4%, var(--card));
+  }
+}
+
+.optionCardSelected {
+  border-color: color-mix(in oklch, var(--accent) 55%, var(--border));
+  background: color-mix(in oklch, var(--accent) 8%, var(--card));
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+}
+
+.optionTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.optionDescription {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
   .optionsGrid {
     grid-template-columns: 1fr;
   }

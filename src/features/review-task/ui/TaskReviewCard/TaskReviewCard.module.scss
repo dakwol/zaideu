@@ -1,0 +1,63 @@
+.card {
+  display: grid;
+  gap: 14px;
+  border: 1px solid color-mix(in oklch, var(--accent) 24%, var(--border));
+  border-radius: var(--radius-lg);
+  background: color-mix(in oklch, var(--accent) 5%, var(--card));
+  padding: 16px;
+}
+
+.header {
+  display: grid;
+  gap: 4px;
+
+  p,
+  h3 {
+    margin: 0;
+  }
+
+  p {
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    color: var(--foreground);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+}
+
+.body {
+  display: grid;
+  gap: 6px;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.55;
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: var(--accent);
+    overflow-wrap: anywhere;
+  }
+}
+
+.successMessage {
+  margin: 0;
+  color: var(--success);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

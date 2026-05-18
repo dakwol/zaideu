@@ -1,97 +1,46 @@
-import {
-  PROJECT_FIRST_RESULT_LABELS,
-  PROJECT_ROLE_LABELS,
-  PROJECT_TYPE_LABELS,
-} from '@/entities/project/model/constants'
-import { Button } from '@/shared/ui/button'
-import { StepHeader } from '@/shared/ui/StepHeader'
+import { PROJECT_ROLE_LABELS } from '@/entities/project/model/constants'
+import { CreateProjectStepHeading } from '../CreateProjectStepHeading'
 import type { ProjectPreviewSectionProps } from '../../model/types'
 import styles from './ProjectPreviewSection.module.scss'
 
 function ProjectPreviewSection({
   projectPreview,
-  validationMessages,
-  onProjectCreate,
 }: ProjectPreviewSectionProps) {
   return (
     <section className={styles.section}>
-      <StepHeader
-        eyebrow="Preview"
-        title="Проверьте проект перед публикацией"
-        subtitle="Мы подготовили первый шаг. Проверьте и измените, если нужно."
+      <CreateProjectStepHeading
+        eyebrow="Проверка"
+        title="Проект готов к старту"
+        subtitle="Проверьте первый шаг перед публикацией."
       />
 
-      {validationMessages.length > 0 ? (
-        <div className={styles.validationBox} role="alert">
-          {validationMessages.map((validationMessage) => (
-            <p key={validationMessage}>{validationMessage}</p>
-          ))}
+      <div className={styles.reviewCard}>
+        <div className={styles.reviewRow}>
+          <span>Название</span>
+          <strong>{projectPreview.title || 'Название пока не добавлено'}</strong>
         </div>
-      ) : null}
-
-      <div className={styles.previewGrid}>
-        <article className={styles.previewCard}>
-          <p className={styles.previewLabel}>Название</p>
-          <p className={styles.previewValue}>
-            {projectPreview.title || 'Название пока не добавлено'}
-          </p>
-        </article>
-        <article className={styles.previewCard}>
-          <p className={styles.previewLabel}>Описание</p>
-          <p className={styles.previewValue}>
-            {projectPreview.description || 'Описание пока не добавлено'}
-          </p>
-        </article>
-        <article className={styles.previewCard}>
-          <p className={styles.previewLabel}>Тип проекта</p>
-          <p className={styles.previewValue}>
-            {PROJECT_TYPE_LABELS[projectPreview.projectType]}
-          </p>
-        </article>
-        <article className={styles.previewCard}>
-          <p className={styles.previewLabel}>Первый результат</p>
-          <p className={styles.previewValue}>
-            {PROJECT_FIRST_RESULT_LABELS[projectPreview.firstResult]}
-          </p>
-        </article>
-        <article className={styles.previewCard}>
-          <p className={styles.previewLabel}>Роли</p>
-          <div className={styles.tags}>
-            {projectPreview.roles.map((projectRole) => (
-              <span key={projectRole}>{PROJECT_ROLE_LABELS[projectRole]}</span>
-            ))}
-          </div>
-        </article>
-        <article className={styles.previewCard}>
-          <p className={styles.previewLabel}>Первый этап</p>
-          <p className={styles.previewValue}>
-            {projectPreview.firstStage.title} · {projectPreview.firstStage.duration}
-          </p>
-          <p className={styles.previewDescription}>
-            {projectPreview.firstStage.goal}
-          </p>
-        </article>
+        <div className={styles.reviewRow}>
+          <span>Роли</span>
+          <strong>
+            {projectPreview.roles
+              .map((projectRole) => PROJECT_ROLE_LABELS[projectRole])
+              .join(', ') || 'Роли пока не выбраны'}
+          </strong>
+        </div>
+        <div className={styles.reviewRow}>
+          <span>Первый этап</span>
+          <strong>
+            {projectPreview.firstStage.title}, {projectPreview.firstStage.duration}
+          </strong>
+        </div>
+        <div className={styles.reviewRow}>
+          <span>Задачи</span>
+          <strong>{projectPreview.tasks.length} стартовых задач</strong>
+        </div>
       </div>
-
-      <article className={styles.tasksCard}>
-        <p className={styles.previewLabel}>Стартовые задачи</p>
-        <div className={styles.taskList}>
-          {projectPreview.tasks.map((projectTask) => (
-            <div className={styles.taskItem} key={projectTask.id}>
-              <span>{projectTask.title || 'Без названия'}</span>
-              <strong>{projectTask.estimateMinutes} мин</strong>
-            </div>
-          ))}
-        </div>
-      </article>
-
-      <Button
-        className={styles.createButton}
-        type="button"
-        onClick={onProjectCreate}
-      >
-        Создать проект
-      </Button>
+      <p className={styles.reviewMessage}>
+        Теперь люди смогут подключиться и начать движение по проекту.
+      </p>
     </section>
   )
 }
