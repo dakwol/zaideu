@@ -1,5 +1,8 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
 .item {
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid ds.color(border-default);
 
   &:last-child {
     border-bottom: 0;
@@ -15,57 +18,57 @@
   flex: 1 1 0%;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 1rem;
-  border-radius: var(--radius-md);
-  padding-block: 1rem;
+  gap: ds.spacing(4);
+  border-radius: ds.radius(md);
+  padding: ds.spacing(4) ds.spacing(2);
   border: 1px solid transparent;
   background: transparent;
-  color: inherit;
+  color: ds.color(text-primary);
   text-align: left;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
+  font-family: ds.$font-primary;
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, normal);
+  font-weight: map.get(ds.$font-weight, medium);
   outline: none;
-  transition:
-    color 150ms ease,
-    background-color 150ms ease,
-    border-color 150ms ease,
-    box-shadow 150ms ease,
-    text-decoration-color 150ms ease;
+  cursor: pointer;
+  @include ds.smooth-transition(background, color, border-color, box-shadow);
 
   &:hover {
-    text-decoration-line: underline;
+    background: ds.color(surface-hover);
   }
 
   &:focus-visible {
-    border-color: var(--ring);
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 50%, transparent);
+    @include ds.focus-ring;
   }
 
   &:disabled {
-    pointer-events: none;
-    opacity: 0.5;
+    @include ds.disabled-state;
+  }
+
+  &[data-state='open'] {
+    color: ds.color(accent-primary);
   }
 
   &[data-state='open'] .icon {
-    transform: translateY(0.125rem) rotate(180deg);
+    transform: translateY(2px) rotate(180deg);
   }
 }
 
 .icon {
-  width: 1rem;
-  height: 1rem;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
   pointer-events: none;
-  color: var(--muted-foreground);
-  transform: translateY(0.125rem);
-  transition: transform 200ms ease;
+  color: ds.color(text-secondary);
+  transform: translateY(2px);
+  transition: transform ds.transition(base);
 }
 
 .content {
   overflow: hidden;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, normal);
 
   &[data-state='closed'] {
     animation: accordion-up 200ms ease-out;
@@ -77,7 +80,7 @@
 }
 
 .contentInner {
-  padding-block: 0 1rem;
+  padding: 0 ds.spacing(2) ds.spacing(4);
 }
 
 @keyframes accordion-down {

@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
 .root {
   position: relative;
   display: flex;
@@ -13,7 +16,7 @@
   list-style: none;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
+  gap: ds.spacing(1);
 }
 
 .item {
@@ -23,49 +26,50 @@
 .trigger {
   display: inline-flex;
   width: max-content;
-  height: 2.25rem;
+  height: 40px;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-md);
-  background-color: var(--background);
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: ds.radius(md);
+  background: transparent;
+  padding: ds.spacing(2) ds.spacing(4);
+  color: ds.color(text-secondary);
+  font-family: ds.$font-primary;
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, normal);
+  font-weight: map.get(ds.$font-weight, medium);
   outline: none;
-  transition:
-    color 150ms ease,
-    box-shadow 150ms ease,
-    background-color 150ms ease;
+  cursor: pointer;
+  @include ds.smooth-transition(background, color, border-color, box-shadow);
 
   &:hover,
   &:focus,
   &[data-state='open'] {
-    background-color: var(--accent);
-    color: var(--accent-foreground);
+    background: ds.color(surface-hover);
+    color: ds.color(text-primary);
   }
 
   &[data-state='open'] {
-    background-color: color-mix(in oklch, var(--accent) 50%, transparent);
+    border-color: rgba(123, 237, 159, 0.25);
+    background: ds.color(accent-primary-subtle);
+    color: ds.color(accent-primary);
   }
 
   &:disabled {
-    pointer-events: none;
-    opacity: 0.5;
+    @include ds.disabled-state;
   }
 
   &:focus-visible {
-    outline: 1px solid currentColor;
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 50%, transparent);
+    @include ds.focus-ring;
   }
 }
 
 .triggerIcon {
   position: relative;
   top: 1px;
-  width: 0.75rem;
-  height: 0.75rem;
-  margin-left: 0.25rem;
+  width: 12px;
+  height: 12px;
+  margin-left: ds.spacing(1);
   transition: transform 300ms ease;
 
   .trigger[data-state='open'] & {
@@ -77,7 +81,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0.5rem 0.625rem 0.5rem 0.5rem;
+  padding: ds.spacing(2);
 
   &[data-motion^='from-'] {
     animation: nav-in 200ms ease-out;
@@ -94,13 +98,13 @@
 
   .root[data-viewport='false'] & {
     top: 100%;
-    margin-top: 0.375rem;
+    margin-top: ds.spacing(2);
     overflow: hidden;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    background-color: var(--popover);
-    color: var(--popover-foreground);
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+    border: 1px solid ds.color(border-default);
+    border-radius: ds.radius(md);
+    background: ds.color(background-elevated);
+    color: ds.color(text-primary);
+    box-shadow: ds.shadow(lg);
   }
 }
 
@@ -109,7 +113,7 @@
   top: 100%;
   left: 0;
   isolation: isolate;
-  z-index: 50;
+  z-index: ds.z(dropdown);
   display: flex;
   justify-content: center;
 }
@@ -118,14 +122,14 @@
   position: relative;
   width: 100%;
   height: var(--radix-navigation-menu-viewport-height);
-  margin-top: 0.375rem;
+  margin-top: ds.spacing(2);
   transform-origin: top center;
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background-color: var(--popover);
-  color: var(--popover-foreground);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  border: 1px solid ds.color(border-default);
+  border-radius: ds.radius(md);
+  background: ds.color(background-elevated);
+  color: ds.color(text-primary);
+  box-shadow: ds.shadow(lg);
 
   &[data-state='open'] {
     animation: viewport-in 200ms ease-out;
@@ -143,32 +147,33 @@
 .link {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  border-radius: var(--radius-sm);
-  padding: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  gap: ds.spacing(1);
+  border-radius: ds.radius(base);
+  padding: ds.spacing(2);
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, normal);
   outline: none;
-  transition: all 150ms ease;
+  @include ds.smooth-transition(background, color, box-shadow);
 
   &:hover,
   &:focus,
   &[data-active='true'] {
-    background-color: var(--accent);
-    color: var(--accent-foreground);
+    background: ds.color(surface-hover);
+    color: ds.color(text-primary);
   }
 
   &[data-active='true'] {
-    background-color: color-mix(in oklch, var(--accent) 50%, transparent);
+    background: ds.color(accent-primary-subtle);
+    color: ds.color(accent-primary);
   }
 
   &:focus-visible {
-    outline: 1px solid currentColor;
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 50%, transparent);
+    @include ds.focus-ring;
   }
 
   svg:not([class*='text-']) {
-    color: var(--muted-foreground);
+    color: ds.color(text-secondary);
   }
 
   svg:not([class*='size-']) {
@@ -181,7 +186,7 @@
   top: 100%;
   z-index: 1;
   display: flex;
-  height: 0.375rem;
+  height: 6px;
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
@@ -198,11 +203,11 @@
 .indicatorArrow {
   position: relative;
   top: 60%;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-top-left-radius: var(--radius-sm);
-  background-color: var(--border);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  width: 8px;
+  height: 8px;
+  border-top-left-radius: ds.radius(sm);
+  background: ds.color(background-elevated);
+  box-shadow: ds.shadow(sm);
   transform: rotate(45deg);
 }
 

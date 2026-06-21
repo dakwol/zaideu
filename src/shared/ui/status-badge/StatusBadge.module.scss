@@ -1,9 +1,13 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
 .badge {
   display: inline-flex;
   align-items: center;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  font-weight: 500;
+  border: 1px solid ds.color(border-default);
+  border-radius: ds.radius(full);
+  font-family: ds.$font-primary;
+  font-weight: map.get(ds.$font-weight, medium);
 }
 
 .sm {
@@ -19,32 +23,37 @@
 }
 
 .active {
-  border-color: color-mix(in oklch, var(--success) 20%, transparent);
-  background-color: color-mix(in oklch, var(--success) 10%, transparent);
-  color: var(--success);
+  border-color: rgba(123, 237, 159, 0.3);
+  background: rgba(123, 237, 159, 0.12);
+  color: ds.color(status-active);
 }
 
 .slow {
-  border-color: color-mix(in oklch, var(--warning) 20%, transparent);
-  background-color: color-mix(in oklch, var(--warning) 10%, transparent);
-  color: var(--warning);
+  border-color: rgba(255, 165, 2, 0.3);
+  background: rgba(255, 165, 2, 0.12);
+  color: ds.color(status-slow);
 }
 
 .stalled {
-  border-color: color-mix(in oklch, var(--destructive) 20%, transparent);
-  background-color: color-mix(in oklch, var(--destructive) 10%, transparent);
-  color: var(--destructive);
+  border-color: rgba(255, 99, 72, 0.3);
+  background: rgba(255, 99, 72, 0.12);
+  color: ds.color(status-stalled);
 }
 
 .revival {
-  border-color: color-mix(in oklch, var(--accent) 20%, transparent);
-  background-color: color-mix(in oklch, var(--accent) 10%, transparent);
-  color: var(--accent);
+  border-color: rgba(112, 161, 255, 0.3);
+  background: rgba(112, 161, 255, 0.12);
+  color: ds.color(status-revival);
 }
 
-.completed,
+.completed {
+  border-color: rgba(149, 175, 192, 0.3);
+  background: rgba(149, 175, 192, 0.12);
+  color: ds.color(status-completed);
+}
+
 .archived {
-  border-color: var(--border);
-  background-color: var(--muted);
-  color: var(--muted-foreground);
+  border-color: rgba(116, 125, 140, 0.3);
+  background: rgba(116, 125, 140, 0.12);
+  color: ds.color(status-archived);
 }

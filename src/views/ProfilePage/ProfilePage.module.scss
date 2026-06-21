@@ -1,0 +1,9 @@
+@use '@/shared/styles/design-system' as ds;
+
+.page {
+  @include ds.page-shell;
+}
+
+.main {
+  @include ds.page-main(896px);
+}

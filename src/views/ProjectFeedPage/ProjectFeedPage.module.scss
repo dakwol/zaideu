@@ -2,21 +2,15 @@
 @use '@/shared/styles/design-system' as ds;
 
 .page {
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(123, 237, 159, 0.08), transparent 32rem),
-    ds.color(background-primary);
-  color: ds.color(text-primary);
+  @include ds.page-shell;
 }
 
 .main {
-  @include ds.container;
+  @include ds.page-main;
 
   display: flex;
   flex-direction: column;
   gap: ds.spacing(10);
-  padding-top: ds.spacing(8);
-  padding-bottom: ds.spacing(16);
 }
 
 .hero {

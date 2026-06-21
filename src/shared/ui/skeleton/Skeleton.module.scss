@@ -1,11 +1,28 @@
+@use '@/shared/styles/design-system' as ds;
+
 .skeleton {
-  border-radius: var(--radius-md);
-  background-color: var(--accent);
-  animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  position: relative;
+  overflow: hidden;
+  border-radius: ds.radius(md);
+  background: ds.color(surface-hover);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.06),
+      transparent
+    );
+    transform: translateX(-100%);
+    animation: skeleton-shimmer 1.6s ease-in-out infinite;
+  }
 }
 
-@keyframes skeleton-pulse {
-  50% {
-    opacity: 0.5;
+@keyframes skeleton-shimmer {
+  to {
+    transform: translateX(100%);
   }
 }

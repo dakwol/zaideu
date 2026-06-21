@@ -1,39 +1,44 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
 .root {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: ds.spacing(2);
 }
 
 .track {
   flex: 1;
   overflow: hidden;
-  border-radius: 9999px;
-  background-color: var(--secondary);
+  border-radius: ds.radius(full);
+  background: ds.color(surface-active);
 }
 
 .sm {
-  height: 0.25rem;
+  height: 4px;
 }
 
 .md {
-  height: 0.5rem;
+  height: 8px;
 }
 
 .lg {
-  height: 0.75rem;
+  height: 12px;
 }
 
 .indicator {
   height: 100%;
-  border-radius: 9999px;
-  background-color: var(--accent);
-  transition: width 300ms ease-out;
+  border-radius: inherit;
+  background: ds.color(accent-primary);
+  box-shadow: ds.glow(accent-sm);
+  transition: width ds.transition(slow);
 }
 
 .label {
   min-width: 3ch;
-  color: var(--muted-foreground);
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 500;
+  color: ds.color(text-secondary);
+  font-family: ds.$font-mono;
+  font-size: map.get(ds.$font-size, xs);
+  line-height: map.get(ds.$line-height, normal);
+  font-weight: map.get(ds.$font-weight, medium);
 }

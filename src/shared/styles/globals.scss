@@ -1,9 +1,55 @@
-@use './variables.scss' as variables;
+@use './design-system' as ds;
+@use './globals-extended';
 
 :root {
-  --zaideu-auth-background: #{variables.$auth-background};
-  --zaideu-auth-surface: #{variables.$auth-surface};
-  --zaideu-auth-text-primary: #{variables.$auth-text-primary};
-  --zaideu-auth-text-secondary: #{variables.$auth-text-secondary};
-  --zaideu-auth-accent: #{variables.$auth-accent};
+  color-scheme: dark;
+
+  --background: #{ds.color(background-primary)};
+  --foreground: #{ds.color(text-primary)};
+  --card: #{ds.color(background-secondary)};
+  --card-foreground: #{ds.color(text-primary)};
+  --popover: #{ds.color(background-elevated)};
+  --popover-foreground: #{ds.color(text-primary)};
+
+  --primary: #{ds.color(accent-primary)};
+  --primary-foreground: #{ds.color(text-inverse)};
+  --secondary: #{ds.color(surface-default)};
+  --secondary-foreground: #{ds.color(text-primary)};
+  --muted: #{ds.color(surface-hover)};
+  --muted-foreground: #{ds.color(text-secondary)};
+  --accent: #{ds.color(accent-primary-subtle)};
+  --accent-foreground: #{ds.color(accent-primary)};
+
+  --destructive: #{ds.color(error)};
+  --destructive-foreground: #{ds.color(text-primary)};
+  --success: #{ds.color(success)};
+  --success-foreground: #{ds.color(text-inverse)};
+  --warning: #{ds.color(warning)};
+  --warning-foreground: #{ds.color(text-inverse)};
+
+  --chart-1: #{ds.color(accent-primary)};
+  --chart-2: #{ds.color(status-revival)};
+  --chart-3: #{ds.color(status-slow)};
+  --chart-4: #{ds.color(status-stalled)};
+  --chart-5: #{ds.color(status-completed)};
+
+  --border: #{ds.color(border-default)};
+  --input: #{ds.color(border-hover)};
+  --ring: #{ds.color(border-focus)};
+  --radius: #{ds.radius(base)};
+
+  --sidebar: #{ds.color(background-secondary)};
+  --sidebar-foreground: #{ds.color(text-primary)};
+  --sidebar-primary: #{ds.color(accent-primary)};
+  --sidebar-primary-foreground: #{ds.color(text-inverse)};
+  --sidebar-accent: #{ds.color(surface-hover)};
+  --sidebar-accent-foreground: #{ds.color(text-primary)};
+  --sidebar-border: #{ds.color(border-default)};
+  --sidebar-ring: #{ds.color(border-focus)};
+
+  --zaideu-auth-background: #{ds.color(background-primary)};
+  --zaideu-auth-surface: #{ds.color(background-secondary)};
+  --zaideu-auth-text-primary: #{ds.color(text-primary)};
+  --zaideu-auth-text-secondary: #{ds.color(text-secondary)};
+  --zaideu-auth-accent: #{ds.color(accent-primary)};
 }

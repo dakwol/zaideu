@@ -1,7 +1,10 @@
+@use '@/shared/styles/design-system' as ds;
+
 .spinner {
-  width: 1rem;
-  height: 1rem;
-  animation: spinner-spin 1s linear infinite;
+  width: 16px;
+  height: 16px;
+  color: ds.color(accent-primary);
+  animation: spinner-spin 800ms linear infinite;
 }
 
 @keyframes spinner-spin {

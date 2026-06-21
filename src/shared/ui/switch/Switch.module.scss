@@ -1,64 +1,52 @@
+@use '@/shared/styles/design-system' as ds;
+
 .switch {
   display: inline-flex;
-  width: 2rem;
-  height: 1.15rem;
+  width: 36px;
+  height: 20px;
   flex-shrink: 0;
   align-items: center;
-  border: 1px solid transparent;
-  border-radius: 9999px;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  border: 1px solid ds.color(border-hover);
+  border-radius: ds.radius(full);
+  padding: 1px;
   outline: none;
-  transition: all 150ms ease;
+  cursor: pointer;
+  @include ds.smooth-transition(background, border-color, box-shadow);
 
   &[data-state='checked'] {
-    background-color: var(--primary);
+    border-color: ds.color(accent-primary);
+    background: ds.color(accent-primary);
   }
 
   &[data-state='unchecked'] {
-    background-color: var(--input);
+    background: ds.color(surface-active);
   }
 
   &:focus-visible {
-    border-color: var(--ring);
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 50%, transparent);
+    @include ds.focus-ring;
   }
 
   &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-
-  :global(.dark) & {
-    &[data-state='unchecked'] {
-      background-color: color-mix(in oklch, var(--input) 80%, transparent);
-    }
+    @include ds.disabled-state;
   }
 }
 
 .thumb {
   display: block;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 9999px;
-  background-color: var(--background);
+  width: 16px;
+  height: 16px;
+  border-radius: ds.radius(full);
+  background: ds.color(text-secondary);
+  box-shadow: ds.shadow(sm);
   pointer-events: none;
-  transition: transform 150ms ease;
+  @include ds.smooth-transition(background, transform);
 
   &[data-state='checked'] {
-    transform: translateX(calc(100% - 2px));
+    background: ds.color(text-inverse);
+    transform: translateX(16px);
   }
 
   &[data-state='unchecked'] {
     transform: translateX(0);
-  }
-
-  :global(.dark) & {
-    &[data-state='unchecked'] {
-      background-color: var(--foreground);
-    }
-
-    &[data-state='checked'] {
-      background-color: var(--primary-foreground);
-    }
   }
 }

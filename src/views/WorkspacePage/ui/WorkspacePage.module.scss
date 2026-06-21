@@ -1,42 +1,26 @@
+@use '@/shared/styles/design-system' as ds;
+
+.page {
+  @include ds.page-shell;
+}
+
 .main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 36px 24px 64px;
+  @include ds.page-main(1100px);
 }
 
 .header {
-  display: grid;
-  gap: 8px;
-  margin-bottom: 28px;
+  @include ds.page-heading;
 
-  h1,
-  p {
-    margin: 0;
-  }
-
-  h1 {
-    color: var(--foreground);
-    font-size: 2.25rem;
-    font-weight: 700;
-    letter-spacing: 0;
-    line-height: 1.12;
-  }
-
-  p {
-    max-width: 720px;
-    color: var(--muted-foreground);
-    font-size: 1rem;
-    line-height: 1.6;
-  }
+  margin-bottom: ds.spacing(8);
 }
 
 .workingGrid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(420px, 0.95fr);
-  gap: 20px;
+  gap: ds.spacing(5);
   align-items: start;
-  margin-top: 24px;
-  margin-bottom: 32px;
+  margin-top: ds.spacing(6);
+  margin-bottom: ds.spacing(8);
 }
 
 @media (max-width: 1020px) {
@@ -46,13 +30,9 @@
 }
 
 @media (max-width: 640px) {
-  .main {
-    padding: 28px 14px 48px;
-  }
-
   .header {
     h1 {
-      font-size: 1.85rem;
+      font-size: 1.875rem;
     }
   }
 }

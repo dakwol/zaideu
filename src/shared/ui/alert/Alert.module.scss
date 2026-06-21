@@ -1,63 +1,68 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
 .alert {
   position: relative;
   display: grid;
   grid-template-columns: 0 1fr;
   width: 100%;
   align-items: flex-start;
-  row-gap: 0.125rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 0.75rem 1rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  row-gap: 2px;
+  border: 1px solid ds.color(border-default);
+  border-radius: ds.radius(md);
+  padding: ds.spacing(3) ds.spacing(4);
+  font-family: ds.$font-primary;
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, normal);
 
   &:has(> svg) {
-    grid-template-columns: 1rem 1fr;
-    column-gap: 0.75rem;
+    grid-template-columns: 16px 1fr;
+    column-gap: ds.spacing(3);
   }
 
   > svg {
-    width: 1rem;
-    height: 1rem;
+    width: 16px;
+    height: 16px;
     color: currentColor;
-    transform: translateY(0.125rem);
+    transform: translateY(2px);
   }
 }
 
 .default {
-  background-color: var(--card);
-  color: var(--card-foreground);
+  background: ds.color(surface-default);
+  color: ds.color(text-primary);
 }
 
 .destructive {
-  background-color: var(--card);
-  color: var(--destructive);
+  border-color: rgba(255, 71, 87, 0.3);
+  background: rgba(255, 71, 87, 0.08);
+  color: ds.color(error);
 
   [data-slot='alert-description'] {
-    color: color-mix(in oklch, var(--destructive) 90%, transparent);
+    color: ds.color(text-secondary);
   }
 }
 
 .title {
   grid-column-start: 2;
-  min-height: 1rem;
+  min-height: 16px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-  font-weight: 500;
+  font-weight: map.get(ds.$font-weight, semibold);
 }
 
 .description {
   display: grid;
   grid-column-start: 2;
   justify-items: flex-start;
-  gap: 0.25rem;
-  color: var(--muted-foreground);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  gap: ds.spacing(1);
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, normal);
 
   p {
-    line-height: 1.625;
+    line-height: map.get(ds.$line-height, relaxed);
   }
 }

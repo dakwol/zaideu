@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
 .empty {
   display: flex;
   min-width: 0;
@@ -5,24 +8,26 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  border-style: dashed;
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  gap: ds.spacing(6);
+  border: 1px dashed ds.color(border-hover);
+  border-radius: ds.radius(lg);
+  background: ds.color(surface-default);
+  padding: ds.spacing(6);
+  color: ds.color(text-primary);
   text-align: center;
   text-wrap: balance;
 
   @media (min-width: 48rem) {
-    padding: 3rem;
+    padding: ds.spacing(12);
   }
 }
 
 .header {
   display: flex;
-  max-width: 24rem;
+  max-width: 384px;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: ds.spacing(2);
   text-align: center;
 }
 
@@ -31,7 +36,7 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: ds.spacing(2);
 
   svg {
     flex-shrink: 0;
@@ -44,35 +49,36 @@
 }
 
 .icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--radius-lg);
-  background-color: var(--muted);
-  color: var(--foreground);
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(123, 237, 159, 0.2);
+  border-radius: ds.radius(lg);
+  background: ds.color(accent-primary-subtle);
+  color: ds.color(accent-primary);
 
   svg:not([class*='size-']) {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 24px;
+    height: 24px;
   }
 }
 
 .title {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 500;
+  font-size: map.get(ds.$font-size, lg);
+  line-height: map.get(ds.$line-height, normal);
+  font-weight: map.get(ds.$font-weight, semibold);
 }
 
 .description {
-  color: var(--muted-foreground);
-  font-size: 0.875rem;
-  line-height: 1.625;
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, relaxed);
 
   a {
     text-decoration-line: underline;
     text-underline-offset: 4px;
 
     &:hover {
-      color: var(--primary);
+      color: ds.color(accent-primary);
     }
   }
 }
@@ -80,12 +86,12 @@
 .content {
   display: flex;
   width: 100%;
-  max-width: 24rem;
+  max-width: 384px;
   min-width: 0;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  gap: ds.spacing(4);
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, normal);
   text-wrap: balance;
 }

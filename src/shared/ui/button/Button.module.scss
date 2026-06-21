@@ -1,21 +1,30 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
 .button {
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: ds.spacing(2);
   white-space: nowrap;
   border: 1px solid transparent;
-  border-radius: var(--radius-md);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
+  border-radius: ds.radius(md);
+  font-family: ds.$font-primary;
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, normal);
+  font-weight: map.get(ds.$font-weight, medium);
   outline: none;
-  transition: all 150ms ease;
+  cursor: pointer;
+  user-select: none;
+  @include ds.smooth-transition(background, color, border-color, box-shadow, transform);
 
   &:disabled {
-    pointer-events: none;
-    opacity: 0.5;
+    @include ds.disabled-state;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
   }
 
   svg {
@@ -29,143 +38,125 @@
   }
 
   &:focus-visible {
-    border-color: var(--ring);
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 50%, transparent);
+    @include ds.focus-ring;
   }
 
   &[aria-invalid='true'] {
-    border-color: var(--destructive);
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 20%, transparent);
-  }
-
-  :global(.dark) & {
-    &[aria-invalid='true'] {
-      box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 40%, transparent);
-    }
+    border-color: ds.color(border-error);
+    box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.2);
   }
 }
 
 .default {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
+  background: ds.color(accent-primary);
+  color: ds.color(text-inverse);
+  font-weight: map.get(ds.$font-weight, semibold);
 
-  &:hover {
-    background-color: color-mix(in oklch, var(--primary) 90%, transparent);
+  &:hover:not(:disabled) {
+    background: ds.color(accent-primary-hover);
+    box-shadow: ds.glow(accent-sm);
+  }
+
+  &:active:not(:disabled) {
+    background: ds.color(accent-primary-active);
   }
 }
 
 .destructive {
-  background-color: var(--destructive);
-  color: white;
+  background: ds.color(error);
+  color: ds.color(text-primary);
 
-  &:hover {
-    background-color: color-mix(in oklch, var(--destructive) 90%, transparent);
+  &:hover:not(:disabled) {
+    filter: brightness(1.08);
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 20%, transparent);
-  }
-
-  :global(.dark) & {
-    background-color: color-mix(in oklch, var(--destructive) 60%, transparent);
-
-    &:focus-visible {
-      box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 40%, transparent);
-    }
+    outline-color: ds.color(error);
   }
 }
 
 .outline {
-  border-color: var(--border);
-  background-color: var(--background);
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  border-color: ds.color(border-default);
+  background: transparent;
+  color: ds.color(text-primary);
 
-  &:hover {
-    background-color: var(--accent);
-    color: var(--accent-foreground);
-  }
-
-  :global(.dark) & {
-    border-color: var(--input);
-    background-color: color-mix(in oklch, var(--input) 30%, transparent);
-
-    &:hover {
-      background-color: color-mix(in oklch, var(--input) 50%, transparent);
-    }
+  &:hover:not(:disabled) {
+    border-color: ds.color(border-hover);
+    background: ds.color(surface-hover);
   }
 }
 
 .secondary {
-  background-color: var(--secondary);
-  color: var(--secondary-foreground);
+  border-color: ds.color(border-default);
+  background: ds.color(surface-default);
+  color: ds.color(text-primary);
 
-  &:hover {
-    background-color: color-mix(in oklch, var(--secondary) 80%, transparent);
+  &:hover:not(:disabled) {
+    border-color: ds.color(border-hover);
+    background: ds.color(surface-hover);
   }
 }
 
 .ghost {
-  background-color: transparent;
+  background: transparent;
+  color: ds.color(text-secondary);
 
-  &:hover {
-    background-color: var(--accent);
-    color: var(--accent-foreground);
-  }
-
-  :global(.dark) &:hover {
-    background-color: color-mix(in oklch, var(--accent) 50%, transparent);
+  &:hover:not(:disabled) {
+    background: ds.color(surface-hover);
+    color: ds.color(text-primary);
   }
 }
 
 .link {
-  background-color: transparent;
-  color: var(--primary);
+  background: transparent;
+  color: ds.color(accent-primary);
   text-underline-offset: 4px;
 
-  &:hover {
+  &:hover:not(:disabled) {
     text-decoration-line: underline;
   }
 }
 
 .sizeDefault {
-  height: 2.25rem;
-  padding: 0.5rem 1rem;
+  height: 40px;
+  padding: 0 ds.spacing(4);
 
   &:has(> svg) {
-    padding-inline: 0.75rem;
+    padding-inline: ds.spacing(3);
   }
 }
 
 .sizeSm {
-  height: 2rem;
-  gap: 0.375rem;
-  padding-inline: 0.75rem;
+  height: 32px;
+  gap: ds.spacing(1);
+  padding-inline: ds.spacing(3);
 
   &:has(> svg) {
-    padding-inline: 0.625rem;
+    padding-inline: ds.spacing(2);
   }
 }
 
 .sizeLg {
-  height: 2.5rem;
-  padding-inline: 1.5rem;
+  height: 48px;
+  padding-inline: ds.spacing(6);
+  font-size: map.get(ds.$font-size, base);
 
   &:has(> svg) {
-    padding-inline: 1rem;
+    padding-inline: ds.spacing(4);
   }
 }
 
 .sizeIcon {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 40px;
+  height: 40px;
 }
 
 .sizeIconSm {
-  width: 2rem;
-  height: 2rem;
+  width: 32px;
+  height: 32px;
 }
 
 .sizeIconLg {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 48px;
+  height: 48px;
 }

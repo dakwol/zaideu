@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:color';
 @use '../design-system' as ds;
 
 // ============================================================================
@@ -87,12 +88,12 @@
   color: ds.color(text-primary);
 
   &:hover:not(:disabled) {
-    background: lighten(ds.color(error), 5%);
+    background: color.adjust(ds.color(error), $lightness: 5%);
     box-shadow: 0 0 8px rgba(255, 71, 87, 0.3);
   }
 
   &:active:not(:disabled) {
-    background: darken(ds.color(error), 5%);
+    background: color.adjust(ds.color(error), $lightness: -5%);
   }
 }
 

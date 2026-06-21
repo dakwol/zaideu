@@ -1,9 +1,9 @@
 1:"$Sreact.fragment"
-2:I[92853,["/zaideu/_next/static/chunks/0xfgfti4rqnse.js","/zaideu/_next/static/chunks/00-csyj9a6t-x.js","/zaideu/_next/static/chunks/0~aqax6p~ijv3.js","/zaideu/_next/static/chunks/0nj.6bz9x5knr.js"],"WorkspacePage"]
+2:I[92853,["/zaideu/_next/static/chunks/0xfgfti4rqnse.js","/zaideu/_next/static/chunks/00-csyj9a6t-x.js","/zaideu/_next/static/chunks/1494edxzvq734.js","/zaideu/_next/static/chunks/0.iy892znn_9n.js"],"WorkspacePage"]
 3:I[97367,["/zaideu/_next/static/chunks/0xfgfti4rqnse.js","/zaideu/_next/static/chunks/00-csyj9a6t-x.js"],"OutletBoundary"]
 4:"$Sreact.suspense"
-:HL["/zaideu/_next/static/chunks/12zgqoe2hc1lb.css","style"]
+:HL["/zaideu/_next/static/chunks/11bk01rs6g75y.css","style"]
 :HL["/zaideu/_next/static/chunks/0wykb4l23_xr7.css","style"]
 :HL["/zaideu/_next/static/chunks/0lac9h.u6iwz4.css","style"]
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","link","0",{"rel":"stylesheet","href":"/zaideu/_next/static/chunks/12zgqoe2hc1lb.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/zaideu/_next/static/chunks/0wykb4l23_xr7.css","precedence":"next"}],["$","link","2",{"rel":"stylesheet","href":"/zaideu/_next/static/chunks/0lac9h.u6iwz4.css","precedence":"next"}],["$","script","script-0",{"src":"/zaideu/_next/static/chunks/0~aqax6p~ijv3.js","async":true}],["$","script","script-1",{"src":"/zaideu/_next/static/chunks/0nj.6bz9x5knr.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"wlX0KY7tR2T13VRfTg_jb"}
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","link","0",{"rel":"stylesheet","href":"/zaideu/_next/static/chunks/11bk01rs6g75y.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/zaideu/_next/static/chunks/0wykb4l23_xr7.css","precedence":"next"}],["$","link","2",{"rel":"stylesheet","href":"/zaideu/_next/static/chunks/0lac9h.u6iwz4.css","precedence":"next"}],["$","script","script-0",{"src":"/zaideu/_next/static/chunks/1494edxzvq734.js","async":true}],["$","script","script-1",{"src":"/zaideu/_next/static/chunks/0.iy892znn_9n.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"2Xc5_5Bs_HCyYRUNsN3nJ"}
 5:null

@@ -1,5 +1,9 @@
+@use '@/shared/styles/design-system' as ds;
+
+.page {
+  @include ds.page-shell;
+}
+
 .main {
-  width: min(100%, 720px);
-  margin: 0 auto;
-  padding: 32px 16px 56px;
+  @include ds.page-main(720px);
 }

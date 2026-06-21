@@ -1,15 +1,15 @@
+@use '@/shared/styles/design-system' as ds;
+
 .content {
-  z-index: 50;
-  width: 18rem;
+  z-index: ds.z(popover);
+  width: 288px;
   transform-origin: var(--radix-popover-content-transform-origin);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background-color: var(--popover);
-  padding: 1rem;
-  color: var(--popover-foreground);
-  box-shadow:
-    0 4px 6px -1px rgb(0 0 0 / 0.1),
-    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border: 1px solid ds.color(border-default);
+  border-radius: ds.radius(md);
+  background: ds.color(background-elevated);
+  padding: ds.spacing(4);
+  color: ds.color(text-primary);
+  box-shadow: ds.shadow(lg);
   outline: none;
 
   &[data-state='open'] {
@@ -18,6 +18,10 @@
 
   &[data-state='closed'] {
     animation: overlay-out 150ms ease-in;
+  }
+
+  &:focus-visible {
+    @include ds.focus-ring;
   }
 }
 

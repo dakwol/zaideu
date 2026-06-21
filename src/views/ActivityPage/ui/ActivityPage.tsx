@@ -6,6 +6,7 @@ import { ActivityItem } from '@/entities/activity/ui/ActivityItem'
 import { mockActivities, mockProjects } from '@/shared/lib/mock-data'
 import { Filter } from 'lucide-react'
 import { useTranslation } from '@/shared/hooks/use-locale'
+import styles from '../ActivityPage.module.scss'
 type ActivityFilter =
   | 'all'
   | 'task_completed'
@@ -61,10 +62,10 @@ export const ActivityPage = () => {
     )
   }
   return (
-    <div className="min-h-screen bg-background">
+    <div className={styles.page}>
       <AppHeader />
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+      <main className={styles.main}>
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-foreground mb-2">{translate('activity.title')}</h1>
           <p className="text-muted-foreground">{translate('activity.description')}</p>

@@ -245,7 +245,7 @@ const CreateProjectPage = () => {
     return <CreateProjectSuccess createdProject={createdProject} />
   }
   return (
-    <div className="min-h-screen bg-background">
+    <div className={styles.page}>
       <AppHeader />
       <main className={styles.main}>
         <section className={styles.onboardingShell}>

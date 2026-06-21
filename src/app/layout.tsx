@@ -32,7 +32,7 @@ const RootLayout = ({
   children: React.ReactNode
 }>) => {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className="font-sans antialiased">
         <AppLocaleProvider>{children}</AppLocaleProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}

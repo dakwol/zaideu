@@ -16,7 +16,7 @@ const ContributionPage = ({ params }: ContributionPageProps) => {
     notFound()
   }
   return (
-    <div className="min-h-screen bg-background">
+    <div className={styles.page}>
       <AppHeader />
       <main className={styles.main}>
         <ContributionFlow task={task} />

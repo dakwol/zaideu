@@ -29,7 +29,7 @@ const EmptyTitle = ({ className, ...props }: React.ComponentProps<'div'>) => {
 }
 const EmptyDescription = ({ className, ...props }: React.ComponentProps<'p'>) => {
   return (
-    <div
+    <p
       data-slot="empty-description"
       className={classNames(styles.description, className)}
       {...props}

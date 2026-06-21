@@ -44,7 +44,7 @@ const ProjectDetailPage = ({ params }: ProjectPageProps) => {
     setProjectTasks(getTasksByProjectId(params.id))
   }
   return (
-    <div className="min-h-screen bg-background">
+    <div className={styles.page}>
       <AppHeader />
 
       <main className={styles.main}>

@@ -1,13 +1,19 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
 .content {
-  z-index: 50;
+  z-index: ds.z(tooltip);
   width: fit-content;
   transform-origin: var(--radix-tooltip-content-transform-origin);
-  border-radius: var(--radius-md);
-  background-color: var(--foreground);
-  padding: 0.375rem 0.75rem;
-  color: var(--background);
-  font-size: 0.75rem;
-  line-height: 1rem;
+  border: 1px solid ds.color(border-hover);
+  border-radius: ds.radius(base);
+  background: ds.color(background-elevated);
+  padding: ds.spacing(2) ds.spacing(3);
+  color: ds.color(text-primary);
+  font-family: ds.$font-primary;
+  font-size: map.get(ds.$font-size, xs);
+  line-height: map.get(ds.$line-height, normal);
+  box-shadow: ds.shadow(md);
   text-wrap: balance;
   animation: tooltip-in 150ms ease-out;
 
@@ -17,12 +23,12 @@
 }
 
 .arrow {
-  z-index: 50;
-  width: 0.625rem;
-  height: 0.625rem;
+  z-index: ds.z(tooltip);
+  width: 10px;
+  height: 10px;
   border-radius: 2px;
-  background-color: var(--foreground);
-  fill: var(--foreground);
+  background: ds.color(background-elevated);
+  fill: ds.color(background-elevated);
   transform: translateY(calc(-50% - 2px)) rotate(45deg);
 }
 

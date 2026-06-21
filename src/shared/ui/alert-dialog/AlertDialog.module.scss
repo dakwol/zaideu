@@ -1,8 +1,12 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 50;
-  background-color: rgb(0 0 0 / 0.5);
+  z-index: ds.z(modal-backdrop);
+  background: ds.color(overlay-medium);
+  backdrop-filter: blur(4px);
 
   &[data-state='open'] {
     animation: fade-in 200ms ease-out;
@@ -17,18 +21,17 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 50;
+  z-index: ds.z(modal);
   display: grid;
   width: 100%;
-  max-width: calc(100% - 2rem);
-  gap: 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background-color: var(--background);
-  padding: 1.5rem;
-  box-shadow:
-    0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  max-width: calc(100% - #{ds.spacing(8)});
+  gap: ds.spacing(4);
+  border: 1px solid ds.color(border-default);
+  border-radius: ds.radius(lg);
+  background: ds.color(background-elevated);
+  padding: ds.spacing(6);
+  color: ds.color(text-primary);
+  box-shadow: ds.shadow(xl);
   transform: translate(-50%, -50%);
 
   &[data-state='open'] {
@@ -40,14 +43,14 @@
   }
 
   @media (min-width: 40rem) {
-    max-width: 32rem;
+    max-width: 512px;
   }
 }
 
 .header {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: ds.spacing(2);
   text-align: center;
 
   @media (min-width: 40rem) {
@@ -58,7 +61,7 @@
 .footer {
   display: flex;
   flex-direction: column-reverse;
-  gap: 0.5rem;
+  gap: ds.spacing(2);
 
   @media (min-width: 40rem) {
     flex-direction: row;
@@ -67,15 +70,15 @@
 }
 
 .title {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  font-weight: 600;
+  font-size: map.get(ds.$font-size, lg);
+  line-height: map.get(ds.$line-height, normal);
+  font-weight: map.get(ds.$font-weight, semibold);
 }
 
 .description {
-  color: var(--muted-foreground);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, normal);
 }
 
 @keyframes fade-in {

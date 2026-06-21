@@ -7,6 +7,7 @@ import { StatusBadge } from '@/shared/ui/status-badge'
 import { mockUsers, mockProjects, mockActivities } from '@/shared/lib/mock-data'
 import { useTranslation } from '@/shared/hooks/use-locale'
 import { CheckCircle2, Folder, Clock, TrendingUp, Calendar, ExternalLink } from 'lucide-react'
+import styles from '../ProfilePage.module.scss'
 const currentUser = mockUsers[0]
 export const ProfilePage = () => {
   const translate = useTranslation()
@@ -57,10 +58,10 @@ export const ProfilePage = () => {
   }
   const activityConfig = activityLevelConfig[currentUser.activityLevel]
   return (
-    <div className="min-h-screen bg-background">
+    <div className={styles.page}>
       <AppHeader />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+      <main className={styles.main}>
         <div className="flex flex-col sm:flex-row items-start gap-6 mb-8 pb-8 border-b border-border">
           <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center overflow-hidden">
             {currentUser.avatar ? (
