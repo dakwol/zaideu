@@ -1,26 +1,24 @@
 import { Slot } from '@radix-ui/react-slot'
-
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import { Separator } from '@/shared/ui/separator'
 import styles from '../ButtonGroup.module.scss'
-
 type ButtonGroupOrientation = 'horizontal' | 'vertical'
-
-function buttonGroupVariants({
+const buttonGroupVariants = ({
   orientation = 'horizontal',
   className,
 }: {
   orientation?: ButtonGroupOrientation
   className?: string
-} = {}) {
-  return cn(styles.group, styles[orientation], className)
+} = {}) => {
+  return classNames(styles.group, styles[orientation], className)
 }
-
-function ButtonGroup({
+const ButtonGroup = ({
   className,
   orientation,
   ...props
-}: React.ComponentProps<'div'> & { orientation?: ButtonGroupOrientation }) {
+}: React.ComponentProps<'div'> & {
+  orientation?: ButtonGroupOrientation
+}) => {
   return (
     <div
       role="group"
@@ -31,43 +29,28 @@ function ButtonGroup({
     />
   )
 }
-
-function ButtonGroupText({
+const ButtonGroupText = ({
   className,
   asChild = false,
   ...props
 }: React.ComponentProps<'div'> & {
   asChild?: boolean
-}) {
+}) => {
   const Comp = asChild ? Slot : 'div'
-
-  return (
-    <Comp
-      className={cn(styles.text, className)}
-      {...props}
-    />
-  )
+  return <Comp className={classNames(styles.text, className)} {...props} />
 }
-
-function ButtonGroupSeparator({
+const ButtonGroupSeparator = ({
   className,
   orientation = 'vertical',
   ...props
-}: React.ComponentProps<typeof Separator>) {
+}: React.ComponentProps<typeof Separator>) => {
   return (
     <Separator
       data-slot="button-group-separator"
       orientation={orientation}
-      className={cn(styles.separator, className)}
+      className={classNames(styles.separator, className)}
       {...props}
     />
   )
 }
-
-export {
-  ButtonGroup,
-  ButtonGroupSeparator,
-  ButtonGroupText,
-  buttonGroupVariants,
-}
-
+export { ButtonGroup, ButtonGroupSeparator, ButtonGroupText, buttonGroupVariants }

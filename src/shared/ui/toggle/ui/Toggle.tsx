@@ -1,32 +1,22 @@
 'use client'
-
 import * as React from 'react'
 import * as TogglePrimitive from '@radix-ui/react-toggle'
-
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import type { ToggleProps, ToggleVariantsOptions } from '../model/types'
 import styles from '../Toggle.module.scss'
-
-function toggleVariants({
+const toggleVariants = ({
   variant = 'default',
   size = 'default',
   className,
-}: ToggleVariantsOptions = {}) {
+}: ToggleVariantsOptions = {}) => {
   const sizeClass = {
     default: styles.sizeDefault,
     sm: styles.sizeSm,
     lg: styles.sizeLg,
   }[size]
-
-  return cn(styles.toggle, styles[variant], sizeClass, className)
+  return classNames(styles.toggle, styles[variant], sizeClass, className)
 }
-
-function Toggle({
-  className,
-  variant,
-  size,
-  ...props
-}: ToggleProps) {
+const Toggle = ({ className, variant, size, ...props }: ToggleProps) => {
   return (
     <TogglePrimitive.Root
       data-slot="toggle"
@@ -35,6 +25,4 @@ function Toggle({
     />
   )
 }
-
 export { Toggle, toggleVariants }
-

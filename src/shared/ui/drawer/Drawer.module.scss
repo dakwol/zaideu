@@ -4,8 +4,12 @@
   z-index: 50;
   background-color: rgb(0 0 0 / 0.5);
 
-  &[data-state='open'] { animation: fade-in 200ms ease-out; }
-  &[data-state='closed'] { animation: fade-out 200ms ease-in; }
+  &[data-state='open'] {
+    animation: fade-in 200ms ease-out;
+  }
+  &[data-state='closed'] {
+    animation: fade-out 200ms ease-in;
+  }
 }
 
 .content {
@@ -110,11 +114,19 @@
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

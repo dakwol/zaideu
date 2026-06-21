@@ -1,5 +1,5 @@
 import { App } from '../App'
-
-export default function AuthPage() {
+const AuthPage = () => {
   return <App />
 }
+export default AuthPage

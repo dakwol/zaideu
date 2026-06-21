@@ -1,8 +1,6 @@
 'use client'
-
 import { useMemo, useState } from 'react'
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
-
 import { FOUNDATION_STAGE } from '@/entities/project/model/constants'
 import {
   ProjectFirstResult,
@@ -34,8 +32,7 @@ import { ProjectTasksSection } from '@/features/create-project/ui/ProjectTasksSe
 import { Button } from '@/shared/ui/button'
 import { AppHeader } from '@/widgets/AppHeader'
 import styles from './CreateProjectPage.module.scss'
-
-function CreateProjectPage() {
+const CreateProjectPage = () => {
   const [activeStepIndex, setActiveStepIndex] = useState(0)
   const [formValues, setFormValues] = useState<CreateProjectFormValues>(() => ({
     title: '',
@@ -46,20 +43,16 @@ function CreateProjectPage() {
     tasks: getSuggestedTasks(ProjectType.WebApp),
   }))
   const [tasksEditedManually, setTasksEditedManually] = useState(false)
-  const [hasTemplateTaskUpdateAvailable, setHasTemplateTaskUpdateAvailable] =
-    useState(false)
+  const [hasTemplateTaskUpdateAvailable, setHasTemplateTaskUpdateAvailable] = useState(false)
   const [attemptedSteps, setAttemptedSteps] = useState<CreateProjectStep[]>([])
   const [rolePickerIsOpen, setRolePickerIsOpen] = useState(false)
-  const [createdProject, setCreatedProject] =
-    useState<CreatedProjectPayload | null>(null)
-
+  const [createdProject, setCreatedProject] = useState<CreatedProjectPayload | null>(null)
   const activeStep = CREATE_PROJECT_FLOW_STEPS[activeStepIndex]
   const activeStepId = activeStep.id
   const userHasAttemptedActiveStep = attemptedSteps.includes(activeStepId)
   const validationMessages = userHasAttemptedActiveStep
     ? getStepValidationMessages(activeStepId, formValues)
     : []
-
   const projectPreview = useMemo<CreatedProjectPayload>(
     () => ({
       title: formValues.title,
@@ -71,101 +64,79 @@ function CreateProjectPage() {
       tasks: formValues.tasks,
       nextAction: CREATE_PROJECT_NEXT_ACTION,
     }),
-    [formValues],
+    [formValues]
   )
-
-  function handleTitleChange(nextTitle: string) {
-    setFormValues((currentFormValues) => ({
+  const handleTitleChange = (nextTitle: string) => {
+    setFormValues(currentFormValues => ({
       ...currentFormValues,
       title: nextTitle,
     }))
   }
-
-  function handleDescriptionChange(nextDescription: string) {
-    setFormValues((currentFormValues) => ({
+  const handleDescriptionChange = (nextDescription: string) => {
+    setFormValues(currentFormValues => ({
       ...currentFormValues,
       description: nextDescription,
     }))
   }
-
-  function handleProjectTypeChange(nextProjectType: ProjectType) {
-    setFormValues((currentFormValues) => ({
+  const handleProjectTypeChange = (nextProjectType: ProjectType) => {
+    setFormValues(currentFormValues => ({
       ...currentFormValues,
       projectType: nextProjectType,
       selectedRoles: getSuggestedRoles(nextProjectType),
-      tasks: tasksEditedManually
-        ? currentFormValues.tasks
-        : getSuggestedTasks(nextProjectType),
+      tasks: tasksEditedManually ? currentFormValues.tasks : getSuggestedTasks(nextProjectType),
     }))
-
     if (tasksEditedManually) {
       setHasTemplateTaskUpdateAvailable(true)
     }
   }
-
-  function handleFirstResultChange(nextFirstResult: ProjectFirstResult) {
-    setFormValues((currentFormValues) => ({
+  const handleFirstResultChange = (nextFirstResult: ProjectFirstResult) => {
+    setFormValues(currentFormValues => ({
       ...currentFormValues,
       firstResult: nextFirstResult,
     }))
   }
-
-  function handleRoleToggle(projectRole: ProjectRole) {
-    setFormValues((currentFormValues) => {
+  const handleRoleToggle = (projectRole: ProjectRole) => {
+    setFormValues(currentFormValues => {
       const roleIsSelected = currentFormValues.selectedRoles.includes(projectRole)
       const nextSelectedRoles = roleIsSelected
-        ? currentFormValues.selectedRoles.filter(
-            (selectedRole) => selectedRole !== projectRole,
-          )
+        ? currentFormValues.selectedRoles.filter(selectedRole => selectedRole !== projectRole)
         : [...currentFormValues.selectedRoles, projectRole]
-
       return {
         ...currentFormValues,
         selectedRoles: nextSelectedRoles,
       }
     })
   }
-
-  function handleTaskTitleChange(taskId: string, nextTitle: string) {
+  const handleTaskTitleChange = (taskId: string, nextTitle: string) => {
     markTasksAsEdited()
-    setFormValues((currentFormValues) => ({
+    setFormValues(currentFormValues => ({
       ...currentFormValues,
-      tasks: currentFormValues.tasks.map((projectTask) =>
-        projectTask.id === taskId
-          ? { ...projectTask, title: nextTitle }
-          : projectTask,
+      tasks: currentFormValues.tasks.map(projectTask =>
+        projectTask.id === taskId ? { ...projectTask, title: nextTitle } : projectTask
       ),
     }))
   }
-
-  function handleTaskEstimateChange(
-    taskId: string,
-    nextEstimateMinutes: ProjectTaskEstimate,
-  ) {
+  const handleTaskEstimateChange = (taskId: string, nextEstimateMinutes: ProjectTaskEstimate) => {
     markTasksAsEdited()
-    setFormValues((currentFormValues) => ({
+    setFormValues(currentFormValues => ({
       ...currentFormValues,
-      tasks: currentFormValues.tasks.map((projectTask) =>
+      tasks: currentFormValues.tasks.map(projectTask =>
         projectTask.id === taskId
           ? { ...projectTask, estimateMinutes: nextEstimateMinutes }
-          : projectTask,
+          : projectTask
       ),
     }))
   }
-
-  function handleTaskDelete(taskId: string) {
+  const handleTaskDelete = (taskId: string) => {
     markTasksAsEdited()
-    setFormValues((currentFormValues) => ({
+    setFormValues(currentFormValues => ({
       ...currentFormValues,
-      tasks: currentFormValues.tasks.filter(
-        (projectTask) => projectTask.id !== taskId,
-      ),
+      tasks: currentFormValues.tasks.filter(projectTask => projectTask.id !== taskId),
     }))
   }
-
-  function handleTaskAdd() {
+  const handleTaskAdd = () => {
     markTasksAsEdited()
-    setFormValues((currentFormValues) => ({
+    setFormValues(currentFormValues => ({
       ...currentFormValues,
       tasks: [
         ...currentFormValues.tasks,
@@ -177,64 +148,50 @@ function CreateProjectPage() {
       ],
     }))
   }
-
-  function handleTasksRegenerate() {
-    setFormValues((currentFormValues) => ({
+  const handleTasksRegenerate = () => {
+    setFormValues(currentFormValues => ({
       ...currentFormValues,
       tasks: getSuggestedTasks(currentFormValues.projectType),
     }))
     setTasksEditedManually(false)
     setHasTemplateTaskUpdateAvailable(false)
   }
-
-  function handleBackClick() {
-    setActiveStepIndex((currentStepIndex) => Math.max(currentStepIndex - 1, 0))
+  const handleBackClick = () => {
+    setActiveStepIndex(currentStepIndex => Math.max(currentStepIndex - 1, 0))
   }
-
-  function handleNextClick() {
-    const nextValidationMessages = getStepValidationMessages(
-      activeStepId,
-      formValues,
-    )
-
+  const handleNextClick = () => {
+    const nextValidationMessages = getStepValidationMessages(activeStepId, formValues)
     if (nextValidationMessages.length > 0) {
       markActiveStepAsAttempted()
       return
     }
-
-    setActiveStepIndex((currentStepIndex) =>
-      Math.min(currentStepIndex + 1, CREATE_PROJECT_FLOW_STEPS.length - 1),
+    setActiveStepIndex(currentStepIndex =>
+      Math.min(currentStepIndex + 1, CREATE_PROJECT_FLOW_STEPS.length - 1)
     )
   }
-
-  function handleProjectCreate() {
+  const handleProjectCreate = () => {
     const nextValidationMessages = getStepValidationMessages(
       CreateProjectStep.FinalReview,
-      formValues,
+      formValues
     )
-
     if (nextValidationMessages.length > 0) {
       markActiveStepAsAttempted()
       return
     }
-
-    console.log('create project submit', projectPreview)
+    //TODO: send project to backend
     setCreatedProject(projectPreview)
   }
-
-  function markActiveStepAsAttempted() {
-    setAttemptedSteps((currentAttemptedSteps) =>
+  const markActiveStepAsAttempted = () => {
+    setAttemptedSteps(currentAttemptedSteps =>
       currentAttemptedSteps.includes(activeStepId)
         ? currentAttemptedSteps
-        : [...currentAttemptedSteps, activeStepId],
+        : [...currentAttemptedSteps, activeStepId]
     )
   }
-
-  function markTasksAsEdited() {
+  const markTasksAsEdited = () => {
     setTasksEditedManually(true)
   }
-
-  function renderActiveStep() {
+  const renderActiveStep = () => {
     if (activeStepId === CreateProjectStep.Idea) {
       return (
         <ProjectIdeaSection
@@ -247,7 +204,6 @@ function CreateProjectPage() {
         />
       )
     }
-
     if (activeStepId === CreateProjectStep.FirstResult) {
       return (
         <ProjectGoalSection
@@ -256,24 +212,19 @@ function CreateProjectPage() {
         />
       )
     }
-
     if (activeStepId === CreateProjectStep.Team) {
       return (
         <ProjectRolesSection
           rolePickerIsOpen={rolePickerIsOpen}
           selectedRoles={formValues.selectedRoles}
-          onRolePickerToggle={() =>
-            setRolePickerIsOpen((currentValue) => !currentValue)
-          }
+          onRolePickerToggle={() => setRolePickerIsOpen(currentValue => !currentValue)}
           onRoleToggle={handleRoleToggle}
         />
       )
     }
-
     if (activeStepId === CreateProjectStep.FirstStage) {
       return <ProjectStageSection taskCount={formValues.tasks.length} />
     }
-
     if (activeStepId === CreateProjectStep.StarterTasks) {
       return (
         <ProjectTasksSection
@@ -288,14 +239,11 @@ function CreateProjectPage() {
         />
       )
     }
-
     return <ProjectPreviewSection projectPreview={projectPreview} />
   }
-
   if (createdProject) {
     return <CreateProjectSuccess createdProject={createdProject} />
   }
-
   return (
     <div className="min-h-screen bg-background">
       <AppHeader />
@@ -309,7 +257,7 @@ function CreateProjectPage() {
 
             {validationMessages.length > 0 ? (
               <div className={styles.validationBox} role="alert">
-                {validationMessages.map((validationMessage) => (
+                {validationMessages.map(validationMessage => (
                   <p key={validationMessage}>{validationMessage}</p>
                 ))}
               </div>
@@ -343,5 +291,4 @@ function CreateProjectPage() {
     </div>
   )
 }
-
 export { CreateProjectPage }

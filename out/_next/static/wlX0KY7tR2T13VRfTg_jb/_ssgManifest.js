@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fproject\u002F[id]","\u002Fproject\u002F[id]\u002Fcontribute\u002F[taskId]","\u002Fproject\u002F[id]\u002Fstages","\u002Fworkspace\u002Ftask\u002F[taskId]\u002Fsubmit"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()

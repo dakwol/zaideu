@@ -1,77 +1,44 @@
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import styles from '../Empty.module.scss'
-
-function Empty({ className, ...props }: React.ComponentProps<'div'>) {
+const Empty = ({ className, ...props }: React.ComponentProps<'div'>) => {
+  return <div data-slot="empty" className={classNames(styles.empty, className)} {...props} />
+}
+const EmptyHeader = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
-    <div
-      data-slot="empty"
-      className={cn(styles.empty, className)}
-      {...props}
-    />
+    <div data-slot="empty-header" className={classNames(styles.header, className)} {...props} />
   )
 }
-
-function EmptyHeader({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="empty-header"
-      className={cn(styles.header, className)}
-      {...props}
-    />
-  )
-}
-
-function EmptyMedia({
+const EmptyMedia = ({
   className,
   variant = 'default',
   ...props
-}: React.ComponentProps<'div'> & { variant?: 'default' | 'icon' }) {
+}: React.ComponentProps<'div'> & {
+  variant?: 'default' | 'icon'
+}) => {
   return (
     <div
       data-slot="empty-icon"
       data-variant={variant}
-      className={cn(styles.media, styles[variant], className)}
+      className={classNames(styles.media, styles[variant], className)}
       {...props}
     />
   )
 }
-
-function EmptyTitle({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="empty-title"
-      className={cn(styles.title, className)}
-      {...props}
-    />
-  )
+const EmptyTitle = ({ className, ...props }: React.ComponentProps<'div'>) => {
+  return <div data-slot="empty-title" className={classNames(styles.title, className)} {...props} />
 }
-
-function EmptyDescription({ className, ...props }: React.ComponentProps<'p'>) {
+const EmptyDescription = ({ className, ...props }: React.ComponentProps<'p'>) => {
   return (
     <div
       data-slot="empty-description"
-      className={cn(styles.description, className)}
+      className={classNames(styles.description, className)}
       {...props}
     />
   )
 }
-
-function EmptyContent({ className, ...props }: React.ComponentProps<'div'>) {
+const EmptyContent = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
-    <div
-      data-slot="empty-content"
-      className={cn(styles.content, className)}
-      {...props}
-    />
+    <div data-slot="empty-content" className={classNames(styles.content, className)} {...props} />
   )
 }
-
-export {
-  Empty,
-  EmptyHeader,
-  EmptyTitle,
-  EmptyDescription,
-  EmptyContent,
-  EmptyMedia,
-}
-
+export { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent, EmptyMedia }

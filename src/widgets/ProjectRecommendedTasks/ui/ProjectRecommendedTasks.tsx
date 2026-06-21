@@ -1,34 +1,23 @@
 'use client'
-
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Clock, Search } from 'lucide-react'
-
 import { formatTaskStatus } from '@/entities/task/lib/formatTaskStatus'
 import { getRecommendedTasks } from '@/entities/task/lib/getRecommendedTasks'
 import { getRelatedTasks } from '@/entities/task/lib/getRelatedTasks'
-import {
-  getTasksByProjectId,
-} from '@/entities/task/lib/taskStore'
-import {
-  ProjectTaskStatus,
-  type ProjectTask,
-} from '@/entities/task/model/types'
+import { getTasksByProjectId } from '@/entities/task/lib/taskStore'
+import { ProjectTaskStatus, type ProjectTask } from '@/entities/task/model/types'
 import { Button } from '@/shared/ui/button'
 import type { ProjectRecommendedTasksProps } from '../model/types'
 import styles from './ProjectRecommendedTasks.module.scss'
-
-function ProjectRecommendedTasks({ projectId }: ProjectRecommendedTasksProps) {
+const ProjectRecommendedTasks = ({ projectId }: ProjectRecommendedTasksProps) => {
   const [projectTasks, setProjectTasks] = useState<ProjectTask[]>(() =>
-    getTasksByProjectId(projectId),
+    getTasksByProjectId(projectId)
   )
-
   useEffect(() => {
     setProjectTasks(getTasksByProjectId(projectId))
   }, [projectId])
-
   const recommendedTasks = getRecommendedTasks(projectTasks)
-
   return (
     <section className={styles.section}>
       <div className={styles.heading}>
@@ -37,7 +26,7 @@ function ProjectRecommendedTasks({ projectId }: ProjectRecommendedTasksProps) {
       </div>
 
       <div className={styles.taskGrid}>
-        {recommendedTasks.map((projectTask) => (
+        {recommendedTasks.map(projectTask => (
           <RecommendedTaskCard
             key={projectTask.id}
             projectTasks={projectTasks}
@@ -48,15 +37,12 @@ function ProjectRecommendedTasks({ projectId }: ProjectRecommendedTasksProps) {
     </section>
   )
 }
-
 interface RecommendedTaskCardProps {
   task: ProjectTask
   projectTasks: ProjectTask[]
 }
-
-function RecommendedTaskCard({ task, projectTasks }: RecommendedTaskCardProps) {
+const RecommendedTaskCard = ({ task, projectTasks }: RecommendedTaskCardProps) => {
   const relatedTasks = getRelatedTasks(projectTasks, task)
-
   return (
     <article className={styles.taskCard}>
       <div className={styles.taskHeader}>
@@ -75,24 +61,14 @@ function RecommendedTaskCard({ task, projectTasks }: RecommendedTaskCardProps) {
     </article>
   )
 }
-
-function TaskAction({
-  task,
-  relatedTasks,
-}: {
-  task: ProjectTask
-  relatedTasks: ProjectTask[]
-}) {
+const TaskAction = ({ task, relatedTasks }: { task: ProjectTask; relatedTasks: ProjectTask[] }) => {
   if (task.status === ProjectTaskStatus.Available) {
     return (
       <Button size="sm" asChild>
-        <Link href={`/project/${task.projectId}/contribute/${task.id}`}>
-          Взять задачу
-        </Link>
+        <Link href={`/project/${task.projectId}/contribute/${task.id}`}>Взять задачу</Link>
       </Button>
     )
   }
-
   if (task.status === ProjectTaskStatus.InProgress) {
     return (
       <div className={styles.ownershipBlock}>
@@ -100,7 +76,7 @@ function TaskAction({
         {relatedTasks.length > 0 ? (
           <div className={styles.relatedTasks}>
             <span>Можно помочь здесь:</span>
-            {relatedTasks.map((relatedTask) => (
+            {relatedTasks.map(relatedTask => (
               <Link
                 key={relatedTask.id}
                 href={`/project/${relatedTask.projectId}/contribute/${relatedTask.id}`}
@@ -123,12 +99,9 @@ function TaskAction({
       </div>
     )
   }
-
   if (task.status === ProjectTaskStatus.InReview) {
     return <p className={styles.stateText}>На проверке</p>
   }
-
   return <p className={styles.stateText}>Готово</p>
 }
-
 export { ProjectRecommendedTasks }

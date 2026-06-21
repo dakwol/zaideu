@@ -1,18 +1,14 @@
 import * as React from 'react'
-
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import styles from '../Input.module.scss'
-
-function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
+const Input = ({ className, type, ...props }: React.ComponentProps<'input'>) => {
   return (
     <input
       type={type}
       data-slot="input"
-      className={cn(styles.input, className)}
+      className={classNames(styles.input, className)}
       {...props}
     />
   )
 }
-
 export { Input }
-

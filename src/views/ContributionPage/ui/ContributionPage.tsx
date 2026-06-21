@@ -1,26 +1,20 @@
 'use client'
-
 import { notFound } from 'next/navigation'
-
 import { getTaskById } from '@/entities/task/lib/taskStore'
 import { ContributionFlow } from '@/features/take-task/ui/ContributionFlow'
 import { AppHeader } from '@/widgets/AppHeader'
 import styles from './ContributionPage.module.scss'
-
 interface ContributionPageProps {
   params: {
     id: string
     taskId: string
   }
 }
-
-function ContributionPage({ params }: ContributionPageProps) {
+const ContributionPage = ({ params }: ContributionPageProps) => {
   const task = getTaskById(params.taskId)
-
   if (!task || task.projectId !== params.id) {
     notFound()
   }
-
   return (
     <div className="min-h-screen bg-background">
       <AppHeader />
@@ -30,5 +24,4 @@ function ContributionPage({ params }: ContributionPageProps) {
     </div>
   )
 }
-
 export { ContributionPage }

@@ -1,0 +1,347 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
+.card {
+  @include ds.card-base;
+
+  position: relative;
+  display: flex;
+  min-width: 0;
+  height: 100%;
+  flex-direction: column;
+  gap: ds.spacing(4);
+  padding: ds.spacing(5);
+}
+
+.cardAttention {
+  border-color: rgba(255, 165, 2, 0.28);
+  background: rgba(255, 165, 2, 0.06);
+}
+
+.cardStalled {
+  border-color: rgba(255, 99, 72, 0.28);
+}
+
+.cardRevival {
+  border-color: rgba(112, 161, 255, 0.28);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: ds.spacing(3);
+  align-items: start;
+}
+
+.titleGroup {
+  min-width: 0;
+
+  h3 {
+    @include ds.truncate;
+
+    margin: ds.spacing(1) 0 0;
+    color: ds.color(text-primary);
+    font-size: map.get(ds.$font-size, lg);
+    font-weight: map.get(ds.$font-weight, semibold);
+    line-height: map.get(ds.$line-height, tight);
+  }
+}
+
+.stageLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: ds.spacing(1);
+  margin: 0;
+  color: ds.color(text-tertiary);
+  font-size: map.get(ds.$font-size, xs);
+  font-weight: map.get(ds.$font-weight, medium);
+  text-transform: uppercase;
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+.description {
+  @include ds.line-clamp(2);
+
+  min-height: 3rem;
+  margin: 0;
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, normal);
+}
+
+.metaRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: ds.spacing(3);
+  align-items: center;
+}
+
+.tags {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: ds.spacing(2);
+
+  span {
+    display: inline-flex;
+    max-width: 9rem;
+    align-items: center;
+    padding: 0.1875rem ds.spacing(2);
+    border: 1px solid ds.color(border-default);
+    border-radius: ds.radius(full);
+    background: ds.color(surface-default);
+    color: ds.color(text-secondary);
+    font-size: map.get(ds.$font-size, xs);
+    font-weight: map.get(ds.$font-weight, medium);
+    @include ds.truncate;
+  }
+}
+
+.mutedTag {
+  color: ds.color(text-tertiary) !important;
+}
+
+.avatars {
+  justify-content: flex-end;
+}
+
+.progressPanel {
+  display: grid;
+  gap: ds.spacing(3);
+  padding: ds.spacing(4);
+  border: 1px solid ds.color(border-default);
+  border-radius: ds.radius(md);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.progressHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: ds.spacing(3);
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, xs);
+  font-weight: map.get(ds.$font-weight, medium);
+
+  strong {
+    color: ds.color(text-primary);
+    font-family: ds.$font-mono;
+    font-size: map.get(ds.$font-size, sm);
+  }
+}
+
+.healthRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: ds.spacing(3);
+  justify-content: space-between;
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, xs);
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: ds.spacing(1);
+  }
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    color: ds.color(text-tertiary);
+  }
+}
+
+.healthDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: ds.radius(full);
+}
+
+.healthHealthy {
+  background: ds.color(status-active);
+}
+
+.healthSlowing {
+  background: ds.color(status-slow);
+}
+
+.healthAtRisk {
+  background: ds.color(status-stalled);
+}
+
+.healthDescription {
+  margin: 0;
+  color: ds.color(text-tertiary);
+  font-size: map.get(ds.$font-size, xs);
+}
+
+.signalGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: ds.spacing(2);
+
+  div {
+    min-width: 0;
+    padding: ds.spacing(3);
+    border: 1px solid ds.color(border-default);
+    border-radius: ds.radius(md);
+    background: ds.color(surface-default);
+  }
+
+  strong {
+    display: block;
+    margin-top: ds.spacing(1);
+    color: ds.color(text-primary);
+    font-family: ds.$font-mono;
+    font-size: map.get(ds.$font-size, lg);
+    line-height: 1;
+  }
+}
+
+.signalLabel {
+  display: block;
+  color: ds.color(text-tertiary);
+  font-size: map.get(ds.$font-size, xs);
+  @include ds.truncate;
+}
+
+.helpSignals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: ds.spacing(2);
+}
+
+.overdueSignal,
+.roleSignal {
+  display: inline-flex;
+  align-items: center;
+  gap: ds.spacing(1);
+  min-height: 1.75rem;
+  padding: 0 ds.spacing(2);
+  border-radius: ds.radius(full);
+  font-size: map.get(ds.$font-size, xs);
+  font-weight: map.get(ds.$font-weight, medium);
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+.overdueSignal {
+  border: 1px solid rgba(255, 165, 2, 0.28);
+  background: rgba(255, 165, 2, 0.08);
+  color: ds.color(status-slow);
+}
+
+.roleSignal {
+  border: 1px solid rgba(112, 161, 255, 0.28);
+  background: rgba(112, 161, 255, 0.08);
+  color: ds.color(status-revival);
+}
+
+.nextAction {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: ds.spacing(3);
+  margin-top: auto;
+  padding: ds.spacing(4);
+  border: 1px solid rgba(123, 237, 159, 0.2);
+  border-radius: ds.radius(md);
+  background: ds.color(accent-primary-subtle);
+}
+
+.nextActionIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: ds.radius(md);
+  background: rgba(123, 237, 159, 0.14);
+  color: ds.color(accent-primary);
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.nextActionContent {
+  min-width: 0;
+
+  span {
+    display: block;
+    color: ds.color(text-tertiary);
+    font-size: map.get(ds.$font-size, xs);
+    font-weight: map.get(ds.$font-weight, medium);
+  }
+
+  strong {
+    @include ds.truncate;
+
+    display: block;
+    margin-top: ds.spacing(1);
+    color: ds.color(text-primary);
+    font-size: map.get(ds.$font-size, sm);
+  }
+
+  p {
+    display: inline-flex;
+    align-items: center;
+    gap: ds.spacing(1);
+    margin: ds.spacing(2) 0 0;
+    color: ds.color(accent-primary);
+    font-family: ds.$font-mono;
+    font-size: map.get(ds.$font-size, xs);
+  }
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: ds.spacing(2);
+  min-height: 2.5rem;
+  padding: 0 ds.spacing(4);
+  border: 1px solid ds.color(border-default);
+  border-radius: ds.radius(md);
+  background: ds.color(surface-default);
+  color: ds.color(text-primary);
+  font-size: map.get(ds.$font-size, sm);
+  font-weight: map.get(ds.$font-weight, semibold);
+  text-decoration: none;
+  @include ds.smooth-transition(background, border-color, color);
+
+  &:hover {
+    border-color: ds.color(border-hover);
+    background: ds.color(surface-hover);
+    color: ds.color(accent-primary);
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.actionPrimary {
+  border-color: transparent;
+  background: ds.color(accent-primary);
+  color: ds.color(text-inverse);
+
+  &:hover {
+    border-color: transparent;
+    background: ds.color(accent-primary-hover);
+    color: ds.color(text-inverse);
+  }
+}

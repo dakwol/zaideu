@@ -93,14 +93,26 @@
     0 4px 6px -1px rgb(0 0 0 / 0.1),
     0 2px 4px -2px rgb(0 0 0 / 0.1);
 
-  &[data-state='open'] { animation: select-in 150ms ease-out; }
-  &[data-state='closed'] { animation: select-out 150ms ease-in; }
+  &[data-state='open'] {
+    animation: select-in 150ms ease-out;
+  }
+  &[data-state='closed'] {
+    animation: select-out 150ms ease-in;
+  }
 }
 
-.popper[data-side='bottom'] { transform: translateY(0.25rem); }
-.popper[data-side='left'] { transform: translateX(-0.25rem); }
-.popper[data-side='right'] { transform: translateX(0.25rem); }
-.popper[data-side='top'] { transform: translateY(-0.25rem); }
+.popper[data-side='bottom'] {
+  transform: translateY(0.25rem);
+}
+.popper[data-side='left'] {
+  transform: translateX(-0.25rem);
+}
+.popper[data-side='right'] {
+  transform: translateX(0.25rem);
+}
+.popper[data-side='top'] {
+  transform: translateY(-0.25rem);
+}
 
 .viewport {
   padding: 0.25rem;
@@ -195,11 +207,23 @@
 }
 
 @keyframes select-in {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes select-out {
-  from { opacity: 1; transform: scale(1); }
-  to { opacity: 0; transform: scale(0.95); }
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
 }

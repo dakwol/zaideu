@@ -1,54 +1,41 @@
 'use client'
-
 import Link from 'next/link'
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import { Check } from 'lucide-react'
-
 import { submitProjectTask } from '@/entities/task/lib/taskStore'
 import type { ProjectTask } from '@/entities/task/model/types'
 import { Button } from '@/shared/ui/button'
 import styles from './SubmitTaskForm.module.scss'
-
 interface SubmitTaskFormProps {
   task: ProjectTask
 }
-
-function SubmitTaskForm({ task }: SubmitTaskFormProps) {
+const SubmitTaskForm = ({ task }: SubmitTaskFormProps) => {
   const [resultUrl, setResultUrl] = useState(task.resultUrl ?? '')
   const [comment, setComment] = useState(task.resultComment ?? '')
   const [errorMessage, setErrorMessage] = useState('')
   const [hasSubmitted, setHasSubmitted] = useState(false)
-
-  function handleResultUrlChange(event: ChangeEvent<HTMLInputElement>) {
+  const handleResultUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
     setResultUrl(event.target.value)
   }
-
-  function handleCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
+  const handleCommentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value)
   }
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
     if (!resultUrl.trim() && !comment.trim()) {
       setErrorMessage('Добавьте ссылку или коротко опишите, что сделали.')
       return
     }
-
     setErrorMessage('')
     submitProjectTask(task, resultUrl.trim(), comment.trim())
     setHasSubmitted(true)
   }
-
   if (hasSubmitted) {
     return (
       <section className={styles.card}>
         <div className={styles.heading}>
           <h1>Результат отправлен</h1>
-          <p>
-            Автор проекта или активный участник сможет принять работу или
-            попросить изменения.
-          </p>
+          <p>Автор проекта или активный участник сможет принять работу или попросить изменения.</p>
         </div>
         <Button asChild>
           <Link href="/workspace">Вернуться в рабочую зону</Link>
@@ -56,15 +43,12 @@ function SubmitTaskForm({ task }: SubmitTaskFormProps) {
       </section>
     )
   }
-
   return (
     <form className={styles.card} onSubmit={handleSubmit} noValidate>
       <div className={styles.heading}>
         <p className={styles.eyebrow}>{task.title}</p>
         <h1>Отправить результат</h1>
-        <span>
-          Добавьте ссылку на PR, commit, макет или коротко опишите, что сделали.
-        </span>
+        <span>Добавьте ссылку на PR, commit, макет или коротко опишите, что сделали.</span>
       </div>
 
       <label className={styles.field}>
@@ -98,5 +82,4 @@ function SubmitTaskForm({ task }: SubmitTaskFormProps) {
     </form>
   )
 }
-
 export { SubmitTaskForm }

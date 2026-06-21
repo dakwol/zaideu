@@ -1,23 +1,21 @@
 import * as React from 'react'
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu'
 import { ChevronDownIcon } from 'lucide-react'
-
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import styles from '../NavigationMenu.module.scss'
-
-function NavigationMenu({
+const NavigationMenu = ({
   className,
   children,
   viewport = true,
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & {
   viewport?: boolean
-}) {
+}) => {
   return (
     <NavigationMenuPrimitive.Root
       data-slot="navigation-menu"
       data-viewport={viewport}
-      className={cn(styles.root, className)}
+      className={classNames(styles.root, className)}
       {...props}
     >
       {children}
@@ -25,113 +23,104 @@ function NavigationMenu({
     </NavigationMenuPrimitive.Root>
   )
 }
-
-function NavigationMenuList({
+const NavigationMenuList = ({
   className,
   ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.List>) {
+}: React.ComponentProps<typeof NavigationMenuPrimitive.List>) => {
   return (
     <NavigationMenuPrimitive.List
       data-slot="navigation-menu-list"
-      className={cn(styles.list, className)}
+      className={classNames(styles.list, className)}
       {...props}
     />
   )
 }
-
-function NavigationMenuItem({
+const NavigationMenuItem = ({
   className,
   ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Item>) {
+}: React.ComponentProps<typeof NavigationMenuPrimitive.Item>) => {
   return (
     <NavigationMenuPrimitive.Item
       data-slot="navigation-menu-item"
-      className={cn(styles.item, className)}
+      className={classNames(styles.item, className)}
       {...props}
     />
   )
 }
-
-function navigationMenuTriggerStyle({ className }: { className?: string } = {}) {
-  return cn(styles.trigger, className)
+const navigationMenuTriggerStyle = ({
+  className,
+}: {
+  className?: string
+} = {}) => {
+  return classNames(styles.trigger, className)
 }
-
-function NavigationMenuTrigger({
+const NavigationMenuTrigger = ({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>) {
+}: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>) => {
   return (
     <NavigationMenuPrimitive.Trigger
       data-slot="navigation-menu-trigger"
       className={navigationMenuTriggerStyle({ className })}
       {...props}
     >
-      {children}{' '}
-      <ChevronDownIcon
-        className={styles.triggerIcon}
-        aria-hidden="true"
-      />
+      {children} <ChevronDownIcon className={styles.triggerIcon} aria-hidden="true" />
     </NavigationMenuPrimitive.Trigger>
   )
 }
-
-function NavigationMenuContent({
+const NavigationMenuContent = ({
   className,
   ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Content>) {
+}: React.ComponentProps<typeof NavigationMenuPrimitive.Content>) => {
   return (
     <NavigationMenuPrimitive.Content
       data-slot="navigation-menu-content"
-      className={cn(styles.content, className)}
+      className={classNames(styles.content, className)}
       {...props}
     />
   )
 }
-
-function NavigationMenuViewport({
+const NavigationMenuViewport = ({
   className,
   ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>) {
+}: React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>) => {
   return (
     <div className={styles.viewportWrap}>
       <NavigationMenuPrimitive.Viewport
         data-slot="navigation-menu-viewport"
-        className={cn(styles.viewport, className)}
+        className={classNames(styles.viewport, className)}
         {...props}
       />
     </div>
   )
 }
-
-function NavigationMenuLink({
+const NavigationMenuLink = ({
   className,
   ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Link>) {
+}: React.ComponentProps<typeof NavigationMenuPrimitive.Link>) => {
   return (
     <NavigationMenuPrimitive.Link
       data-slot="navigation-menu-link"
-      className={cn(styles.link, className)}
+      className={classNames(styles.link, className)}
       {...props}
     />
   )
 }
-
-function NavigationMenuIndicator({
+const NavigationMenuIndicator = ({
   className,
   ...props
-}: React.ComponentProps<typeof NavigationMenuPrimitive.Indicator>) {
+}: React.ComponentProps<typeof NavigationMenuPrimitive.Indicator>) => {
   return (
     <NavigationMenuPrimitive.Indicator
       data-slot="navigation-menu-indicator"
-      className={cn(styles.indicator, className)}
+      className={classNames(styles.indicator, className)}
       {...props}
     >
       <div className={styles.indicatorArrow} />
     </NavigationMenuPrimitive.Indicator>
   )
 }
-
 export {
   NavigationMenu,
   NavigationMenuList,
@@ -143,4 +132,3 @@ export {
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
 }
-

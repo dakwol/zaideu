@@ -2,20 +2,16 @@ import { Button } from '@/shared/ui/button'
 import { AppHeader } from '@/widgets/AppHeader'
 import type { CreateProjectSuccessProps } from '../../model/types'
 import styles from './CreateProjectSuccess.module.scss'
-
-function CreateProjectSuccess({ createdProject }: CreateProjectSuccessProps) {
-  function handleTakeFirstTaskClick() {
-    console.log('take first task', createdProject.tasks[0] ?? null)
+const CreateProjectSuccess = ({ createdProject }: CreateProjectSuccessProps) => {
+  const handleTakeFirstTaskClick = () => {
+    //TODO: implement take first task
   }
-
-  function handleOpenProjectClick() {
-    console.log('open project', createdProject)
+  const handleOpenProjectClick = () => {
+    //TODO: implement open project navigation
   }
-
-  function handleShareProjectClick() {
-    console.log('share project', createdProject.title)
+  const handleShareProjectClick = () => {
+    //TODO: implement share project
   }
-
   return (
     <div className={styles.screen}>
       <AppHeader />
@@ -25,8 +21,7 @@ function CreateProjectSuccess({ createdProject }: CreateProjectSuccessProps) {
             <p className={styles.eyebrow}>готово</p>
             <h1 className={styles.title}>Проект создан</h1>
             <p className={styles.subtitle}>
-              Мы подготовили первый этап и стартовые задачи. Теперь можно начать
-              движение.
+              Мы подготовили первый этап и стартовые задачи. Теперь можно начать движение.
             </p>
           </div>
           <div className={styles.nextBlock}>
@@ -63,5 +58,4 @@ function CreateProjectSuccess({ createdProject }: CreateProjectSuccessProps) {
     </div>
   )
 }
-
 export { CreateProjectSuccess }

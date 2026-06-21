@@ -3,27 +3,23 @@ import { ProjectType } from '@/entities/project/model/types'
 import { CreateProjectStepHeading } from '../CreateProjectStepHeading'
 import type { ProjectIdeaSectionProps } from '../../model/types'
 import styles from './ProjectIdeaSection.module.scss'
-
-function ProjectIdeaSection({
+const ProjectIdeaSection = ({
   title,
   description,
   projectType,
   onTitleChange,
   onDescriptionChange,
   onProjectTypeChange,
-}: ProjectIdeaSectionProps) {
-  function handleTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
+}: ProjectIdeaSectionProps) => {
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onTitleChange(event.target.value)
   }
-
-  function handleDescriptionChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
+  const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     onDescriptionChange(event.target.value)
   }
-
-  function handleProjectTypeChange(event: React.ChangeEvent<HTMLSelectElement>) {
+  const handleProjectTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     onProjectTypeChange(event.target.value as ProjectType)
   }
-
   return (
     <section className={styles.section}>
       <CreateProjectStepHeading
@@ -53,12 +49,8 @@ function ProjectIdeaSection({
         </label>
         <label className={styles.field}>
           <span className={styles.label}>Тип проекта</span>
-          <select
-            className={styles.select}
-            value={projectType}
-            onChange={handleProjectTypeChange}
-          >
-            {PROJECT_TYPE_OPTIONS.map((projectTypeOption) => (
+          <select className={styles.select} value={projectType} onChange={handleProjectTypeChange}>
+            {PROJECT_TYPE_OPTIONS.map(projectTypeOption => (
               <option key={projectTypeOption} value={projectTypeOption}>
                 {PROJECT_TYPE_LABELS[projectTypeOption]}
               </option>
@@ -69,5 +61,4 @@ function ProjectIdeaSection({
     </section>
   )
 }
-
 export { ProjectIdeaSection }

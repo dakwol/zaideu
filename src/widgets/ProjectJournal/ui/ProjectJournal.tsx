@@ -1,7 +1,6 @@
 import type { ProjectJournalProps } from '../model/types'
 import styles from './ProjectJournal.module.scss'
-
-function ProjectJournal({ entries }: ProjectJournalProps) {
+const ProjectJournal = ({ entries }: ProjectJournalProps) => {
   return (
     <section className={styles.section}>
       <div className={styles.heading}>
@@ -10,7 +9,7 @@ function ProjectJournal({ entries }: ProjectJournalProps) {
       </div>
       {entries.length > 0 ? (
         <div className={styles.list}>
-          {entries.map((journalEntry) => (
+          {entries.map(journalEntry => (
             <article className={styles.entry} key={journalEntry.id}>
               <div className={styles.entryHeader}>
                 <h3>{journalEntry.whatWasDone}</h3>
@@ -37,20 +36,15 @@ function ProjectJournal({ entries }: ProjectJournalProps) {
     </section>
   )
 }
-
-function formatJournalDate(date: Date): string {
+const formatJournalDate = (date: Date): string => {
   const differenceMs = Date.now() - date.getTime()
   const differenceDays = Math.floor(differenceMs / 86400000)
-
   if (differenceDays <= 0) {
     return 'сегодня'
   }
-
   if (differenceDays === 1) {
     return 'вчера'
   }
-
   return `${differenceDays} дн. назад`
 }
-
 export { ProjectJournal }

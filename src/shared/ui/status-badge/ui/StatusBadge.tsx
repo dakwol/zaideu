@@ -1,10 +1,13 @@
 'use client'
-
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import type { ProjectStatus } from '@/shared/lib/types'
 import styles from '../StatusBadge.module.scss'
-
-const statusConfig: Record<ProjectStatus, { label: string }> = {
+const statusConfig: Record<
+  ProjectStatus,
+  {
+    label: string
+  }
+> = {
   active: {
     label: 'Active',
   },
@@ -24,19 +27,16 @@ const statusConfig: Record<ProjectStatus, { label: string }> = {
     label: 'Archived',
   },
 }
-
 interface StatusBadgeProps {
   status: ProjectStatus
   size?: 'sm' | 'default'
   className?: string
 }
-
-export function StatusBadge({ status, size = 'default', className }: StatusBadgeProps) {
+export const StatusBadge = ({ status, size = 'default', className }: StatusBadgeProps) => {
   const config = statusConfig[status]
-  
   return (
     <span
-      className={cn(
+      className={classNames(
         styles.badge,
         size === 'sm' ? styles.sm : styles.default,
         styles[status],
@@ -47,4 +47,3 @@ export function StatusBadge({ status, size = 'default', className }: StatusBadge
     </span>
   )
 }
-

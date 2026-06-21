@@ -50,16 +50,24 @@
   right: 0;
   border-left: 1px solid var(--border);
 
-  &[data-state='open'] { animation-name: sheet-in-right; }
-  &[data-state='closed'] { animation-name: sheet-out-right; }
+  &[data-state='open'] {
+    animation-name: sheet-in-right;
+  }
+  &[data-state='closed'] {
+    animation-name: sheet-out-right;
+  }
 }
 
 .left {
   left: 0;
   border-right: 1px solid var(--border);
 
-  &[data-state='open'] { animation-name: sheet-in-left; }
-  &[data-state='closed'] { animation-name: sheet-out-left; }
+  &[data-state='open'] {
+    animation-name: sheet-in-left;
+  }
+  &[data-state='closed'] {
+    animation-name: sheet-out-left;
+  }
 }
 
 .top,
@@ -73,16 +81,24 @@
   top: 0;
   border-bottom: 1px solid var(--border);
 
-  &[data-state='open'] { animation-name: sheet-in-top; }
-  &[data-state='closed'] { animation-name: sheet-out-top; }
+  &[data-state='open'] {
+    animation-name: sheet-in-top;
+  }
+  &[data-state='closed'] {
+    animation-name: sheet-out-top;
+  }
 }
 
 .bottom {
   bottom: 0;
   border-top: 1px solid var(--border);
 
-  &[data-state='open'] { animation-name: sheet-in-bottom; }
-  &[data-state='closed'] { animation-name: sheet-out-bottom; }
+  &[data-state='open'] {
+    animation-name: sheet-in-bottom;
+  }
+  &[data-state='closed'] {
+    animation-name: sheet-out-bottom;
+  }
 }
 
 .close {
@@ -94,9 +110,15 @@
   outline: none;
   transition: opacity 150ms ease;
 
-  &:hover { opacity: 1; }
-  &:disabled { pointer-events: none; }
-  &[data-state='open'] { background-color: var(--secondary); }
+  &:hover {
+    opacity: 1;
+  }
+  &:disabled {
+    pointer-events: none;
+  }
+  &[data-state='open'] {
+    background-color: var(--secondary);
+  }
 
   &:focus {
     box-shadow:
@@ -145,13 +167,83 @@
   white-space: nowrap;
 }
 
-@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
-@keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
-@keyframes sheet-in-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
-@keyframes sheet-out-right { from { transform: translateX(0); } to { transform: translateX(100%); } }
-@keyframes sheet-in-left { from { transform: translateX(-100%); } to { transform: translateX(0); } }
-@keyframes sheet-out-left { from { transform: translateX(0); } to { transform: translateX(-100%); } }
-@keyframes sheet-in-top { from { transform: translateY(-100%); } to { transform: translateY(0); } }
-@keyframes sheet-out-top { from { transform: translateY(0); } to { transform: translateY(-100%); } }
-@keyframes sheet-in-bottom { from { transform: translateY(100%); } to { transform: translateY(0); } }
-@keyframes sheet-out-bottom { from { transform: translateY(0); } to { transform: translateY(100%); } }
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes sheet-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes sheet-out-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes sheet-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes sheet-out-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes sheet-in-top {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes sheet-out-top {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+@keyframes sheet-in-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes sheet-out-bottom {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}

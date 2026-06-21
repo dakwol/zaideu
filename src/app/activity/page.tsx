@@ -1,5 +1,5 @@
 import { ActivityPage } from '@/views/ActivityPage'
-
-export default function Page() {
+const Page = () => {
   return <ActivityPage />
 }
+export default Page

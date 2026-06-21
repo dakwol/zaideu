@@ -1,5 +1,5 @@
 import { CreateProjectPage } from '@/views/create-project'
-
-export default function CreateProjectRoutePage() {
+const CreateProjectRoutePage = () => {
   return <CreateProjectPage />
 }
+export default CreateProjectRoutePage

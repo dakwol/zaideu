@@ -1,0 +1,119 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
+.filters {
+  display: grid;
+  gap: ds.spacing(5);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: ds.spacing(3);
+}
+
+.title {
+  display: inline-flex;
+  align-items: center;
+  gap: ds.spacing(2);
+  color: ds.color(text-primary);
+  font-size: map.get(ds.$font-size, sm);
+  font-weight: map.get(ds.$font-weight, semibold);
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    color: ds.color(accent-primary);
+  }
+}
+
+.clearButton {
+  height: 2rem;
+  padding-inline: ds.spacing(2);
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, xs);
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+.groups {
+  display: grid;
+  gap: ds.spacing(5);
+}
+
+.group {
+  display: grid;
+  gap: ds.spacing(2);
+}
+
+.label {
+  color: ds.color(text-tertiary);
+  font-size: map.get(ds.$font-size, xs);
+  font-weight: map.get(ds.$font-weight, semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: ds.spacing(2);
+}
+
+.option {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.875rem;
+  max-width: 100%;
+  padding: 0 ds.spacing(3);
+  border: 1px solid ds.color(border-default);
+  border-radius: ds.radius(full);
+  background: ds.color(surface-default);
+  color: ds.color(text-secondary);
+  cursor: pointer;
+  font-size: map.get(ds.$font-size, xs);
+  font-weight: map.get(ds.$font-weight, medium);
+  @include ds.smooth-transition(background, border-color, color, box-shadow);
+
+  &:hover {
+    border-color: ds.color(border-hover);
+    background: ds.color(surface-hover);
+    color: ds.color(text-primary);
+  }
+
+  &:focus-visible {
+    @include ds.focus-ring;
+  }
+}
+
+.optionSelected {
+  border-color: rgba(123, 237, 159, 0.36);
+  background: ds.color(accent-primary-subtle);
+  color: ds.color(accent-primary);
+}
+
+.optionWithIndicator {
+  gap: ds.spacing(2);
+}
+
+.healthDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: ds.radius(full);
+}
+
+.healthHealthy {
+  background: ds.color(status-active);
+}
+
+.healthSlowing {
+  background: ds.color(status-slow);
+}
+
+.healthAtRisk {
+  background: ds.color(status-stalled);
+}

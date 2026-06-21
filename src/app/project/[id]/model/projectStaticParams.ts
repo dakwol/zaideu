@@ -1,11 +1,11 @@
 export interface ProjectStaticParam {
-  id: string;
+  id: string
 }
 
-const projectIds: string[] = ['1', '2', '3'];
+const projectIds: string[] = ['1', '2', '3']
 
 export const getProjectStaticParams = (): ProjectStaticParam[] => {
-  return projectIds.map((projectId) => ({
+  return projectIds.map(projectId => ({
     id: projectId,
-  }));
-};
+  }))
+}

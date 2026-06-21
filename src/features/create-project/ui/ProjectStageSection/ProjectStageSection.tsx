@@ -2,8 +2,7 @@ import { FOUNDATION_STAGE } from '@/entities/project/model/constants'
 import { CreateProjectStepHeading } from '../CreateProjectStepHeading'
 import type { ProjectStageSectionProps } from '../../model/types'
 import styles from './ProjectStageSection.module.scss'
-
-function ProjectStageSection({ taskCount }: ProjectStageSectionProps) {
+const ProjectStageSection = ({ taskCount }: ProjectStageSectionProps) => {
   return (
     <section className={styles.section}>
       <CreateProjectStepHeading
@@ -25,5 +24,4 @@ function ProjectStageSection({ taskCount }: ProjectStageSectionProps) {
     </section>
   )
 }
-
 export { ProjectStageSection }

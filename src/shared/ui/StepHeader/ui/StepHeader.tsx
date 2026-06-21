@@ -1,7 +1,6 @@
 import type { StepHeaderProps } from '../model/types'
 import styles from './StepHeader.module.scss'
-
-function StepHeader({ eyebrow, title, subtitle }: StepHeaderProps) {
+const StepHeader = ({ eyebrow, title, subtitle }: StepHeaderProps) => {
   return (
     <header className={styles.header}>
       {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
@@ -12,5 +11,4 @@ function StepHeader({ eyebrow, title, subtitle }: StepHeaderProps) {
     </header>
   )
 }
-
 export { StepHeader }

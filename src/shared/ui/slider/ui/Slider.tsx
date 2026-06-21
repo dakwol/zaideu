@@ -1,29 +1,20 @@
 'use client'
-
 import * as React from 'react'
 import * as SliderPrimitive from '@radix-ui/react-slider'
-
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import styles from '../Slider.module.scss'
-
-function Slider({
+const Slider = ({
   className,
   defaultValue,
   value,
   min = 0,
   max = 100,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+}: React.ComponentProps<typeof SliderPrimitive.Root>) => {
   const _values = React.useMemo(
-    () =>
-      Array.isArray(value)
-        ? value
-        : Array.isArray(defaultValue)
-          ? defaultValue
-          : [min, max],
-    [value, defaultValue, min, max],
+    () => (Array.isArray(value) ? value : Array.isArray(defaultValue) ? defaultValue : [min, max]),
+    [value, defaultValue, min, max]
   )
-
   return (
     <SliderPrimitive.Root
       data-slot="slider"
@@ -31,28 +22,16 @@ function Slider({
       value={value}
       min={min}
       max={max}
-      className={cn(styles.slider, className)}
+      className={classNames(styles.slider, className)}
       {...props}
     >
-      <SliderPrimitive.Track
-        data-slot="slider-track"
-        className={styles.track}
-      >
-        <SliderPrimitive.Range
-          data-slot="slider-range"
-          className={styles.range}
-        />
+      <SliderPrimitive.Track data-slot="slider-track" className={styles.track}>
+        <SliderPrimitive.Range data-slot="slider-range" className={styles.range} />
       </SliderPrimitive.Track>
-      {Array.from({ length: _values.length }, (_, index) => (
-        <SliderPrimitive.Thumb
-          data-slot="slider-thumb"
-          key={index}
-          className={styles.thumb}
-        />
+      {Array.from({ length: _values.length }, (_value, index) => (
+        <SliderPrimitive.Thumb data-slot="slider-thumb" key={index} className={styles.thumb} />
       ))}
     </SliderPrimitive.Root>
   )
 }
-
 export { Slider }
-

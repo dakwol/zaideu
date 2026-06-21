@@ -1,0 +1,377 @@
+@use 'sass:map';
+@use '../design-system' as ds;
+
+// ============================================================================
+// BASE FORM ELEMENTS
+// ============================================================================
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: ds.spacing(2);
+}
+
+.formLabel {
+  @include ds.body-small;
+  font-weight: map.get(ds.$font-weight, medium);
+  color: ds.color(text-primary);
+
+  &.formLabelRequired::after {
+    content: '*';
+    color: ds.color(error);
+    margin-left: ds.spacing(1);
+  }
+}
+
+.formHelperText {
+  @include ds.caption;
+  color: ds.color(text-tertiary);
+}
+
+.formErrorText {
+  @include ds.caption;
+  color: ds.color(error);
+  display: flex;
+  align-items: center;
+  gap: ds.spacing(1);
+}
+
+// ============================================================================
+// INPUT
+// ============================================================================
+
+.input {
+  width: 100%;
+  height: 40px;
+  padding: 0 ds.spacing(3);
+  @include ds.body-base;
+  font-family: ds.$font-primary;
+  color: ds.color(text-primary);
+  background: ds.color(surface-default);
+  border: 1px solid ds.color(border-default);
+  border-radius: ds.radius(md);
+  @include ds.smooth-transition(border-color, background, box-shadow);
+
+  &::placeholder {
+    color: ds.color(text-tertiary);
+  }
+
+  &:hover:not(:disabled) {
+    background: ds.color(surface-hover);
+    border-color: ds.color(border-hover);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: ds.color(accent-primary);
+    box-shadow: 0 0 0 3px ds.color(accent-primary-subtle);
+  }
+
+  &:disabled {
+    @include ds.disabled-state;
+  }
+
+  &.inputError {
+    border-color: ds.color(error);
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.12);
+    }
+  }
+}
+
+.inputSm {
+  height: 32px;
+  padding: 0 ds.spacing(2);
+  font-size: map.get(ds.$font-size, sm);
+}
+
+.inputLg {
+  height: 48px;
+  padding: 0 ds.spacing(4);
+  font-size: map.get(ds.$font-size, lg);
+}
+
+// ============================================================================
+// TEXTAREA
+// ============================================================================
+
+.textarea {
+  @extend .input;
+  height: auto;
+  min-height: 80px;
+  padding: ds.spacing(3);
+  resize: vertical;
+  line-height: map.get(ds.$line-height, normal);
+}
+
+// ============================================================================
+// SEARCH INPUT
+// ============================================================================
+
+.searchInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .searchInputIcon {
+    position: absolute;
+    left: ds.spacing(3);
+    width: 20px;
+    height: 20px;
+    color: ds.color(text-tertiary);
+    pointer-events: none;
+  }
+
+  .searchInputField {
+    @extend .input;
+    padding-left: ds.spacing(10);
+    padding-right: ds.spacing(10);
+  }
+
+  .searchInputClear {
+    position: absolute;
+    right: ds.spacing(3);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: ds.color(text-tertiary);
+    border-radius: ds.radius(sm);
+    @include ds.smooth-transition(color, background);
+
+    &:hover {
+      color: ds.color(text-primary);
+      background: ds.color(surface-hover);
+    }
+  }
+}
+
+// ============================================================================
+// SELECT
+// ============================================================================
+
+.select {
+  @extend .input;
+  appearance: none;
+  padding-right: ds.spacing(10);
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right ds.spacing(3) center;
+  cursor: pointer;
+}
+
+// ============================================================================
+// CHECKBOX
+// ============================================================================
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: ds.spacing(2);
+  cursor: pointer;
+  user-select: none;
+
+  .checkboxInput {
+    width: 18px;
+    height: 18px;
+    appearance: none;
+    background: ds.color(surface-default);
+    border: 1px solid ds.color(border-default);
+    border-radius: ds.radius(sm);
+    cursor: pointer;
+    position: relative;
+    @include ds.smooth-transition(background, border-color);
+
+    &:hover {
+      background: ds.color(surface-hover);
+      border-color: ds.color(border-hover);
+    }
+
+    &:checked {
+      background: ds.color(accent-primary);
+      border-color: ds.color(accent-primary);
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 2px;
+        width: 5px;
+        height: 9px;
+        border: solid ds.color(text-inverse);
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    &:focus-visible {
+      @include ds.focus-ring;
+    }
+
+    &:disabled {
+      @include ds.disabled-state;
+    }
+  }
+
+  .checkboxLabel {
+    @include ds.body-base;
+    color: ds.color(text-primary);
+  }
+}
+
+// ============================================================================
+// RADIO
+// ============================================================================
+
+.radio {
+  @extend .checkbox;
+
+  .radioInput {
+    @extend .checkboxInput;
+    border-radius: 50%;
+
+    &:checked::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      background: ds.color(text-inverse);
+      border-radius: 50%;
+      border: none;
+      transform: none;
+    }
+  }
+}
+
+// ============================================================================
+// SWITCH
+// ============================================================================
+
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: ds.spacing(2);
+  cursor: pointer;
+  user-select: none;
+
+  .switchInput {
+    width: 44px;
+    height: 24px;
+    appearance: none;
+    background: ds.color(surface-hover);
+    border: 1px solid ds.color(border-default);
+    border-radius: ds.radius(full);
+    position: relative;
+    cursor: pointer;
+    @include ds.smooth-transition(background, border-color);
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      width: 18px;
+      height: 18px;
+      background: ds.color(text-primary);
+      border-radius: 50%;
+      @include ds.smooth-transition(transform);
+    }
+
+    &:checked {
+      background: ds.color(accent-primary);
+      border-color: ds.color(accent-primary);
+
+      &::after {
+        transform: translateX(20px);
+        background: ds.color(text-inverse);
+      }
+    }
+
+    &:focus-visible {
+      @include ds.focus-ring;
+    }
+
+    &:disabled {
+      @include ds.disabled-state;
+    }
+  }
+
+  .switchLabel {
+    @include ds.body-base;
+    color: ds.color(text-primary);
+  }
+}
+
+// ============================================================================
+// INPUT GROUP (with addons)
+// ============================================================================
+
+.inputGroup {
+  display: flex;
+  align-items: stretch;
+
+  .inputGroupAddon {
+    display: flex;
+    align-items: center;
+    padding: 0 ds.spacing(3);
+    background: ds.color(surface-hover);
+    border: 1px solid ds.color(border-default);
+    @include ds.body-base;
+    color: ds.color(text-secondary);
+    white-space: nowrap;
+
+    &:first-child {
+      border-right: none;
+      border-top-left-radius: ds.radius(md);
+      border-bottom-left-radius: ds.radius(md);
+    }
+
+    &:last-child {
+      border-left: none;
+      border-top-right-radius: ds.radius(md);
+      border-bottom-right-radius: ds.radius(md);
+    }
+  }
+
+  .input {
+    border-radius: 0;
+
+    &:first-child {
+      border-top-left-radius: ds.radius(md);
+      border-bottom-left-radius: ds.radius(md);
+    }
+
+    &:last-child {
+      border-top-right-radius: ds.radius(md);
+      border-bottom-right-radius: ds.radius(md);
+    }
+  }
+}
+
+// ============================================================================
+// FORM VALIDATION STATES
+// ============================================================================
+
+.formFieldError {
+  .input,
+  .textarea,
+  .select {
+    @extend .inputError;
+  }
+}
+
+.formFieldSuccess {
+  .input,
+  .textarea,
+  .select {
+    border-color: ds.color(success);
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(46, 213, 115, 0.12);
+    }
+  }
+}

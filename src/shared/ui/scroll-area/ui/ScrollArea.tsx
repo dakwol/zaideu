@@ -1,26 +1,20 @@
 'use client'
-
 import * as React from 'react'
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area'
-
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import styles from '../ScrollArea.module.scss'
-
-function ScrollArea({
+const ScrollArea = ({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) {
+}: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) => {
   return (
     <ScrollAreaPrimitive.Root
       data-slot="scroll-area"
-      className={cn(styles.root, className)}
+      className={classNames(styles.root, className)}
       {...props}
     >
-      <ScrollAreaPrimitive.Viewport
-        data-slot="scroll-area-viewport"
-        className={styles.viewport}
-      >
+      <ScrollAreaPrimitive.Viewport data-slot="scroll-area-viewport" className={styles.viewport}>
         {children}
       </ScrollAreaPrimitive.Viewport>
       <ScrollBar />
@@ -28,26 +22,20 @@ function ScrollArea({
     </ScrollAreaPrimitive.Root>
   )
 }
-
-function ScrollBar({
+const ScrollBar = ({
   className,
   orientation = 'vertical',
   ...props
-}: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>) {
+}: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>) => {
   return (
     <ScrollAreaPrimitive.ScrollAreaScrollbar
       data-slot="scroll-area-scrollbar"
       orientation={orientation}
-      className={cn(styles.scrollbar, styles[orientation], className)}
+      className={classNames(styles.scrollbar, styles[orientation], className)}
       {...props}
     >
-      <ScrollAreaPrimitive.ScrollAreaThumb
-        data-slot="scroll-area-thumb"
-        className={styles.thumb}
-      />
+      <ScrollAreaPrimitive.ScrollAreaThumb data-slot="scroll-area-thumb" className={styles.thumb} />
     </ScrollAreaPrimitive.ScrollAreaScrollbar>
   )
 }
-
 export { ScrollArea, ScrollBar }
-

@@ -8,8 +8,7 @@ export const mockProjectTasks: ProjectTask[] = [
     id: '1-task-login-page',
     projectId: '1',
     title: 'Создать login page',
-    description:
-      'Собрать первый экран входа с email, password, состояниями загрузки и ошибками.',
+    description: 'Собрать первый экран входа с email, password, состояниями загрузки и ошибками.',
     role: 'Frontend',
     estimateMinutes: 60,
     status: ProjectTaskStatus.Available,
@@ -54,8 +53,7 @@ export const mockProjectTasks: ProjectTask[] = [
     id: '1-task-form-validation',
     projectId: '1',
     title: 'Добавить валидацию формы',
-    description:
-      'Не отправлять пустые поля и сразу показывать, что нужно исправить.',
+    description: 'Не отправлять пустые поля и сразу показывать, что нужно исправить.',
     role: 'Frontend',
     estimateMinutes: 30,
     status: ProjectTaskStatus.Available,
@@ -66,8 +64,7 @@ export const mockProjectTasks: ProjectTask[] = [
     id: '2-task-upload-feedback',
     projectId: '2',
     title: 'Показать прогресс загрузки файла',
-    description:
-      'Добавить понятный прогресс, чтобы пользователь видел, что файл не завис.',
+    description: 'Добавить понятный прогресс, чтобы пользователь видел, что файл не завис.',
     role: 'Frontend',
     estimateMinutes: 60,
     status: ProjectTaskStatus.Available,
@@ -79,8 +76,7 @@ export const mockProjectTasks: ProjectTask[] = [
     id: '2-task-timeout-copy',
     projectId: '2',
     title: 'Уточнить текст ошибки timeout',
-    description:
-      'Сделать ошибку загрузки понятной и подсказать пользователю следующий шаг.',
+    description: 'Сделать ошибку загрузки понятной и подсказать пользователю следующий шаг.',
     role: 'UX Writer',
     estimateMinutes: 30,
     status: ProjectTaskStatus.InProgress,
@@ -94,8 +90,7 @@ export const mockProjectTasks: ProjectTask[] = [
     id: '3-task-empty-review',
     projectId: '3',
     title: 'Сделать empty state для code review',
-    description:
-      'Показать понятный экран, когда у проекта ещё нет проверок кода.',
+    description: 'Показать понятный экран, когда у проекта ещё нет проверок кода.',
     role: 'Frontend',
     estimateMinutes: 45,
     status: ProjectTaskStatus.Available,
@@ -107,8 +102,7 @@ export const mockProjectTasks: ProjectTask[] = [
     id: '3-task-readme-setup',
     projectId: '3',
     title: 'Описать запуск локальной модели',
-    description:
-      'Добавить README-раздел, чтобы новый участник мог поднять проект без созвона.',
+    description: 'Добавить README-раздел, чтобы новый участник мог поднять проект без созвона.',
     role: 'Backend',
     estimateMinutes: 60,
     status: ProjectTaskStatus.Available,

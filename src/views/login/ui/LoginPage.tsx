@@ -1,64 +1,51 @@
 'use client'
-
 import { useState, type ChangeEvent, type FormEvent } from 'react'
-
 import { Button } from '@/shared/ui/button'
 import { AuthCard } from '@/shared/ui/AuthCard'
 import { TextField } from '@/shared/ui/TextField'
 import type { LoginFormValues } from '@/features/auth/model/types'
 import styles from './LoginPage.module.scss'
-
 interface LoginPageProps {
   onLoginSuccess: () => void
   onRegisterClick: () => void
 }
-
-function LoginPage({ onLoginSuccess, onRegisterClick }: LoginPageProps) {
+const LoginPage = ({ onLoginSuccess, onRegisterClick }: LoginPageProps) => {
   const [loginFormValues, setLoginFormValues] = useState<LoginFormValues>({
     email: '',
     password: '',
   })
   const [formErrorMessage, setFormErrorMessage] = useState('')
-
-  function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
-    setLoginFormValues((currentFormValues) => ({
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setLoginFormValues(currentFormValues => ({
       ...currentFormValues,
       email: event.target.value,
     }))
   }
-
-  function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
-    setLoginFormValues((currentFormValues) => ({
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setLoginFormValues(currentFormValues => ({
       ...currentFormValues,
       password: event.target.value,
     }))
   }
-
-  function handleLoginSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleLoginSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
     if (!loginFormValues.email.trim() || !loginFormValues.password.trim()) {
       setFormErrorMessage('Заполните email и пароль.')
       return
     }
-
     setFormErrorMessage('')
-    console.log('login submit', loginFormValues)
+    //TODO: implement login API call
     onLoginSuccess()
   }
-
-  function handleForgotPasswordClick() {
-    console.log('forgot password click')
+  const handleForgotPasswordClick = () => {
+    //TODO: implement forgot password flow
   }
-
-  function handleGithubLoginClick() {
-    console.log('github login click')
+  const handleGithubLoginClick = () => {
+    //TODO: implement GitHub OAuth
   }
-
-  function handleTelegramLoginClick() {
-    console.log('telegram login click')
+  const handleTelegramLoginClick = () => {
+    //TODO: implement Telegram OAuth
   }
-
   return (
     <AuthCard
       title="Продолжить работу"
@@ -66,11 +53,7 @@ function LoginPage({ onLoginSuccess, onRegisterClick }: LoginPageProps) {
       footer={
         <p className={styles.switchText}>
           Нет аккаунта?{' '}
-          <button
-            className={styles.inlineButton}
-            type="button"
-            onClick={onRegisterClick}
-          >
+          <button className={styles.inlineButton} type="button" onClick={onRegisterClick}>
             Создать аккаунт
           </button>
         </p>
@@ -108,11 +91,7 @@ function LoginPage({ onLoginSuccess, onRegisterClick }: LoginPageProps) {
           <Button className={styles.submitButton} type="submit">
             Войти
           </Button>
-          <button
-            className={styles.linkButton}
-            type="button"
-            onClick={handleForgotPasswordClick}
-          >
+          <button className={styles.linkButton} type="button" onClick={handleForgotPasswordClick}>
             Забыли пароль?
           </button>
         </div>
@@ -144,5 +123,4 @@ function LoginPage({ onLoginSuccess, onRegisterClick }: LoginPageProps) {
     </AuthCard>
   )
 }
-
 export { LoginPage }

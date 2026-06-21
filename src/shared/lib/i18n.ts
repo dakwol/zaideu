@@ -1,12 +1,9 @@
 export type Locale = 'en' | 'ru'
-
 export const supportedLocales: Locale[] = ['en', 'ru']
 export const defaultLocale: Locale = 'en'
-
 interface TranslationDictionary {
   [key: string]: string | TranslationDictionary
 }
-
 const translations: Record<Locale, TranslationDictionary> = {
   en: {
     appName: 'Za Ideyu',
@@ -44,9 +41,41 @@ const translations: Record<Locale, TranslationDictionary> = {
     projectFeed: {
       title: 'Projects',
       description: 'Find a project and actually finish it',
+      heroEyebrow: 'Explore projects',
+      heroTitle: 'Find a live project and take one useful next step.',
+      heroDescription:
+        'Scan project health, open roles, visible progress and the nearest micro-task before you join. The catalog is built around small actions, not endless project browsing.',
+      browseCatalog: 'Browse catalog',
+      heroSummaryLabel: 'Explore summary',
+      catalogHealth: 'Catalog health',
+      heroPanelText:
+        'Average project progress. Look for visible next actions, not just polished ideas.',
+      stalledProjectsNeedRecovery: '{count} stalled projects need calm recovery.',
+      projectsHaveNextTask: '{count} projects have a concrete next task.',
+      rolesCurrentlyRequested: '{count} roles are currently requested.',
+      metricsLabel: 'Explore metrics',
+      metricLiveProjects: 'Live projects',
+      metricLiveProjectsDescription: 'Moving this week',
+      metricNeedStep: 'Need a small step',
+      metricNeedStepDescription: 'Slowed or at risk',
+      metricMicroTasks: 'Micro-tasks',
+      metricMicroTasksDescription: '15-120 min next actions',
+      metricRolesNeeded: 'Roles needed',
+      metricRolesNeededDescription: 'Open team slots',
+      recoveryEyebrow: 'Small recovery actions',
+      recoveryTitle: 'Projects that need help without pressure.',
+      recoveryDescription:
+        'These projects are not failed. They need a small next action, clearer ownership, or a role that can unblock the current stage.',
       criticalTitle: 'Critical - needs help now',
+      criticalDescription: 'Choose a contained task and help restart movement.',
       slowingTitle: 'Slowing down',
+      slowingDescription: 'Normal project slowdown. A 30-90 minute task can help.',
       searchPlaceholder: 'Search projects...',
+      searchAriaLabel: 'Search projects',
+      catalogEyebrow: 'Project catalog',
+      catalogTitle: 'Choose by momentum, role and next action.',
+      avgProgress: 'avg progress',
+      matchCurrentFilters: 'match your current filters.',
       projectsFound: '{count} project(s)',
       noProjectsFound: 'No projects found',
       noFilterResults: 'Try adjusting your filters to find what you›re looking for.',
@@ -212,15 +241,47 @@ const translations: Record<Locale, TranslationDictionary> = {
     projectFeed: {
       title: 'Проекты',
       description: 'Найдите проект и действительно завершите его',
+      heroEyebrow: 'Исследуйте проекты',
+      heroTitle: 'Найдите живой проект и сделайте один полезный следующий шаг.',
+      heroDescription:
+        'Оцените состояние проекта, открытые роли, видимый прогресс и ближайшую микро-задачу перед тем, как присоединиться. Каталог построен вокруг небольших действий, а не бесконечного просмотра проектов.',
+      browseCatalog: 'Перейти к каталогу',
+      heroSummaryLabel: 'Сводка каталога',
+      catalogHealth: 'Состояние каталога',
+      heroPanelText:
+        'Средний прогресс проектов. Ищите понятные следующие действия, а не просто красивые идеи.',
+      stalledProjectsNeedRecovery: '{count} проектов нуждаются в спокойном восстановлении.',
+      projectsHaveNextTask: '{count} проектов имеют конкретную следующую задачу.',
+      rolesCurrentlyRequested: '{count} ролей сейчас запрошены.',
+      metricsLabel: 'Метрики проектов',
+      metricLiveProjects: 'Живые проекты',
+      metricLiveProjectsDescription: 'Двигаются на этой неделе',
+      metricNeedStep: 'Нужен небольшой шаг',
+      metricNeedStepDescription: 'Замедлились или в риске',
+      metricMicroTasks: 'Микро-задачи',
+      metricMicroTasksDescription: 'Следующие действия на 15-120 мин',
+      metricRolesNeeded: 'Нужные роли',
+      metricRolesNeededDescription: 'Открытые места в командах',
+      recoveryEyebrow: 'Маленькие действия восстановления',
+      recoveryTitle: 'Проекты, которым нужна помощь без давления.',
+      recoveryDescription:
+        'Эти проекты не провалились. Им нужно небольшое следующее действие, более ясная ответственность или роль, которая разблокирует текущий этап.',
       criticalTitle: 'Критично — нужна помощь сейчас',
+      criticalDescription: 'Выберите ограниченную задачу и помогите вернуть движение.',
       slowingTitle: 'Замедляется',
+      slowingDescription: 'Обычное замедление проекта. Задача на 30-90 минут может помочь.',
       searchPlaceholder: 'Поиск проектов...',
+      searchAriaLabel: 'Поиск проектов',
+      catalogEyebrow: 'Каталог проектов',
+      catalogTitle: 'Выбирайте по динамике, роли и следующему действию.',
+      avgProgress: 'средний прогресс',
+      matchCurrentFilters: 'соответствуют текущим фильтрам.',
       projectsFound: '{count} проект(ов)',
       noProjectsFound: 'Проекты не найдены',
       noFilterResults: 'Попробуйте изменить фильтры, чтобы найти нужное.',
       emptyProjects: 'Начните проект или присоединяйтесь к одному. Здесь проекты не умирают.',
       projectCountSuffix: 'проекта',
-      projectsCount: '{count} проект{plural}',
+      projectsCount: '{count} проект(ов)',
     },
     projectDetail: {
       backToProjects: 'Назад к проектам',
@@ -298,7 +359,8 @@ const translations: Record<Locale, TranslationDictionary> = {
       noProjectsYet: 'Еще нет проектов.',
       findProject: 'Найти проект',
       exploreMore: 'Исследуйте больше проектов',
-      exploreMoreDescription: 'Оставайтесь на курсе с новыми возможностями и предложенными задачами.',
+      exploreMoreDescription:
+        'Оставайтесь на курсе с новыми возможностями и предложенными задачами.',
       browseProjects: 'Просмотреть проекты',
     },
     filters: {
@@ -345,8 +407,10 @@ const translations: Record<Locale, TranslationDictionary> = {
     },
   },
 }
-
-function getNestedTranslation(dictionary: TranslationDictionary, keyPath: string): string | undefined {
+const getNestedTranslation = (
+  dictionary: TranslationDictionary,
+  keyPath: string
+): string | undefined => {
   return keyPath.split('.').reduce<string | TranslationDictionary | undefined>((value, key) => {
     if (typeof value === 'object' && value !== null && key in value) {
       return (value as TranslationDictionary)[key]
@@ -354,12 +418,14 @@ function getNestedTranslation(dictionary: TranslationDictionary, keyPath: string
     return undefined
   }, dictionary) as string | undefined
 }
-
-export function translate(locale: Locale, key: string, params?: Record<string, string | number>): string {
+export const translate = (
+  locale: Locale,
+  key: string,
+  params?: Record<string, string | number>
+): string => {
   const localeDictionary = translations[locale] ?? translations[defaultLocale]
   const translation = getNestedTranslation(localeDictionary, key) ?? key
   if (!params) return translation
-
   return Object.entries(params).reduce((text, [paramKey, paramValue]) => {
     return text.replace(new RegExp(`{${paramKey}}`, 'g'), String(paramValue))
   }, translation)

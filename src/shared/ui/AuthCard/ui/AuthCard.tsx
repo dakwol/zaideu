@@ -1,7 +1,6 @@
 import type { AuthCardProps } from '../model/types'
 import styles from './AuthCard.module.scss'
-
-function AuthWordmark() {
+const AuthWordmark = () => {
   return (
     <div className={styles.wordmark} aria-label="За Идею">
       <span>за</span>
@@ -9,8 +8,7 @@ function AuthWordmark() {
     </div>
   )
 }
-
-function AuthCard({ title, subtitle, children, footer }: AuthCardProps) {
+const AuthCard = ({ title, subtitle, children, footer }: AuthCardProps) => {
   return (
     <section className={styles.card}>
       <AuthWordmark />
@@ -23,5 +21,4 @@ function AuthCard({ title, subtitle, children, footer }: AuthCardProps) {
     </section>
   )
 }
-
 export { AuthCard }

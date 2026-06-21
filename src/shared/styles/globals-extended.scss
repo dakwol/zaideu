@@ -1,0 +1,331 @@
+@use 'sass:map';
+/**
+ * ZAIDEU UI KIT - GLOBAL STYLES
+ *
+ * Import this file in your app entry point to apply base styles
+ * and make utility classes available globally.
+ */
+
+@use './design-system' as ds;
+@use './components/badges';
+@use './components/buttons';
+@use './components/cards';
+@use './components/forms';
+@use './components/layout';
+@use './components/indicators';
+
+// ============================================================================
+// GLOBAL RESET & BASE STYLES
+// ============================================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: ds.$font-primary;
+  @include ds.body-base;
+  color: ds.color(text-primary);
+  background: ds.color(background-primary);
+  line-height: map.get(ds.$line-height, normal);
+  min-height: 100vh;
+}
+
+// ============================================================================
+// TYPOGRAPHY RESET
+// ============================================================================
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
+
+//Text utilities
+.textPrimary {
+  color: ds.color(text-primary);
+}
+
+.textSecondary {
+  color: ds.color(text-secondary);
+}
+
+.textTertiary {
+  color: ds.color(text-tertiary);
+}
+
+.textAccent {
+  color: ds.color(accent-primary);
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.truncate {
+  @include ds.truncate;
+}
+
+.lineClamp2 {
+  @include ds.line-clamp(2);
+}
+
+.lineClamp3 {
+  @include ds.line-clamp(3);
+}
+
+//Background utilities
+.bgPrimary {
+  background: ds.color(background-primary);
+}
+
+.bgSecondary {
+  background: ds.color(background-secondary);
+}
+
+.bgSurface {
+  background: ds.color(surface-default);
+}
+
+//Spacing utilities (margin & padding)
+@each $size, $value in ds.$spacing {
+  .m-#{$size} {
+    margin: $value;
+  }
+  .mt-#{$size} {
+    margin-top: $value;
+  }
+  .mr-#{$size} {
+    margin-right: $value;
+  }
+  .mb-#{$size} {
+    margin-bottom: $value;
+  }
+  .ml-#{$size} {
+    margin-left: $value;
+  }
+  .mx-#{$size} {
+    margin-left: $value;
+    margin-right: $value;
+  }
+  .my-#{$size} {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+
+  .p-#{$size} {
+    padding: $value;
+  }
+  .pt-#{$size} {
+    padding-top: $value;
+  }
+  .pr-#{$size} {
+    padding-right: $value;
+  }
+  .pb-#{$size} {
+    padding-bottom: $value;
+  }
+  .pl-#{$size} {
+    padding-left: $value;
+  }
+  .px-#{$size} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+  .py-#{$size} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+}
+
+//Display utilities
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.inlineBlock {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.inlineFlex {
+  display: inline-flex;
+}
+
+.grid {
+  display: grid;
+}
+
+//Visibility utilities
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+//Cursor utilities
+.cursorPointer {
+  cursor: pointer;
+}
+
+.cursorNotAllowed {
+  cursor: not-allowed;
+}
+
+//Overflow utilities
+.overflowHidden {
+  overflow: hidden;
+}
+
+.overflowAuto {
+  overflow: auto;
+}
+
+.overflowScroll {
+  overflow: scroll;
+}
+
+//Scrollbar utilities
+.hideScrollbar {
+  @include ds.hide-scrollbar;
+}
+
+.customScrollbar {
+  @include ds.custom-scrollbar;
+}
+
+//Width utilities
+.wFull {
+  width: 100%;
+}
+
+.hFull {
+  height: 100%;
+}
+
+.minHScreen {
+  min-height: 100vh;
+}
+
+//Z-index utilities
+@each $name, $value in ds.$z-index {
+  .z-#{$name} {
+    z-index: $value;
+  }
+}
+
+// ============================================================================
+// FOCUS VISIBLE (keyboard navigation)
+// ============================================================================
+
+:focus-visible {
+  @include ds.focus-ring;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  @include ds.focus-ring;
+}
+
+// ============================================================================
+// SELECTION
+// ============================================================================
+
+::selection {
+  background: ds.color(accent-primary);
+  color: ds.color(text-inverse);
+}
+
+// ============================================================================
+// REDUCED MOTION
+// ============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// ============================================================================
+// PRINT STYLES
+// ============================================================================
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .noPrint {
+    display: none !important;
+  }
+}

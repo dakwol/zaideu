@@ -1,15 +1,12 @@
 'use client'
-
 import Link from 'next/link'
 import { Clock, Send, Users } from 'lucide-react'
-
 import { formatTaskStatus } from '@/entities/task/lib/formatTaskStatus'
 import { ProjectTaskStatus } from '@/entities/task/model/types'
 import { Button } from '@/shared/ui/button'
 import type { WorkspaceCurrentTaskProps } from '../model/types'
 import styles from './WorkspaceCurrentTask.module.scss'
-
-function WorkspaceCurrentTask({ task, project }: WorkspaceCurrentTaskProps) {
+const WorkspaceCurrentTask = ({ task, project }: WorkspaceCurrentTaskProps) => {
   if (!task || !project) {
     return (
       <section className={styles.emptyCard}>
@@ -21,7 +18,6 @@ function WorkspaceCurrentTask({ task, project }: WorkspaceCurrentTaskProps) {
       </section>
     )
   }
-
   return (
     <section className={styles.card}>
       <div className={styles.taskContent}>
@@ -88,5 +84,4 @@ function WorkspaceCurrentTask({ task, project }: WorkspaceCurrentTaskProps) {
     </section>
   )
 }
-
 export { WorkspaceCurrentTask }

@@ -3,10 +3,10 @@ import { Analytics } from '@vercel/analytics/next'
 import { AppLocaleProvider } from '@/shared/ui/locale-provider'
 import './globals.css'
 import '@/shared/styles/globals.scss'
-
 export const metadata: Metadata = {
   title: 'Za Ideyu - Build Teams Around Ideas',
-  description: 'A structured environment for forming and maintaining IT teams around ideas. Join projects, commit to small tasks, work in short stages, and show public progress.',
+  description:
+    'A structured environment for forming and maintaining IT teams around ideas. Join projects, commit to small tasks, work in short stages, and show public progress.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -26,20 +26,18 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
 }
-
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode
-}>) {
+}>) => {
   return (
     <html lang="en">
       <body className="font-sans antialiased">
-        <AppLocaleProvider>
-          {children}
-        </AppLocaleProvider>
+        <AppLocaleProvider>{children}</AppLocaleProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
 }
+export default RootLayout

@@ -1,0 +1,358 @@
+@use 'sass:map';
+@use '../design-system' as ds;
+
+// ============================================================================
+// BASE CARD
+// ============================================================================
+
+.card {
+  @include ds.card-base;
+  padding: ds.spacing(6);
+}
+
+// ============================================================================
+// PROJECT CARD
+// ============================================================================
+
+.projectCard {
+  @include ds.card-base;
+  padding: ds.spacing(5);
+  display: flex;
+  flex-direction: column;
+  gap: ds.spacing(4);
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: ds.shadow(md);
+  }
+}
+
+.projectCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: ds.spacing(3);
+}
+
+.projectCardTitle {
+  @include ds.heading-4;
+  margin: 0;
+  color: ds.color(text-primary);
+  @include ds.line-clamp(2);
+}
+
+.projectCardDescription {
+  @include ds.body-small;
+  color: ds.color(text-secondary);
+  @include ds.line-clamp(3);
+  margin: 0;
+}
+
+.projectCardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: ds.spacing(3);
+  align-items: center;
+}
+
+.projectCardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: ds.spacing(3);
+  border-top: 1px solid ds.color(border-default);
+}
+
+//Project Card States
+.projectCardActive {
+  border-color: ds.color(status-active);
+}
+
+.projectCardSlow {
+  border-color: ds.color(status-slow);
+}
+
+.projectCardStalled {
+  border-color: ds.color(status-stalled);
+
+  .projectCardTitle {
+    color: ds.color(text-secondary);
+  }
+}
+
+.projectCardRevival {
+  border-color: ds.color(status-revival);
+  background: linear-gradient(135deg, ds.color(surface-default), rgba(112, 161, 255, 0.05));
+}
+
+.projectCardCompleted {
+  border-color: ds.color(status-completed);
+  opacity: 0.8;
+}
+
+.projectCardCritical {
+  border: 2px solid ds.color(error);
+  background: linear-gradient(135deg, ds.color(surface-default), rgba(255, 71, 87, 0.05));
+}
+
+// ============================================================================
+// TASK CARD
+// ============================================================================
+
+.taskCard {
+  @include ds.card-base;
+  padding: ds.spacing(4);
+  display: flex;
+  flex-direction: column;
+  gap: ds.spacing(3);
+}
+
+.taskCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: ds.spacing(2);
+}
+
+.taskCardTitle {
+  @include ds.body-base;
+  font-weight: map.get(ds.$font-weight, semibold);
+  color: ds.color(text-primary);
+  margin: 0;
+}
+
+.taskCardDescription {
+  @include ds.body-small;
+  color: ds.color(text-secondary);
+  margin: 0;
+}
+
+.taskCardMeta {
+  display: flex;
+  gap: ds.spacing(3);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.taskCardTimeEstimate {
+  display: flex;
+  align-items: center;
+  gap: ds.spacing(1);
+  @include ds.caption;
+  color: ds.color(text-tertiary);
+}
+
+//Task Card States
+.taskCardAvailable {
+  cursor: pointer;
+
+  &:hover {
+    border-color: ds.color(accent-primary);
+  }
+}
+
+.taskCardInProgress {
+  border-left: 3px solid ds.color(status-active);
+}
+
+.taskCardUnderReview {
+  border-left: 3px solid ds.color(info);
+}
+
+.taskCardCompleted {
+  opacity: 0.6;
+
+  .taskCardTitle {
+    text-decoration: line-through;
+  }
+}
+
+.taskCardOverdue {
+  border: 1px solid ds.color(error);
+  background: linear-gradient(135deg, ds.color(surface-default), rgba(255, 71, 87, 0.05));
+}
+
+// ============================================================================
+// COMMITMENT CARD
+// ============================================================================
+
+.commitmentCard {
+  @include ds.card-base;
+  padding: ds.spacing(4);
+  display: flex;
+  gap: ds.spacing(4);
+  align-items: center;
+}
+
+.commitmentCardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: ds.spacing(2);
+}
+
+.commitmentCardTask {
+  @include ds.body-base;
+  font-weight: map.get(ds.$font-weight, medium);
+  color: ds.color(text-primary);
+  margin: 0;
+}
+
+.commitmentCardDeadline {
+  @include ds.body-small;
+  color: ds.color(text-secondary);
+  display: flex;
+  align-items: center;
+  gap: ds.spacing(1);
+}
+
+.commitmentCardTimeRemaining {
+  @include ds.caption;
+  padding: ds.spacing(1) ds.spacing(2);
+  border-radius: ds.radius(sm);
+  background: ds.color(surface-hover);
+
+  &.commitmentCardUrgent {
+    background: rgba(255, 165, 2, 0.15);
+    color: ds.color(warning);
+  }
+
+  &.commitmentCardCritical {
+    background: rgba(255, 71, 87, 0.15);
+    color: ds.color(error);
+  }
+}
+
+// ============================================================================
+// ACTIVITY ITEM CARD
+// ============================================================================
+
+.activityCard {
+  @include ds.card-base;
+  padding: ds.spacing(4);
+  display: flex;
+  gap: ds.spacing(3);
+}
+
+.activityCardIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ds.color(surface-hover);
+  border-radius: ds.radius(md);
+  flex-shrink: 0;
+}
+
+.activityCardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: ds.spacing(1);
+}
+
+.activityCardMessage {
+  @include ds.body-small;
+  color: ds.color(text-primary);
+  margin: 0;
+
+  .activityCardHighlight {
+    color: ds.color(accent-primary);
+    font-weight: map.get(ds.$font-weight, medium);
+  }
+}
+
+.activityCardTimestamp {
+  @include ds.caption;
+  color: ds.color(text-tertiary);
+}
+
+// ============================================================================
+// HEALTH INDICATOR CARD
+// ============================================================================
+
+.healthCard {
+  @include ds.card-base;
+  padding: ds.spacing(5);
+  display: flex;
+  flex-direction: column;
+  gap: ds.spacing(3);
+}
+
+.healthCardScore {
+  display: flex;
+  align-items: center;
+  gap: ds.spacing(3);
+}
+
+.healthCardScoreValue {
+  @include ds.heading-2;
+  margin: 0;
+
+  &.healthCardHealthy {
+    color: ds.color(success);
+  }
+
+  &.healthCardSlowing {
+    color: ds.color(warning);
+  }
+
+  &.healthCardAtRisk {
+    color: ds.color(error);
+  }
+}
+
+.healthCardMetrics {
+  display: flex;
+  flex-direction: column;
+  gap: ds.spacing(2);
+}
+
+.healthCardMetric {
+  display: flex;
+  justify-content: space-between;
+  @include ds.body-small;
+
+  .healthCardMetricLabel {
+    color: ds.color(text-secondary);
+  }
+
+  .healthCardMetricValue {
+    color: ds.color(text-primary);
+    font-weight: map.get(ds.$font-weight, medium);
+  }
+}
+
+// ============================================================================
+// SKELETON LOADING STATE
+// ============================================================================
+
+.cardSkeleton {
+  @include ds.card-base;
+  padding: ds.spacing(5);
+  pointer-events: none;
+}
+
+.skeletonLine {
+  height: 16px;
+  background: linear-gradient(
+    90deg,
+    ds.color(surface-default) 0%,
+    ds.color(surface-hover) 50%,
+    ds.color(surface-default) 100%
+  );
+  background-size: 200% 100%;
+  border-radius: ds.radius(sm);
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

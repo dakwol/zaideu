@@ -2,10 +2,7 @@ import { PROJECT_ROLE_LABELS } from '@/entities/project/model/constants'
 import { CreateProjectStepHeading } from '../CreateProjectStepHeading'
 import type { ProjectPreviewSectionProps } from '../../model/types'
 import styles from './ProjectPreviewSection.module.scss'
-
-function ProjectPreviewSection({
-  projectPreview,
-}: ProjectPreviewSectionProps) {
+const ProjectPreviewSection = ({ projectPreview }: ProjectPreviewSectionProps) => {
   return (
     <section className={styles.section}>
       <CreateProjectStepHeading
@@ -22,9 +19,8 @@ function ProjectPreviewSection({
         <div className={styles.reviewRow}>
           <span>Роли</span>
           <strong>
-            {projectPreview.roles
-              .map((projectRole) => PROJECT_ROLE_LABELS[projectRole])
-              .join(', ') || 'Роли пока не выбраны'}
+            {projectPreview.roles.map(projectRole => PROJECT_ROLE_LABELS[projectRole]).join(', ') ||
+              'Роли пока не выбраны'}
           </strong>
         </div>
         <div className={styles.reviewRow}>
@@ -44,5 +40,4 @@ function ProjectPreviewSection({
     </section>
   )
 }
-
 export { ProjectPreviewSection }

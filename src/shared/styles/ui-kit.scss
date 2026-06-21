@@ -1,0 +1,42 @@
+// ============================================================================
+// ZAIDEU UI KIT - COMPONENTS INDEX
+// ============================================================================
+// Import this file to get access to all design system components
+// Based on open-design.ai aesthetic: dark-first, tech-forward, minimal
+
+@forward './design-system';
+@forward './components/badges';
+@forward './components/buttons';
+@forward './components/cards';
+@forward './components/forms';
+@forward './components/layout';
+@forward './components/indicators';
+
+// ============================================================================
+// USAGE EXAMPLE
+// ============================================================================
+//
+// In your component SCSS file:
+//
+// @use '@/shared/styles/ui-kit' as ui;
+//
+// .myComponent {
+//   @include ui.card-base;
+//   padding: ui.spacing(4);
+//
+//   .myButton {
+//     @extend .buttonPrimary;
+//     @extend .buttonMd;
+//   }
+// }
+//
+// Or use design system directly:
+//
+// @use '@/shared/styles/design-system' as ds;
+//
+// .myComponent {
+//   background: ds.color(surface-default);
+//   border-radius: ds.radius(lg);
+//   @include ds.smooth-transition(background);
+// }
+// ============================================================================

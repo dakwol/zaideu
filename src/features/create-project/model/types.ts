@@ -69,10 +69,7 @@ export interface ProjectTasksSectionProps {
   tasks: ProjectTask[]
   hasTemplateTaskUpdateAvailable: boolean
   onTaskTitleChange: (taskId: string, nextTitle: string) => void
-  onTaskEstimateChange: (
-    taskId: string,
-    nextEstimateMinutes: ProjectTaskEstimate,
-  ) => void
+  onTaskEstimateChange: (taskId: string, nextEstimateMinutes: ProjectTaskEstimate) => void
   onTaskDelete: (taskId: string) => void
   onTaskAdd: () => void
   onTasksRegenerate: () => void

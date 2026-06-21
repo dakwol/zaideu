@@ -1,0 +1,486 @@
+@use 'sass:map';
+@use '@/shared/styles/design-system' as ds;
+
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(123, 237, 159, 0.08), transparent 32rem),
+    ds.color(background-primary);
+  color: ds.color(text-primary);
+}
+
+.main {
+  @include ds.container;
+
+  display: flex;
+  flex-direction: column;
+  gap: ds.spacing(10);
+  padding-top: ds.spacing(8);
+  padding-bottom: ds.spacing(16);
+}
+
+.hero {
+  display: grid;
+  gap: ds.spacing(6);
+  align-items: stretch;
+
+  @include ds.respond-to(lg) {
+    grid-template-columns: minmax(0, 1.45fr) minmax(20rem, 0.55fr);
+  }
+}
+
+.heroContent {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0 0 ds.spacing(3);
+  color: ds.color(accent-primary);
+  font-size: map.get(ds.$font-size, xs);
+  font-weight: map.get(ds.$font-weight, semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title {
+  max-width: 48rem;
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: map.get(ds.$font-weight, bold);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.description {
+  max-width: 42rem;
+  margin: ds.spacing(5) 0 0;
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, lg);
+  line-height: map.get(ds.$line-height, relaxed);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: ds.spacing(3);
+  margin-top: ds.spacing(8);
+}
+
+.primaryAction {
+  min-height: 3rem;
+  background: ds.color(accent-primary);
+  color: ds.color(text-inverse);
+
+  &:hover {
+    background: ds.color(accent-primary-hover);
+  }
+}
+
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  gap: ds.spacing(2);
+  min-height: 3rem;
+  padding: 0 ds.spacing(5);
+  border: 1px solid ds.color(border-default);
+  border-radius: ds.radius(md);
+  background: ds.color(surface-default);
+  color: ds.color(text-primary);
+  font-size: map.get(ds.$font-size, sm);
+  font-weight: map.get(ds.$font-weight, medium);
+  text-decoration: none;
+  @include ds.smooth-transition(background, border-color, color);
+
+  &:hover {
+    border-color: ds.color(border-hover);
+    background: ds.color(surface-hover);
+    color: ds.color(accent-primary);
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.heroPanel {
+  @include ds.card-base;
+
+  display: flex;
+  flex-direction: column;
+  gap: ds.spacing(5);
+  padding: ds.spacing(6);
+}
+
+.heroPanelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: ds.spacing(4);
+}
+
+.heroPanelLabel {
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, sm);
+  font-weight: map.get(ds.$font-weight, medium);
+}
+
+.heroPanelValue {
+  color: ds.color(accent-primary);
+  font-family: ds.$font-mono;
+  font-size: map.get(ds.$font-size, 4xl);
+  font-weight: map.get(ds.$font-weight, bold);
+  line-height: 1;
+}
+
+.heroProgressTrack {
+  height: 0.5rem;
+  overflow: hidden;
+  border-radius: ds.radius(full);
+  background: ds.color(surface-active);
+}
+
+.heroProgressValue {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: ds.color(accent-primary);
+  box-shadow: ds.glow(accent-sm);
+}
+
+.heroPanelText {
+  margin: 0;
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, sm);
+  line-height: map.get(ds.$line-height, normal);
+}
+
+.heroPanelList {
+  display: grid;
+  gap: ds.spacing(3);
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: ds.spacing(2);
+    color: ds.color(text-primary);
+    font-size: map.get(ds.$font-size, sm);
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+    color: ds.color(accent-primary);
+  }
+}
+
+.metrics {
+  display: grid;
+  gap: ds.spacing(4);
+
+  @include ds.respond-to(sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include ds.respond-to(lg) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.metricCard {
+  @include ds.card-base;
+
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: ds.spacing(2);
+  padding: ds.spacing(5);
+}
+
+.metricValue {
+  color: ds.color(text-primary);
+  font-family: ds.$font-mono;
+  font-size: map.get(ds.$font-size, 3xl);
+  font-weight: map.get(ds.$font-weight, bold);
+  line-height: 1;
+}
+
+.metricLabel {
+  color: ds.color(text-primary);
+  font-size: map.get(ds.$font-size, sm);
+  font-weight: map.get(ds.$font-weight, semibold);
+}
+
+.metricDescription {
+  color: ds.color(text-tertiary);
+  font-size: map.get(ds.$font-size, xs);
+}
+
+.attentionSection {
+  display: grid;
+  gap: ds.spacing(6);
+}
+
+.sectionHeading {
+  max-width: 42rem;
+
+  h2 {
+    margin: 0;
+    font-size: map.get(ds.$font-size, 3xl);
+    font-weight: map.get(ds.$font-weight, bold);
+    line-height: map.get(ds.$line-height, tight);
+  }
+
+  p:last-child {
+    margin: ds.spacing(3) 0 0;
+    color: ds.color(text-secondary);
+    line-height: map.get(ds.$line-height, normal);
+  }
+}
+
+.attentionGroup {
+  @include ds.card-base;
+
+  display: grid;
+  gap: ds.spacing(4);
+  padding: ds.spacing(4);
+
+  &[open] {
+    border-color: ds.color(border-hover);
+    background: ds.color(surface-hover);
+  }
+}
+
+.attentionSummary {
+  display: block;
+  border-radius: ds.radius(md);
+  cursor: pointer;
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:focus-visible {
+    @include ds.focus-ring;
+  }
+}
+
+.attentionHeader {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  gap: ds.spacing(3);
+  align-items: center;
+
+  > svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: ds.color(status-slow);
+  }
+
+  h3,
+  p {
+    margin: 0;
+  }
+
+  h3 {
+    font-size: map.get(ds.$font-size, lg);
+    font-weight: map.get(ds.$font-weight, semibold);
+  }
+
+  p {
+    margin-top: ds.spacing(1);
+    color: ds.color(text-secondary);
+    font-size: map.get(ds.$font-size, sm);
+  }
+
+  > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    border: 1px solid ds.color(border-default);
+    border-radius: ds.radius(full);
+    color: ds.color(text-secondary);
+    font-family: ds.$font-mono;
+    font-size: map.get(ds.$font-size, sm);
+  }
+}
+
+.attentionChevron {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: ds.color(text-tertiary);
+  transition: transform ds.transition(base);
+}
+
+.attentionGroup[open] .attentionChevron {
+  transform: rotate(180deg);
+}
+
+.attentionList {
+  display: grid;
+  gap: ds.spacing(4);
+  padding-top: ds.spacing(4);
+  border-top: 1px solid ds.color(border-default);
+}
+
+.catalogSection {
+  display: grid;
+  gap: ds.spacing(6);
+  align-items: start;
+
+  @include ds.respond-to(lg) {
+    grid-template-columns: minmax(17rem, 0.27fr) minmax(0, 1fr);
+  }
+}
+
+.sidebar {
+  min-width: 0;
+
+  @include ds.respond-to(lg) {
+    position: sticky;
+    top: calc(14px + 4.75rem);
+    z-index: ds.z(sticky);
+    align-self: start;
+  }
+}
+
+.sidebarInner {
+  @include ds.card-base;
+
+  display: grid;
+  gap: ds.spacing(6);
+  padding: ds.spacing(5);
+}
+
+.searchField {
+  position: relative;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: ds.spacing(4);
+    width: 1rem;
+    height: 1rem;
+    color: ds.color(text-tertiary);
+    transform: translateY(-50%);
+  }
+
+  input {
+    width: 100%;
+    height: 2.75rem;
+    padding: 0 ds.spacing(4) 0 ds.spacing(10);
+    border: 1px solid ds.color(border-default);
+    border-radius: ds.radius(md);
+    background: ds.color(background-secondary);
+    color: ds.color(text-primary);
+    font-size: map.get(ds.$font-size, sm);
+    @include ds.smooth-transition(border-color, background, box-shadow);
+
+    &::placeholder {
+      color: ds.color(text-tertiary);
+    }
+
+    &:focus {
+      border-color: ds.color(border-focus);
+      outline: none;
+      box-shadow: ds.glow(accent-sm);
+    }
+  }
+}
+
+.catalogContent {
+  min-width: 0;
+}
+
+.catalogHeader {
+  display: grid;
+  gap: ds.spacing(4);
+  margin-bottom: ds.spacing(4);
+
+  @include ds.respond-to(md) {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: map.get(ds.$font-size, 3xl);
+    font-weight: map.get(ds.$font-weight, bold);
+    line-height: map.get(ds.$line-height, tight);
+  }
+}
+
+.catalogSummary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: ds.spacing(3);
+
+  span {
+    display: flex;
+    min-width: 8rem;
+    flex-direction: column;
+    gap: ds.spacing(1);
+    padding: ds.spacing(3) ds.spacing(4);
+    border: 1px solid ds.color(border-default);
+    border-radius: ds.radius(md);
+    background: ds.color(surface-default);
+    color: ds.color(text-primary);
+    font-family: ds.$font-mono;
+    font-size: map.get(ds.$font-size, xl);
+    font-weight: map.get(ds.$font-weight, semibold);
+  }
+
+  small {
+    color: ds.color(text-tertiary);
+    font-family: ds.$font-primary;
+    font-size: map.get(ds.$font-size, xs);
+    font-weight: map.get(ds.$font-weight, regular);
+  }
+}
+
+.resultCount {
+  margin: 0 0 ds.spacing(5);
+  color: ds.color(text-secondary);
+  font-size: map.get(ds.$font-size, sm);
+
+  span {
+    color: ds.color(text-primary);
+    font-weight: map.get(ds.$font-weight, semibold);
+  }
+}
+
+.projectGrid {
+  display: grid;
+  gap: ds.spacing(4);
+
+  @include ds.respond-to(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.emptyState {
+  @include ds.card-base;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: ds.spacing(4);
+  padding: ds.spacing(8);
+}
+
+.emptyTitle {
+  margin: 0;
+  color: ds.color(text-primary);
+  font-size: map.get(ds.$font-size, xl);
+  font-weight: map.get(ds.$font-weight, semibold);
+}
+
+.emptyDescription {
+  max-width: 28rem;
+  margin: 0;
+  color: ds.color(text-secondary);
+  line-height: map.get(ds.$line-height, normal);
+}

@@ -1,22 +1,19 @@
 'use client'
-
 import Link from 'next/link'
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
 import { StatusBadge } from '@/shared/ui/status-badge'
 import { ProgressBar } from '@/shared/ui/progress-bar'
 import { AvatarStack } from '@/shared/ui/avatar-stack'
 import type { Project } from '@/shared/lib/types'
 import { ArrowLeft, Settings, Share2 } from 'lucide-react'
-
 interface ProjectHeaderProps {
   project: Project
   className?: string
 }
-
-export function ProjectHeader({ project, className }: ProjectHeaderProps) {
+export const ProjectHeader = ({ project, className }: ProjectHeaderProps) => {
   return (
-    <div className={cn('space-y-4', className)}>
+    <div className={classNames('space-y-4', className)}>
       <div className="flex items-center gap-2 text-sm">
         <Link
           href="/"
@@ -30,18 +27,14 @@ export function ProjectHeader({ project, className }: ProjectHeaderProps) {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div className="space-y-2">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-foreground">
-              {project.title}
-            </h1>
+            <h1 className="text-2xl font-bold text-foreground">{project.title}</h1>
             <StatusBadge status={project.status} />
           </div>
 
-          <p className="text-muted-foreground max-w-2xl">
-            {project.description}
-          </p>
+          <p className="text-muted-foreground max-w-2xl">{project.description}</p>
 
           <div className="flex flex-wrap gap-1.5 pt-1">
-            {project.techStack.map((tech) => (
+            {project.techStack.map(tech => (
               <span
                 key={tech}
                 className="px-2 py-0.5 text-xs bg-secondary text-secondary-foreground rounded"
@@ -84,4 +77,3 @@ export function ProjectHeader({ project, className }: ProjectHeaderProps) {
     </div>
   )
 }
-

@@ -1,4 +1,4 @@
-import type { Project, User, ActivityItem, Stage, Task, JournalEntry } from './types'
+import type { Project, User, ActivityItem, Stage, JournalEntry } from './types'
 
 export const mockUsers: User[] = [
   {
@@ -150,7 +150,8 @@ export const mockProjects: Project[] = [
   {
     id: '1',
     title: 'DevFlow Analytics',
-    description: 'Real-time analytics dashboard for development teams to track productivity and code quality metrics.',
+    description:
+      'Real-time analytics dashboard for development teams to track productivity and code quality metrics.',
     status: 'active',
     health: 'healthy',
     participants: [mockUsers[0], mockUsers[1], mockUsers[2]],
@@ -171,7 +172,8 @@ export const mockProjects: Project[] = [
   {
     id: '2',
     title: 'CloudSync Storage',
-    description: 'Distributed file storage system with end-to-end encryption and real-time collaboration features.',
+    description:
+      'Distributed file storage system with end-to-end encryption and real-time collaboration features.',
     status: 'slow',
     health: 'slowing',
     participants: [mockUsers[1], mockUsers[3]],
@@ -192,7 +194,8 @@ export const mockProjects: Project[] = [
   {
     id: '3',
     title: 'AI Code Review',
-    description: 'Automated code review tool powered by machine learning for detecting bugs and suggesting improvements.',
+    description:
+      'Automated code review tool powered by machine learning for detecting bugs and suggesting improvements.',
     status: 'stalled',
     health: 'at_risk',
     participants: [mockUsers[0], mockUsers[4]],
@@ -213,7 +216,8 @@ export const mockProjects: Project[] = [
   {
     id: '4',
     title: 'TeamPulse Chat',
-    description: 'Modern team communication platform with threaded conversations and smart notifications.',
+    description:
+      'Modern team communication platform with threaded conversations and smart notifications.',
     status: 'revival',
     health: 'slowing',
     participants: [mockUsers[2], mockUsers[3], mockUsers[4]],
@@ -254,7 +258,8 @@ export const mockProjects: Project[] = [
   {
     id: '6',
     title: 'Mesh API Gateway',
-    description: 'Service mesh implementation with intelligent routing and automatic load balancing.',
+    description:
+      'Service mesh implementation with intelligent routing and automatic load balancing.',
     status: 'active',
     health: 'healthy',
     participants: [mockUsers[3], mockUsers[4]],
@@ -275,7 +280,8 @@ export const mockProjects: Project[] = [
   {
     id: '7',
     title: 'DataViz Studio',
-    description: 'Interactive data visualization tool with drag-and-drop chart builder and export capabilities.',
+    description:
+      'Interactive data visualization tool with drag-and-drop chart builder and export capabilities.',
     status: 'slow',
     health: 'at_risk',
     participants: [mockUsers[2]],
@@ -377,13 +383,13 @@ export const mockJournalEntries: JournalEntry[] = [
 ]
 
 export const getProjectById = (id: string): Project | undefined => {
-  return mockProjects.find(p => p.id === id)
+  return mockProjects.find(project => project.id === id)
 }
 
 export const getActivitiesByProjectId = (projectId: string): ActivityItem[] => {
-  return mockActivities.filter(a => a.projectId === projectId)
+  return mockActivities.filter(activity => activity.projectId === projectId)
 }
 
 export const getJournalEntriesByProjectId = (projectId: string): JournalEntry[] => {
-  return mockJournalEntries.filter(e => e.projectId === projectId)
+  return mockJournalEntries.filter(entry => entry.projectId === projectId)
 }

@@ -1,49 +1,39 @@
 'use client'
-
 import Link from 'next/link'
 import { useState } from 'react'
 import { ArrowRight, Check, ExternalLink } from 'lucide-react'
-
 import { takeProjectTask } from '@/entities/task/lib/taskStore'
 import type { ProjectTask } from '@/entities/task/model/types'
 import { Button } from '@/shared/ui/button'
 import styles from './ContributionFlow.module.scss'
-
 enum ContributionFlowStep {
   TaskIntro = 'TASK_INTRO',
   Access = 'ACCESS',
   Commitment = 'COMMITMENT',
   Success = 'SUCCESS',
 }
-
 interface ContributionFlowProps {
   task: ProjectTask
 }
-
 const commitmentOptions = ['Сегодня', 'Завтра', 'На этой неделе']
-
-function ContributionFlow({ task }: ContributionFlowProps) {
+const ContributionFlow = ({ task }: ContributionFlowProps) => {
   const [activeStep, setActiveStep] = useState(ContributionFlowStep.TaskIntro)
   const [commitmentLabel, setCommitmentLabel] = useState(commitmentOptions[0])
   const [takenTask, setTakenTask] = useState(task)
-
-  function handleContinueClick() {
+  const handleContinueClick = () => {
     if (activeStep === ContributionFlowStep.TaskIntro) {
       setActiveStep(ContributionFlowStep.Access)
       return
     }
-
     if (activeStep === ContributionFlowStep.Access) {
       setActiveStep(ContributionFlowStep.Commitment)
     }
   }
-
-  function handleTakeTaskClick() {
+  const handleTakeTaskClick = () => {
     const nextTask = takeProjectTask(takenTask, commitmentLabel)
     setTakenTask(nextTask)
     setActiveStep(ContributionFlowStep.Success)
   }
-
   return (
     <section className={styles.flow}>
       <div className={styles.progress}>
@@ -89,7 +79,9 @@ function ContributionFlow({ task }: ContributionFlowProps) {
             <article className={styles.resourceCard}>
               <h3>Быстрый старт</h3>
               <pre className={styles.commands}>
-                <code>git clone ...{'\n'}npm install{'\n'}npm run dev</code>
+                <code>
+                  git clone ...{'\n'}npm install{'\n'}npm run dev
+                </code>
               </pre>
             </article>
           </div>
@@ -107,7 +99,7 @@ function ContributionFlow({ task }: ContributionFlowProps) {
             subtitle="Небольшое обещание помогает проекту двигаться."
           />
           <div className={styles.commitmentOptions}>
-            {commitmentOptions.map((option) => (
+            {commitmentOptions.map(option => (
               <button
                 className={
                   option === commitmentLabel
@@ -148,8 +140,7 @@ function ContributionFlow({ task }: ContributionFlowProps) {
     </section>
   )
 }
-
-function TaskSummary({ task }: { task: ProjectTask }) {
+const TaskSummary = ({ task }: { task: ProjectTask }) => {
   return (
     <article className={styles.taskSummary}>
       <h2>{task.title}</h2>
@@ -161,15 +152,13 @@ function TaskSummary({ task }: { task: ProjectTask }) {
     </article>
   )
 }
-
 interface ResourceCardProps {
   title: string
   value: string
   href?: string
   actionLabel: string
 }
-
-function ResourceCard({ title, value, href, actionLabel }: ResourceCardProps) {
+const ResourceCard = ({ title, value, href, actionLabel }: ResourceCardProps) => {
   return (
     <article className={styles.resourceCard}>
       <h3>{title}</h3>
@@ -185,14 +174,7 @@ function ResourceCard({ title, value, href, actionLabel }: ResourceCardProps) {
     </article>
   )
 }
-
-function StepHeading({
-  title,
-  subtitle,
-}: {
-  title: string
-  subtitle: string
-}) {
+const StepHeading = ({ title, subtitle }: { title: string; subtitle: string }) => {
   return (
     <div className={styles.heading}>
       <h1>{title}</h1>
@@ -200,5 +182,4 @@ function StepHeading({
     </div>
   )
 }
-
 export { ContributionFlow }

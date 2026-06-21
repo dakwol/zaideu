@@ -1,20 +1,20 @@
 import Link from 'next/link'
 import { Clock } from 'lucide-react'
-
 import { formatTaskStatus } from '@/entities/task/lib/formatTaskStatus'
 import { ProjectTaskStatus, type ProjectTask } from '@/entities/task/model/types'
 import { Button } from '@/shared/ui/button'
 import type { ProjectStageTasksProps } from '../model/types'
 import styles from './ProjectStageTasks.module.scss'
-
-const taskGroups: Array<{ title: string; status: ProjectTaskStatus }> = [
+const taskGroups: Array<{
+  title: string
+  status: ProjectTaskStatus
+}> = [
   { title: 'Можно взять', status: ProjectTaskStatus.Available },
   { title: 'Уже в работе', status: ProjectTaskStatus.InProgress },
   { title: 'На проверке', status: ProjectTaskStatus.InReview },
   { title: 'Готово', status: ProjectTaskStatus.Done },
 ]
-
-function ProjectStageTasks({ tasks }: ProjectStageTasksProps) {
+const ProjectStageTasks = ({ tasks }: ProjectStageTasksProps) => {
   return (
     <section className={styles.section}>
       <div className={styles.heading}>
@@ -22,18 +22,16 @@ function ProjectStageTasks({ tasks }: ProjectStageTasksProps) {
         <p>Только ближайшие задачи текущего этапа, без большого backlog.</p>
       </div>
       <div className={styles.groups}>
-        {taskGroups.map((taskGroup) => {
-          const groupTasks = tasks.filter((task) => task.status === taskGroup.status)
-
+        {taskGroups.map(taskGroup => {
+          const groupTasks = tasks.filter(task => task.status === taskGroup.status)
           if (groupTasks.length === 0) {
             return null
           }
-
           return (
             <div className={styles.group} key={taskGroup.status}>
               <h3>{taskGroup.title}</h3>
               <div className={styles.list}>
-                {groupTasks.map((task) => (
+                {groupTasks.map(task => (
                   <StageTaskCard key={task.id} task={task} />
                 ))}
               </div>
@@ -44,8 +42,7 @@ function ProjectStageTasks({ tasks }: ProjectStageTasksProps) {
     </section>
   )
 }
-
-function StageTaskCard({ task }: { task: ProjectTask }) {
+const StageTaskCard = ({ task }: { task: ProjectTask }) => {
   return (
     <article className={styles.card}>
       <div className={styles.cardMain}>
@@ -65,18 +62,14 @@ function StageTaskCard({ task }: { task: ProjectTask }) {
     </article>
   )
 }
-
-function TaskCardAction({ task }: { task: ProjectTask }) {
+const TaskCardAction = ({ task }: { task: ProjectTask }) => {
   if (task.status === ProjectTaskStatus.Available) {
     return (
       <Button size="sm" asChild>
-        <Link href={`/project/${task.projectId}/contribute/${task.id}`}>
-          Взять задачу
-        </Link>
+        <Link href={`/project/${task.projectId}/contribute/${task.id}`}>Взять задачу</Link>
       </Button>
     )
   }
-
   if (task.status === ProjectTaskStatus.InProgress) {
     return (
       <div className={styles.actionText}>
@@ -87,12 +80,9 @@ function TaskCardAction({ task }: { task: ProjectTask }) {
       </div>
     )
   }
-
   if (task.status === ProjectTaskStatus.InReview) {
     return <span className={styles.actionTextOnly}>Результат отправлен на проверку</span>
   }
-
   return <span className={styles.actionTextOnly}>Завершено</span>
 }
-
 export { ProjectStageTasks }

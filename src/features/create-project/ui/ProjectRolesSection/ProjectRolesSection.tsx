@@ -3,17 +3,15 @@ import { Plus, X } from 'lucide-react'
 import { CreateProjectStepHeading } from '../CreateProjectStepHeading'
 import type { ProjectRolesSectionProps } from '../../model/types'
 import styles from './ProjectRolesSection.module.scss'
-
-function ProjectRolesSection({
+const ProjectRolesSection = ({
   selectedRoles,
   rolePickerIsOpen,
   onRolePickerToggle,
   onRoleToggle,
-}: ProjectRolesSectionProps) {
+}: ProjectRolesSectionProps) => {
   const availableRoles = PROJECT_ROLE_OPTIONS.filter(
-    (projectRole) => !selectedRoles.includes(projectRole),
+    projectRole => !selectedRoles.includes(projectRole)
   )
-
   return (
     <section className={styles.section}>
       <CreateProjectStepHeading
@@ -23,7 +21,7 @@ function ProjectRolesSection({
       />
       <div className={styles.rolesBlock}>
         <div className={styles.roleTokens} aria-label="Выбранные роли">
-          {selectedRoles.map((projectRole) => (
+          {selectedRoles.map(projectRole => (
             <button
               className={styles.roleToken}
               key={projectRole}
@@ -35,18 +33,14 @@ function ProjectRolesSection({
             </button>
           ))}
         </div>
-        <button
-          className={styles.addRoleButton}
-          type="button"
-          onClick={onRolePickerToggle}
-        >
+        <button className={styles.addRoleButton} type="button" onClick={onRolePickerToggle}>
           <Plus aria-hidden="true" />
           Добавить роль
         </button>
         {rolePickerIsOpen ? (
           <div className={styles.rolePicker}>
             {availableRoles.length > 0 ? (
-              availableRoles.map((projectRole) => (
+              availableRoles.map(projectRole => (
                 <button
                   className={styles.roleChoice}
                   key={projectRole}
@@ -65,5 +59,4 @@ function ProjectRolesSection({
     </section>
   )
 }
-
 export { ProjectRolesSection }

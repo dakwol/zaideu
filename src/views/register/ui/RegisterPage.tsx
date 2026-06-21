@@ -1,7 +1,5 @@
 'use client'
-
 import { useState, type ChangeEvent, type FormEvent } from 'react'
-
 import { AuthIntentSelector } from '@/features/auth/ui/AuthIntentSelector'
 import {
   CREATE_PROJECT_SUBMIT_LABEL,
@@ -12,52 +10,41 @@ import { Button } from '@/shared/ui/button'
 import { AuthCard } from '@/shared/ui/AuthCard'
 import { TextField } from '@/shared/ui/TextField'
 import styles from './RegisterPage.module.scss'
-
 interface RegisterPageProps {
   onLoginClick: () => void
 }
-
-function RegisterPage({ onLoginClick }: RegisterPageProps) {
-  const [registerFormValues, setRegisterFormValues] =
-    useState<RegisterFormValues>({
-      name: '',
-      email: '',
-      password: '',
-    })
-  const [selectedIntent, setSelectedIntent] = useState<AuthIntent>(
-    AuthIntent.CreateProject,
-  )
+const RegisterPage = ({ onLoginClick }: RegisterPageProps) => {
+  const [registerFormValues, setRegisterFormValues] = useState<RegisterFormValues>({
+    name: '',
+    email: '',
+    password: '',
+  })
+  const [selectedIntent, setSelectedIntent] = useState<AuthIntent>(AuthIntent.CreateProject)
   const [formErrorMessage, setFormErrorMessage] = useState('')
-
   const submitButtonLabel =
     selectedIntent === AuthIntent.CreateProject
       ? CREATE_PROJECT_SUBMIT_LABEL
       : FIND_PROJECT_SUBMIT_LABEL
-
-  function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
-    setRegisterFormValues((currentFormValues) => ({
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setRegisterFormValues(currentFormValues => ({
       ...currentFormValues,
       name: event.target.value,
     }))
   }
-
-  function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
-    setRegisterFormValues((currentFormValues) => ({
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setRegisterFormValues(currentFormValues => ({
       ...currentFormValues,
       email: event.target.value,
     }))
   }
-
-  function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
-    setRegisterFormValues((currentFormValues) => ({
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setRegisterFormValues(currentFormValues => ({
       ...currentFormValues,
       password: event.target.value,
     }))
   }
-
-  function handleRegisterSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleRegisterSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
     if (
       !registerFormValues.name.trim() ||
       !registerFormValues.email.trim() ||
@@ -66,14 +53,9 @@ function RegisterPage({ onLoginClick }: RegisterPageProps) {
       setFormErrorMessage('Заполните имя, email и пароль.')
       return
     }
-
     setFormErrorMessage('')
-    console.log('register submit', {
-      ...registerFormValues,
-      intent: selectedIntent,
-    })
+    //TODO: implement registration API call
   }
-
   return (
     <AuthCard
       title="Начните двигать проект"
@@ -81,11 +63,7 @@ function RegisterPage({ onLoginClick }: RegisterPageProps) {
       footer={
         <p className={styles.switchText}>
           Уже есть аккаунт?{' '}
-          <button
-            className={styles.inlineButton}
-            type="button"
-            onClick={onLoginClick}
-          >
+          <button className={styles.inlineButton} type="button" onClick={onLoginClick}>
             Войти
           </button>
         </p>
@@ -121,10 +99,7 @@ function RegisterPage({ onLoginClick }: RegisterPageProps) {
           />
         </div>
 
-        <AuthIntentSelector
-          selectedIntent={selectedIntent}
-          onIntentChange={setSelectedIntent}
-        />
+        <AuthIntentSelector selectedIntent={selectedIntent} onIntentChange={setSelectedIntent} />
 
         {formErrorMessage ? (
           <p className={styles.errorMessage} role="alert">
@@ -139,5 +114,4 @@ function RegisterPage({ onLoginClick }: RegisterPageProps) {
     </AuthCard>
   )
 }
-
 export { RegisterPage }

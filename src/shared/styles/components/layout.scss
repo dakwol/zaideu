@@ -1,0 +1,383 @@
+@use '../design-system' as ds;
+
+// ============================================================================
+// CONTAINER
+// ============================================================================
+
+.container {
+  @include ds.container;
+}
+
+.containerFluid {
+  width: 100%;
+  padding-left: ds.spacing(4);
+  padding-right: ds.spacing(4);
+
+  @include ds.respond-to(md) {
+    padding-left: ds.spacing(6);
+    padding-right: ds.spacing(6);
+  }
+}
+
+.containerNarrow {
+  @include ds.container;
+  max-width: 768px;
+}
+
+// ============================================================================
+// GRID SYSTEM
+// ============================================================================
+
+.grid {
+  display: grid;
+  gap: ds.spacing(6);
+}
+
+.gridCols1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.gridCols2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.gridCols3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.gridCols4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+//Responsive grid
+.gridResponsive {
+  display: grid;
+  gap: ds.spacing(6);
+  grid-template-columns: repeat(1, 1fr);
+
+  @include ds.respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include ds.respond-to(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// ============================================================================
+// FLEX UTILITIES
+// ============================================================================
+
+.flex {
+  display: flex;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexWrap {
+  flex-wrap: wrap;
+}
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flexBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flexStart {
+  display: flex;
+  align-items: flex-start;
+}
+
+.flexEnd {
+  display: flex;
+  align-items: flex-end;
+}
+
+// ============================================================================
+// STACK (vertical/horizontal spacing)
+// ============================================================================
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stackXs {
+  gap: ds.spacing(1);
+}
+
+.stackSm {
+  gap: ds.spacing(2);
+}
+
+.stackMd {
+  gap: ds.spacing(4);
+}
+
+.stackLg {
+  gap: ds.spacing(6);
+}
+
+.stackXl {
+  gap: ds.spacing(8);
+}
+
+.stackHorizontal {
+  flex-direction: row;
+}
+
+// ============================================================================
+// SECTION
+// ============================================================================
+
+.section {
+  padding-top: ds.spacing(12);
+  padding-bottom: ds.spacing(12);
+
+  @include ds.respond-to(md) {
+    padding-top: ds.spacing(16);
+    padding-bottom: ds.spacing(16);
+  }
+
+  @include ds.respond-to(lg) {
+    padding-top: ds.spacing(20);
+    padding-bottom: ds.spacing(20);
+  }
+}
+
+.sectionHeader {
+  margin-bottom: ds.spacing(8);
+  text-align: center;
+
+  @include ds.respond-to(md) {
+    margin-bottom: ds.spacing(12);
+  }
+}
+
+.sectionTitle {
+  @include ds.heading-2;
+  margin: 0 0 ds.spacing(4);
+  color: ds.color(text-primary);
+}
+
+.sectionDescription {
+  @include ds.body-large;
+  color: ds.color(text-secondary);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+// ============================================================================
+// PAGE LAYOUT
+// ============================================================================
+
+.pageLayout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pageHeader {
+  position: sticky;
+  top: 0;
+  z-index: ds.z(sticky);
+  background: ds.color(background-primary);
+  border-bottom: 1px solid ds.color(border-default);
+  backdrop-filter: blur(8px);
+}
+
+.pageMain {
+  flex: 1;
+  padding-top: ds.spacing(8);
+  padding-bottom: ds.spacing(12);
+
+  @include ds.respond-to(md) {
+    padding-top: ds.spacing(12);
+    padding-bottom: ds.spacing(16);
+  }
+}
+
+.pageFooter {
+  border-top: 1px solid ds.color(border-default);
+  padding: ds.spacing(8) 0;
+  background: ds.color(background-secondary);
+}
+
+// ============================================================================
+// SIDEBAR LAYOUT
+// ============================================================================
+
+.sidebarLayout {
+  display: grid;
+  gap: ds.spacing(6);
+  grid-template-columns: 1fr;
+
+  @include ds.respond-to(lg) {
+    grid-template-columns: 280px 1fr;
+    gap: ds.spacing(8);
+  }
+
+  @include ds.respond-to(xl) {
+    grid-template-columns: 320px 1fr;
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: ds.spacing(4);
+
+  @include ds.respond-to(lg) {
+    position: sticky;
+    top: ds.spacing(20);
+    align-self: start;
+  }
+}
+
+.sidebarContent {
+  flex: 1;
+}
+
+// ============================================================================
+// TWO COLUMN LAYOUT
+// ============================================================================
+
+.twoColumnLayout {
+  display: grid;
+  gap: ds.spacing(6);
+  grid-template-columns: 1fr;
+
+  @include ds.respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: ds.spacing(8);
+  }
+}
+
+.twoColumnAsymmetric {
+  @include ds.respond-to(lg) {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+// ============================================================================
+// EMPTY STATE LAYOUT
+// ============================================================================
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: ds.spacing(12) ds.spacing(4);
+  min-height: 400px;
+}
+
+.emptyStateIcon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: ds.spacing(4);
+  color: ds.color(text-tertiary);
+}
+
+.emptyStateTitle {
+  @include ds.heading-4;
+  margin: 0 0 ds.spacing(2);
+  color: ds.color(text-primary);
+}
+
+.emptyStateDescription {
+  @include ds.body-base;
+  color: ds.color(text-secondary);
+  max-width: 480px;
+  margin: 0 0 ds.spacing(6);
+}
+
+.emptyStateActions {
+  display: flex;
+  gap: ds.spacing(3);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+// ============================================================================
+// DIVIDER
+// ============================================================================
+
+.divider {
+  height: 1px;
+  background: ds.color(border-default);
+  border: none;
+  margin: ds.spacing(6) 0;
+}
+
+.dividerVertical {
+  width: 1px;
+  height: auto;
+  align-self: stretch;
+  margin: 0 ds.spacing(4);
+}
+
+.dividerText {
+  display: flex;
+  align-items: center;
+  gap: ds.spacing(4);
+  @include ds.body-small;
+  color: ds.color(text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: ds.spacing(6) 0;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: ds.color(border-default);
+  }
+}
+
+// ============================================================================
+// ASPECT RATIO CONTAINER
+// ============================================================================
+
+.aspectRatio {
+  position: relative;
+  width: 100%;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-bottom: var(--aspect-ratio, 100%);
+  }
+
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.aspectRatio16x9 {
+  --aspect-ratio: 56.25%; // 9/16
+}
+
+.aspectRatio4x3 {
+  --aspect-ratio: 75%; // 3/4
+}
+
+.aspectRatio1x1 {
+  --aspect-ratio: 100%;
+}

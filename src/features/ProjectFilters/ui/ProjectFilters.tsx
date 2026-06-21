@@ -1,11 +1,10 @@
 'use client'
-
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
 import type { ProjectStatus, HealthStatus } from '@/shared/lib/types'
 import { Filter, X } from 'lucide-react'
 import { useTranslation } from '@/shared/hooks/use-locale'
-
+import styles from '../ProjectFilters.module.scss'
 interface ProjectFiltersProps {
   selectedStatus: ProjectStatus | 'all'
   selectedHealth: HealthStatus | 'all'
@@ -19,8 +18,7 @@ interface ProjectFiltersProps {
   onRolesChange: (roles: string[]) => void
   className?: string
 }
-
-export function ProjectFilters({
+export const ProjectFilters = ({
   selectedStatus,
   selectedHealth,
   selectedTech,
@@ -32,79 +30,93 @@ export function ProjectFilters({
   onTechChange,
   onRolesChange,
   className,
-}: ProjectFiltersProps) {
-  const t = useTranslation()
-  const hasFilters = selectedStatus !== 'all' || selectedHealth !== 'all' || selectedTech.length > 0 || selectedRoles.length > 0
-
+}: ProjectFiltersProps) => {
+  const translate = useTranslation()
+  const hasFilters =
+    selectedStatus !== 'all' ||
+    selectedHealth !== 'all' ||
+    selectedTech.length > 0 ||
+    selectedRoles.length > 0
   const clearFilters = () => {
     onStatusChange('all')
     onHealthChange('all')
     onTechChange([])
     onRolesChange([])
   }
-
   const toggleTech = (tech: string) => {
     if (selectedTech.includes(tech)) {
-      onTechChange(selectedTech.filter(t => t !== tech))
+      onTechChange(selectedTech.filter(item => item !== tech))
     } else {
       onTechChange([...selectedTech, tech])
     }
   }
-
   const toggleRole = (role: string) => {
     if (selectedRoles.includes(role)) {
-      onRolesChange(selectedRoles.filter(r => r !== role))
+      onRolesChange(selectedRoles.filter(item => item !== role))
     } else {
       onRolesChange([...selectedRoles, role])
     }
   }
-
-  const statuses: Array<{ value: ProjectStatus | 'all'; label: string }> = [
-    { value: 'all', label: t('filters.all') },
-    { value: 'active', label: t('filters.active') },
-    { value: 'slow', label: t('filters.slow') },
-    { value: 'stalled', label: t('filters.stalled') },
-    { value: 'revival', label: t('filters.revival') },
-    { value: 'completed', label: t('filters.completed') },
+  const statuses: Array<{
+    value: ProjectStatus | 'all'
+    label: string
+  }> = [
+    { value: 'all', label: translate('filters.all') },
+    { value: 'active', label: translate('filters.active') },
+    { value: 'slow', label: translate('filters.slow') },
+    { value: 'stalled', label: translate('filters.stalled') },
+    { value: 'revival', label: translate('filters.revival') },
+    { value: 'completed', label: translate('filters.completed') },
   ]
-
-  const healthOptions: Array<{ value: HealthStatus | 'all'; label: string; color?: string }> = [
-    { value: 'all', label: t('filters.all') },
-    { value: 'healthy', label: t('filters.healthy'), color: 'bg-emerald-500' },
-    { value: 'slowing', label: t('filters.slowing'), color: 'bg-amber-500' },
-    { value: 'at_risk', label: t('filters.atRisk'), color: 'bg-red-500' },
+  const healthOptions: Array<{
+    value: HealthStatus | 'all'
+    label: string
+    indicatorClassName?: string
+  }> = [
+    { value: 'all', label: translate('filters.all') },
+    {
+      value: 'healthy',
+      label: translate('filters.healthy'),
+      indicatorClassName: styles.healthHealthy,
+    },
+    {
+      value: 'slowing',
+      label: translate('filters.slowing'),
+      indicatorClassName: styles.healthSlowing,
+    },
+    {
+      value: 'at_risk',
+      label: translate('filters.atRisk'),
+      indicatorClassName: styles.healthAtRisk,
+    },
   ]
-
   return (
-    <div className={cn('space-y-4', className)}>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-          <Filter className="w-4 h-4" />
-          {t('buttons.filter')}
+    <div className={classNames(styles.filters, className)}>
+      <div className={styles.header}>
+        <div className={styles.title}>
+          <Filter aria-hidden="true" />
+          {translate('buttons.filter')}
         </div>
         {hasFilters && (
-          <Button variant="ghost" size="sm" onClick={clearFilters} className="h-7 px-2 text-xs">
-            <X className="w-3 h-3 mr-1" />
-            {t('buttons.clear')}
+          <Button variant="ghost" size="sm" onClick={clearFilters} className={styles.clearButton}>
+            <X aria-hidden="true" />
+            {translate('buttons.clear')}
           </Button>
         )}
       </div>
 
-      <div className="space-y-3">
-        <div>
-          <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2 block">
-            {t('filters.status')}
-          </label>
-          <div className="flex flex-wrap gap-1.5">
-            {statuses.map((status) => (
+      <div className={styles.groups}>
+        <div className={styles.group}>
+          <span className={styles.label}>{translate('filters.status')}</span>
+          <div className={styles.options}>
+            {statuses.map(status => (
               <button
                 key={status.value}
+                type="button"
                 onClick={() => onStatusChange(status.value)}
-                className={cn(
-                  'px-2.5 py-1 text-xs font-medium rounded-md transition-colors',
-                  selectedStatus === status.value
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                className={classNames(
+                  styles.option,
+                  selectedStatus === status.value && styles.optionSelected
                 )}
               >
                 {status.label}
@@ -113,24 +125,22 @@ export function ProjectFilters({
           </div>
         </div>
 
-        <div>
-          <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2 block">
-            {t('filters.health')}
-          </label>
-          <div className="flex flex-wrap gap-1.5">
-            {healthOptions.map((option) => (
+        <div className={styles.group}>
+          <span className={styles.label}>{translate('filters.health')}</span>
+          <div className={styles.options}>
+            {healthOptions.map(option => (
               <button
                 key={option.value}
+                type="button"
                 onClick={() => onHealthChange(option.value)}
-                className={cn(
-                  'px-2.5 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1.5',
-                  selectedHealth === option.value
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                className={classNames(
+                  styles.option,
+                  styles.optionWithIndicator,
+                  selectedHealth === option.value && styles.optionSelected
                 )}
               >
-                {option.color && (
-                  <span className={cn('w-2 h-2 rounded-full', option.color)} />
+                {option.indicatorClassName && (
+                  <span className={classNames(styles.healthDot, option.indicatorClassName)} />
                 )}
                 {option.label}
               </button>
@@ -138,20 +148,17 @@ export function ProjectFilters({
           </div>
         </div>
 
-        <div>
-          <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2 block">
-            {t('filters.technology')}
-          </label>
-          <div className="flex flex-wrap gap-1.5">
-            {availableTech.slice(0, 8).map((tech) => (
+        <div className={styles.group}>
+          <span className={styles.label}>{translate('filters.technology')}</span>
+          <div className={styles.options}>
+            {availableTech.slice(0, 8).map(tech => (
               <button
                 key={tech}
+                type="button"
                 onClick={() => toggleTech(tech)}
-                className={cn(
-                  'px-2.5 py-1 text-xs font-medium rounded-md transition-colors',
-                  selectedTech.includes(tech)
-                    ? 'bg-accent text-accent-foreground'
-                    : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                className={classNames(
+                  styles.option,
+                  selectedTech.includes(tech) && styles.optionSelected
                 )}
               >
                 {tech}
@@ -160,20 +167,17 @@ export function ProjectFilters({
           </div>
         </div>
 
-        <div>
-          <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2 block">
-            {t('filters.roles')}
-          </label>
-          <div className="flex flex-wrap gap-1.5">
-            {availableRoles.map((role) => (
+        <div className={styles.group}>
+          <span className={styles.label}>{translate('filters.roles')}</span>
+          <div className={styles.options}>
+            {availableRoles.map(role => (
               <button
                 key={role}
+                type="button"
                 onClick={() => toggleRole(role)}
-                className={cn(
-                  'px-2.5 py-1 text-xs font-medium rounded-md transition-colors',
-                  selectedRoles.includes(role)
-                    ? 'bg-accent text-accent-foreground'
-                    : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                className={classNames(
+                  styles.option,
+                  selectedRoles.includes(role) && styles.optionSelected
                 )}
               >
                 {role}

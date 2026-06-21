@@ -4,10 +4,12 @@ import { StatusBadge } from '@/shared/ui/status-badge'
 import type { ProjectStatus } from '@/shared/lib/types'
 import type { ProjectHeroProps } from '../model/types'
 import styles from './ProjectHero.module.scss'
-
 const projectHealthCopy: Record<
   ProjectStatus,
-  { title: string; description: string }
+  {
+    title: string
+    description: string
+  }
 > = {
   active: {
     title: 'Проект активен',
@@ -34,10 +36,8 @@ const projectHealthCopy: Record<
     description: 'Движение временно остановлено',
   },
 }
-
-function ProjectHero({ project }: ProjectHeroProps) {
+const ProjectHero = ({ project }: ProjectHeroProps) => {
   const healthCopy = projectHealthCopy[project.status]
-
   return (
     <section className={styles.hero}>
       <div className={styles.copy}>
@@ -47,7 +47,7 @@ function ProjectHero({ project }: ProjectHeroProps) {
         </div>
         <p>{project.description}</p>
         <div className={styles.tags}>
-          {project.techStack.map((techStackItem) => (
+          {project.techStack.map(techStackItem => (
             <span key={techStackItem}>{techStackItem}</span>
           ))}
         </div>
@@ -80,13 +80,10 @@ function ProjectHero({ project }: ProjectHeroProps) {
         <div className={styles.healthBlock}>
           <h2>{healthCopy.title}</h2>
           <p>{healthCopy.description}</p>
-          {project.overdueTasks > 0 ? (
-            <span>{project.overdueTasks} задачи зависли</span>
-          ) : null}
+          {project.overdueTasks > 0 ? <span>{project.overdueTasks} задачи зависли</span> : null}
         </div>
       </aside>
     </section>
   )
 }
-
 export { ProjectHero }

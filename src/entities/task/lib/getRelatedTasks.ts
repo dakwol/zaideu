@@ -1,16 +1,10 @@
 import { ProjectTaskStatus, type ProjectTask } from '../model/types'
-
-function getRelatedTasks(
-  tasks: ProjectTask[],
-  currentTask: ProjectTask,
-): ProjectTask[] {
+const getRelatedTasks = (tasks: ProjectTask[], currentTask: ProjectTask): ProjectTask[] => {
   return tasks
     .filter(
-      (projectTask) =>
-        projectTask.id !== currentTask.id &&
-        projectTask.status === ProjectTaskStatus.Available,
+      projectTask =>
+        projectTask.id !== currentTask.id && projectTask.status === ProjectTaskStatus.Available
     )
     .slice(0, 3)
 }
-
 export { getRelatedTasks }

@@ -1,5 +1,5 @@
 import { ProjectFeedPage } from '@/views/ProjectFeedPage'
-
-export default function Page() {
+const Page = () => {
   return <ProjectFeedPage />
 }
+export default Page

@@ -1,5 +1,5 @@
 import { WorkspacePage } from '@/views/WorkspacePage'
-
-export default function Page() {
+const Page = () => {
   return <WorkspacePage />
 }
+export default Page

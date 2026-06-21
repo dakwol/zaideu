@@ -11,5 +11,4 @@ export type ToggleVariantsOptions = {
   className?: string
 }
 
-export type ToggleProps = React.ComponentProps<typeof TogglePrimitive.Root> &
-  ToggleVariantsOptions
+export type ToggleProps = React.ComponentProps<typeof TogglePrimitive.Root> & ToggleVariantsOptions

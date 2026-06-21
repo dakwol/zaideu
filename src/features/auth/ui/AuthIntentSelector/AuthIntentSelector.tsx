@@ -1,24 +1,15 @@
 import { AUTH_INTENT_OPTIONS } from '../../model/constants'
 import type { AuthIntentSelectorProps } from '../../model/types'
 import styles from './AuthIntentSelector.module.scss'
-
-function AuthIntentSelector({
-  selectedIntent,
-  onIntentChange,
-}: AuthIntentSelectorProps) {
+const AuthIntentSelector = ({ selectedIntent, onIntentChange }: AuthIntentSelectorProps) => {
   return (
     <fieldset className={styles.selector}>
       <legend className={styles.legend}>Что хотите сделать сначала?</legend>
       <div className={styles.options}>
-        {AUTH_INTENT_OPTIONS.map((intentOption) => {
+        {AUTH_INTENT_OPTIONS.map(intentOption => {
           const isSelected = selectedIntent === intentOption.value
-
           return (
-            <label
-              key={intentOption.value}
-              className={styles.option}
-              data-selected={isSelected}
-            >
+            <label key={intentOption.value} className={styles.option} data-selected={isSelected}>
               <input
                 className={styles.radioInput}
                 type="radio"
@@ -30,9 +21,7 @@ function AuthIntentSelector({
               <span className={styles.radioMark} aria-hidden="true" />
               <span className={styles.optionContent}>
                 <span className={styles.optionTitle}>{intentOption.title}</span>
-                <span className={styles.optionDescription}>
-                  {intentOption.description}
-                </span>
+                <span className={styles.optionDescription}>{intentOption.description}</span>
               </span>
             </label>
           )
@@ -41,5 +30,4 @@ function AuthIntentSelector({
     </fieldset>
   )
 }
-
 export { AuthIntentSelector }

@@ -1,6 +1,6 @@
 import { App } from '../App'
 import { AuthPage } from '@/features/auth/model/types'
-
-export default function LoginRoutePage() {
+const LoginRoutePage = () => {
   return <App initialPage={AuthPage.Login} />
 }
+export default LoginRoutePage

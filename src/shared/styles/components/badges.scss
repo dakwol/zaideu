@@ -1,0 +1,276 @@
+@use 'sass:map';
+@use '../design-system' as ds;
+
+// ============================================================================
+// BASE BADGE
+// ============================================================================
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: ds.spacing(1);
+  padding: ds.spacing(1) ds.spacing(2);
+  @include ds.caption;
+  font-weight: map.get(ds.$font-weight, medium);
+  border-radius: ds.radius(sm);
+  white-space: nowrap;
+}
+
+// ============================================================================
+// STATUS BADGES - Project Health
+// ============================================================================
+
+.statusBadge {
+  @extend .badge;
+  text-transform: capitalize;
+}
+
+.statusActive {
+  background: rgba(123, 237, 159, 0.15);
+  color: ds.color(status-active);
+  border: 1px solid rgba(123, 237, 159, 0.3);
+}
+
+.statusSlow {
+  background: rgba(255, 165, 2, 0.15);
+  color: ds.color(status-slow);
+  border: 1px solid rgba(255, 165, 2, 0.3);
+}
+
+.statusStalled {
+  background: rgba(255, 99, 72, 0.15);
+  color: ds.color(status-stalled);
+  border: 1px solid rgba(255, 99, 72, 0.3);
+}
+
+.statusRevival {
+  background: rgba(112, 161, 255, 0.15);
+  color: ds.color(status-revival);
+  border: 1px solid rgba(112, 161, 255, 0.3);
+}
+
+.statusCompleted {
+  background: rgba(149, 175, 192, 0.15);
+  color: ds.color(status-completed);
+  border: 1px solid rgba(149, 175, 192, 0.3);
+}
+
+.statusArchived {
+  background: rgba(116, 125, 140, 0.15);
+  color: ds.color(status-archived);
+  border: 1px solid rgba(116, 125, 140, 0.3);
+}
+
+// ============================================================================
+// SEMANTIC BADGES
+// ============================================================================
+
+.badgeSuccess {
+  @extend .badge;
+  background: rgba(46, 213, 115, 0.15);
+  color: ds.color(success);
+  border: 1px solid rgba(46, 213, 115, 0.3);
+}
+
+.badgeWarning {
+  @extend .badge;
+  background: rgba(255, 165, 2, 0.15);
+  color: ds.color(warning);
+  border: 1px solid rgba(255, 165, 2, 0.3);
+}
+
+.badgeError {
+  @extend .badge;
+  background: rgba(255, 71, 87, 0.15);
+  color: ds.color(error);
+  border: 1px solid rgba(255, 71, 87, 0.3);
+}
+
+.badgeInfo {
+  @extend .badge;
+  background: rgba(83, 82, 237, 0.15);
+  color: ds.color(info);
+  border: 1px solid rgba(83, 82, 237, 0.3);
+}
+
+// ============================================================================
+// NEUTRAL BADGES
+// ============================================================================
+
+.badgeDefault {
+  @extend .badge;
+  background: ds.color(surface-hover);
+  color: ds.color(text-secondary);
+  border: 1px solid ds.color(border-default);
+}
+
+.badgeSubtle {
+  @extend .badge;
+  background: transparent;
+  color: ds.color(text-tertiary);
+  border: 1px solid ds.color(border-default);
+}
+
+// ============================================================================
+// TAG (for technologies, roles, etc.)
+// ============================================================================
+
+.tag {
+  @extend .badge;
+  background: ds.color(surface-hover);
+  color: ds.color(text-primary);
+  border: 1px solid ds.color(border-default);
+  @include ds.smooth-transition(background, border-color);
+
+  &:hover {
+    background: ds.color(surface-active);
+    border-color: ds.color(border-hover);
+  }
+}
+
+.tagInteractive {
+  cursor: pointer;
+}
+
+.tagSelected {
+  background: ds.color(accent-primary-subtle);
+  color: ds.color(accent-primary);
+  border-color: ds.color(accent-primary);
+}
+
+.tagRemovable {
+  padding-right: ds.spacing(1);
+
+  .tagRemoveButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin-left: ds.spacing(1);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: ds.radius(sm);
+    color: currentColor;
+    opacity: 0.6;
+    @include ds.smooth-transition(opacity, background);
+
+    &:hover {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+// ============================================================================
+// ROLE BADGE (for team roles)
+// ============================================================================
+
+.roleBadge {
+  @extend .badge;
+  background: ds.color(surface-hover);
+  color: ds.color(text-primary);
+  border: 1px solid ds.color(border-default);
+  padding: ds.spacing(1) ds.spacing(3);
+
+  .roleBadgeIcon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.roleFrontend {
+  border-color: rgba(123, 237, 159, 0.3);
+  background: rgba(123, 237, 159, 0.1);
+}
+
+.roleBackend {
+  border-color: rgba(112, 161, 255, 0.3);
+  background: rgba(112, 161, 255, 0.1);
+}
+
+.roleDesigner {
+  border-color: rgba(255, 107, 129, 0.3);
+  background: rgba(255, 107, 129, 0.1);
+}
+
+.roleManager {
+  border-color: rgba(255, 165, 2, 0.3);
+  background: rgba(255, 165, 2, 0.1);
+}
+
+.roleDevOps {
+  border-color: rgba(83, 82, 237, 0.3);
+  background: rgba(83, 82, 237, 0.1);
+}
+
+// ============================================================================
+// TIME ESTIMATE BADGE
+// ============================================================================
+
+.timeEstimate {
+  @extend .badge;
+  background: transparent;
+  color: ds.color(text-secondary);
+  border: 1px solid ds.color(border-default);
+
+  .timeEstimateIcon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+// ============================================================================
+// DOT INDICATOR (minimal status)
+// ============================================================================
+
+.dotIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: ds.spacing(2);
+  @include ds.caption;
+
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  &.dotActive {
+    color: ds.color(status-active);
+  }
+
+  &.dotSlow {
+    color: ds.color(status-slow);
+  }
+
+  &.dotStalled {
+    color: ds.color(status-stalled);
+  }
+
+  &.dotRevival {
+    color: ds.color(status-revival);
+  }
+}
+
+// ============================================================================
+// BADGE SIZES
+// ============================================================================
+
+.badgeSm {
+  padding: ds.spacing(0.5) ds.spacing(1.5);
+  font-size: 0.6875rem; // 11px
+}
+
+.badgeMd {
+  padding: ds.spacing(1) ds.spacing(2);
+  font-size: map.get(ds.$font-size, xs);
+}
+
+.badgeLg {
+  padding: ds.spacing(1.5) ds.spacing(3);
+  font-size: map.get(ds.$font-size, sm);
+}

@@ -1,17 +1,15 @@
 import type { CheckboxCardProps } from '../model/types'
 import styles from './CheckboxCard.module.scss'
-
-function CheckboxCard({
+const CheckboxCard = ({
   title,
   description,
   checked,
   children,
   onCheckedChange,
-}: CheckboxCardProps) {
-  function handleCheckboxChange() {
+}: CheckboxCardProps) => {
+  const handleCheckboxChange = () => {
     onCheckedChange(!checked)
   }
-
   return (
     <label className={styles.card} data-checked={checked}>
       <input
@@ -23,13 +21,10 @@ function CheckboxCard({
       <span className={styles.mark} aria-hidden="true" />
       <span className={styles.content}>
         <span className={styles.title}>{title}</span>
-        {description ? (
-          <span className={styles.description}>{description}</span>
-        ) : null}
+        {description ? <span className={styles.description}>{description}</span> : null}
         {children}
       </span>
     </label>
   )
 }
-
 export { CheckboxCard }

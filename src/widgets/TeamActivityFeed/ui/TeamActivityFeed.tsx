@@ -1,7 +1,6 @@
 import type { TeamActivityFeedProps } from '../model/types'
 import styles from './TeamActivityFeed.module.scss'
-
-function TeamActivityFeed({ items }: TeamActivityFeedProps) {
+const TeamActivityFeed = ({ items }: TeamActivityFeedProps) => {
   return (
     <section className={styles.section}>
       <div className={styles.heading}>
@@ -9,7 +8,7 @@ function TeamActivityFeed({ items }: TeamActivityFeedProps) {
         <p>Короткие сигналы движения команды.</p>
       </div>
       <div className={styles.list}>
-        {items.map((activityItem) => (
+        {items.map(activityItem => (
           <article className={styles.item} key={activityItem.id}>
             <span />
             <p>{activityItem.text}</p>
@@ -19,5 +18,4 @@ function TeamActivityFeed({ items }: TeamActivityFeedProps) {
     </section>
   )
 }
-
 export { TeamActivityFeed }

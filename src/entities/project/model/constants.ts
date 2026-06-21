@@ -43,7 +43,7 @@ export const PROJECT_ROLE_OPTIONS = Object.values(ProjectRole)
 
 export const PROJECT_TASK_ESTIMATE_OPTIONS = Object.values(ProjectTaskEstimate).filter(
   (taskEstimateValue): taskEstimateValue is ProjectTaskEstimate =>
-    typeof taskEstimateValue === 'number',
+    typeof taskEstimateValue === 'number'
 )
 
 export const FOUNDATION_STAGE: ProjectStage = {

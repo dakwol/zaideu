@@ -1,16 +1,10 @@
 import styles from './CreateProjectStepHeading.module.scss'
-
 interface CreateProjectStepHeadingProps {
   eyebrow: string
   title: string
   subtitle: string
 }
-
-function CreateProjectStepHeading({
-  eyebrow,
-  title,
-  subtitle,
-}: CreateProjectStepHeadingProps) {
+const CreateProjectStepHeading = ({ eyebrow, title, subtitle }: CreateProjectStepHeadingProps) => {
   return (
     <div className={styles.heading}>
       <p>{eyebrow}</p>
@@ -19,5 +13,4 @@ function CreateProjectStepHeading({
     </div>
   )
 }
-
 export { CreateProjectStepHeading }

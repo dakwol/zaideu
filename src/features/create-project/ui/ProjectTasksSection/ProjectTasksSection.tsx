@@ -1,5 +1,4 @@
 import { Pencil, Plus, RefreshCw, Trash2 } from 'lucide-react'
-
 import { PROJECT_TASK_ESTIMATE_OPTIONS } from '@/entities/project/model/constants'
 import { ProjectTaskEstimate } from '@/entities/project/model/types'
 import { getTaskImportanceDescription } from '@/features/create-project/lib/getTaskImportanceDescription'
@@ -7,8 +6,7 @@ import { Button } from '@/shared/ui/button'
 import { CreateProjectStepHeading } from '../CreateProjectStepHeading'
 import type { ProjectTasksSectionProps } from '../../model/types'
 import styles from './ProjectTasksSection.module.scss'
-
-function ProjectTasksSection({
+const ProjectTasksSection = ({
   tasks,
   hasTemplateTaskUpdateAvailable,
   onTaskTitleChange,
@@ -17,11 +15,10 @@ function ProjectTasksSection({
   onTaskAdd,
   onTasksRegenerate,
   onTemplateTasksApply,
-}: ProjectTasksSectionProps) {
-  function handleTaskEstimateChange(taskId: string, nextEstimate: string) {
+}: ProjectTasksSectionProps) => {
+  const handleTaskEstimateChange = (taskId: string, nextEstimate: string) => {
     onTaskEstimateChange(taskId, Number(nextEstimate) as ProjectTaskEstimate)
   }
-
   return (
     <section className={styles.section}>
       <CreateProjectStepHeading
@@ -53,7 +50,7 @@ function ProjectTasksSection({
       </div>
 
       <div className={styles.tasksList}>
-        {tasks.map((projectTask) => (
+        {tasks.map(projectTask => (
           <article className={styles.taskCard} key={projectTask.id}>
             <div className={styles.taskTopline}>
               <Pencil aria-hidden="true" />
@@ -61,15 +58,10 @@ function ProjectTasksSection({
                 className={styles.estimateSelect}
                 value={projectTask.estimateMinutes}
                 aria-label="Оценка задачи"
-                onChange={(event) =>
-                  handleTaskEstimateChange(projectTask.id, event.target.value)
-                }
+                onChange={event => handleTaskEstimateChange(projectTask.id, event.target.value)}
               >
-                {PROJECT_TASK_ESTIMATE_OPTIONS.map((taskEstimateMinutes) => (
-                  <option
-                    key={taskEstimateMinutes}
-                    value={taskEstimateMinutes}
-                  >
+                {PROJECT_TASK_ESTIMATE_OPTIONS.map(taskEstimateMinutes => (
+                  <option key={taskEstimateMinutes} value={taskEstimateMinutes}>
                     {taskEstimateMinutes} минут
                   </option>
                 ))}
@@ -89,28 +81,18 @@ function ProjectTasksSection({
               className={styles.taskTitleInput}
               value={projectTask.title}
               aria-label="Название задачи"
-              onChange={(event) =>
-                onTaskTitleChange(projectTask.id, event.target.value)
-              }
+              onChange={event => onTaskTitleChange(projectTask.id, event.target.value)}
             />
-            <p className={styles.taskReason}>
-              {getTaskImportanceDescription(projectTask.title)}
-            </p>
+            <p className={styles.taskReason}>{getTaskImportanceDescription(projectTask.title)}</p>
           </article>
         ))}
       </div>
 
-      <Button
-        className={styles.addButton}
-        type="button"
-        variant="outline"
-        onClick={onTaskAdd}
-      >
+      <Button className={styles.addButton} type="button" variant="outline" onClick={onTaskAdd}>
         <Plus aria-hidden="true" />
         Добавить задачу
       </Button>
     </section>
   )
 }
-
 export { ProjectTasksSection }

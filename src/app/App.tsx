@@ -12,19 +12,19 @@ interface AppProps {
   initialPage?: AuthPage
 }
 
-function App({ initialPage = AuthPage.Login }: AppProps) {
+const App = ({ initialPage = AuthPage.Login }: AppProps) => {
   const router = useRouter()
   const [currentPage, setCurrentPage] = useState<AuthPage>(initialPage)
 
-  function handleOpenLoginPage() {
+  const handleOpenLoginPage = () => {
     setCurrentPage(AuthPage.Login)
   }
 
-  function handleOpenRegisterPage() {
+  const handleOpenRegisterPage = () => {
     setCurrentPage(AuthPage.Register)
   }
 
-  function handleLoginSuccess() {
+  const handleLoginSuccess = () => {
     router.push('/')
   }
 
@@ -44,12 +44,10 @@ function App({ initialPage = AuthPage.Login }: AppProps) {
 
         <aside className={styles.workspaceNote} aria-label="О продукте">
           <p className={styles.noteLabel}>рабочее пространство команды</p>
-          <h2 className={styles.noteTitle}>
-            Один понятный следующий шаг важнее большого плана.
-          </h2>
+          <h2 className={styles.noteTitle}>Один понятный следующий шаг важнее большого плана.</h2>
           <p className={styles.noteText}>
-            За Идею помогает держать проект в движении: видеть людей, задачи и
-            ближайшее действие без лишнего шума.
+            За Идею помогает держать проект в движении: видеть людей, задачи и ближайшее действие
+            без лишнего шума.
           </p>
           <div className={styles.noteChecklist}>
             <span>идея</span>

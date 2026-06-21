@@ -1,16 +1,13 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-
 import { StatusBadge } from '@/shared/ui/status-badge'
 import { Button } from '@/shared/ui/button'
 import type { ProjectsNeedHelpProps } from '../model/types'
 import styles from './ProjectsNeedHelp.module.scss'
-
-function ProjectsNeedHelp({ items }: ProjectsNeedHelpProps) {
+const ProjectsNeedHelp = ({ items }: ProjectsNeedHelpProps) => {
   if (items.length === 0) {
     return null
   }
-
   return (
     <section className={styles.section}>
       <div className={styles.heading}>
@@ -37,5 +34,4 @@ function ProjectsNeedHelp({ items }: ProjectsNeedHelpProps) {
     </section>
   )
 }
-
 export { ProjectsNeedHelp }

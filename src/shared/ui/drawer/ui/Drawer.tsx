@@ -1,59 +1,43 @@
 'use client'
-
 import * as React from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
-
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import styles from '../Drawer.module.scss'
-
-function Drawer({
-  ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) {
+const Drawer = ({ ...props }: React.ComponentProps<typeof DrawerPrimitive.Root>) => {
   return <DrawerPrimitive.Root data-slot="drawer" {...props} />
 }
-
-function DrawerTrigger({
-  ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Trigger>) {
+const DrawerTrigger = ({ ...props }: React.ComponentProps<typeof DrawerPrimitive.Trigger>) => {
   return <DrawerPrimitive.Trigger data-slot="drawer-trigger" {...props} />
 }
-
-function DrawerPortal({
-  ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Portal>) {
+const DrawerPortal = ({ ...props }: React.ComponentProps<typeof DrawerPrimitive.Portal>) => {
   return <DrawerPrimitive.Portal data-slot="drawer-portal" {...props} />
 }
-
-function DrawerClose({
-  ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Close>) {
+const DrawerClose = ({ ...props }: React.ComponentProps<typeof DrawerPrimitive.Close>) => {
   return <DrawerPrimitive.Close data-slot="drawer-close" {...props} />
 }
-
-function DrawerOverlay({
+const DrawerOverlay = ({
   className,
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Overlay>) {
+}: React.ComponentProps<typeof DrawerPrimitive.Overlay>) => {
   return (
     <DrawerPrimitive.Overlay
       data-slot="drawer-overlay"
-      className={cn(styles.overlay, className)}
+      className={classNames(styles.overlay, className)}
       {...props}
     />
   )
 }
-
-function DrawerContent({
+const DrawerContent = ({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Content>) {
+}: React.ComponentProps<typeof DrawerPrimitive.Content>) => {
   return (
     <DrawerPortal data-slot="drawer-portal">
       <DrawerOverlay />
       <DrawerPrimitive.Content
         data-slot="drawer-content"
-        className={cn(styles.content, className)}
+        className={classNames(styles.content, className)}
         {...props}
       >
         <div className={styles.handle} />
@@ -62,53 +46,40 @@ function DrawerContent({
     </DrawerPortal>
   )
 }
-
-function DrawerHeader({ className, ...props }: React.ComponentProps<'div'>) {
+const DrawerHeader = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
-    <div
-      data-slot="drawer-header"
-      className={cn(styles.header, className)}
-      {...props}
-    />
+    <div data-slot="drawer-header" className={classNames(styles.header, className)} {...props} />
   )
 }
-
-function DrawerFooter({ className, ...props }: React.ComponentProps<'div'>) {
+const DrawerFooter = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
-    <div
-      data-slot="drawer-footer"
-      className={cn(styles.footer, className)}
-      {...props}
-    />
+    <div data-slot="drawer-footer" className={classNames(styles.footer, className)} {...props} />
   )
 }
-
-function DrawerTitle({
+const DrawerTitle = ({
   className,
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Title>) {
+}: React.ComponentProps<typeof DrawerPrimitive.Title>) => {
   return (
     <DrawerPrimitive.Title
       data-slot="drawer-title"
-      className={cn(styles.title, className)}
+      className={classNames(styles.title, className)}
       {...props}
     />
   )
 }
-
-function DrawerDescription({
+const DrawerDescription = ({
   className,
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Description>) {
+}: React.ComponentProps<typeof DrawerPrimitive.Description>) => {
   return (
     <DrawerPrimitive.Description
       data-slot="drawer-description"
-      className={cn(styles.description, className)}
+      className={classNames(styles.description, className)}
       {...props}
     />
   )
 }
-
 export {
   Drawer,
   DrawerPortal,
@@ -121,4 +92,3 @@ export {
   DrawerTitle,
   DrawerDescription,
 }
-

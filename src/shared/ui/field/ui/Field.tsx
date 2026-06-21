@@ -1,192 +1,146 @@
 'use client'
-
 import { useMemo } from 'react'
-
-import { cn } from '@/shared/lib/utils'
+import { classNames } from '@/shared/lib/utils'
 import { Label } from '@/shared/ui/label'
 import { Separator } from '@/shared/ui/separator'
 import styles from '../Field.module.scss'
-
-function FieldSet({ className, ...props }: React.ComponentProps<'fieldset'>) {
-  return (
-    <fieldset
-      data-slot="field-set"
-      className={cn(styles.set, className)}
-      {...props}
-    />
-  )
+const FieldSet = ({ className, ...props }: React.ComponentProps<'fieldset'>) => {
+  return <fieldset data-slot="field-set" className={classNames(styles.set, className)} {...props} />
 }
-
-function FieldLegend({
+const FieldLegend = ({
   className,
   variant = 'legend',
   ...props
-}: React.ComponentProps<'legend'> & { variant?: 'legend' | 'label' }) {
+}: React.ComponentProps<'legend'> & {
+  variant?: 'legend' | 'label'
+}) => {
   return (
     <legend
       data-slot="field-legend"
       data-variant={variant}
-      className={cn(styles.legend, className)}
+      className={classNames(styles.legend, className)}
       {...props}
     />
   )
 }
-
-function FieldGroup({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="field-group"
-      className={cn(styles.group, className)}
-      {...props}
-    />
-  )
+const FieldGroup = ({ className, ...props }: React.ComponentProps<'div'>) => {
+  return <div data-slot="field-group" className={classNames(styles.group, className)} {...props} />
 }
-
 type FieldOrientation = 'vertical' | 'horizontal' | 'responsive'
-
-function fieldVariants({
+const fieldVariants = ({
   orientation = 'vertical',
   className,
 }: {
   orientation?: FieldOrientation
   className?: string
-} = {}) {
-  return cn(styles.field, styles[orientation], className)
+} = {}) => {
+  return classNames(styles.field, styles[orientation], className)
 }
-
-function Field({
+const Field = ({
   className,
   orientation = 'vertical',
   ...props
-}: React.ComponentProps<'div'> & { orientation?: FieldOrientation }) {
+}: React.ComponentProps<'div'> & {
+  orientation?: FieldOrientation
+}) => {
   return (
     <div
       role="group"
       data-slot="field"
       data-orientation={orientation}
-      className={cn(fieldVariants({ orientation }), className)}
+      className={classNames(fieldVariants({ orientation }), className)}
       {...props}
     />
   )
 }
-
-function FieldContent({ className, ...props }: React.ComponentProps<'div'>) {
+const FieldContent = ({ className, ...props }: React.ComponentProps<'div'>) => {
   return (
-    <div
-      data-slot="field-content"
-      className={cn(styles.content, className)}
-      {...props}
-    />
+    <div data-slot="field-content" className={classNames(styles.content, className)} {...props} />
   )
 }
-
-function FieldLabel({
-  className,
-  ...props
-}: React.ComponentProps<typeof Label>) {
+const FieldLabel = ({ className, ...props }: React.ComponentProps<typeof Label>) => {
   return (
-    <Label
-      data-slot="field-label"
-      className={cn(styles.label, className)}
-      {...props}
-    />
+    <Label data-slot="field-label" className={classNames(styles.label, className)} {...props} />
   )
 }
-
-function FieldTitle({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="field-label"
-      className={cn(styles.title, className)}
-      {...props}
-    />
-  )
+const FieldTitle = ({ className, ...props }: React.ComponentProps<'div'>) => {
+  return <div data-slot="field-label" className={classNames(styles.title, className)} {...props} />
 }
-
-function FieldDescription({ className, ...props }: React.ComponentProps<'p'>) {
+const FieldDescription = ({ className, ...props }: React.ComponentProps<'p'>) => {
   return (
     <p
       data-slot="field-description"
-      className={cn(styles.description, className)}
+      className={classNames(styles.description, className)}
       {...props}
     />
   )
 }
-
-function FieldSeparator({
+const FieldSeparator = ({
   children,
   className,
   ...props
 }: React.ComponentProps<'div'> & {
   children?: React.ReactNode
-}) {
+}) => {
   return (
     <div
       data-slot="field-separator"
       data-content={!!children}
-      className={cn(styles.separator, className)}
+      className={classNames(styles.separator, className)}
       {...props}
     >
       <Separator className={styles.separatorLine} />
       {children && (
-        <span
-          className={styles.separatorContent}
-          data-slot="field-separator-content"
-        >
+        <span className={styles.separatorContent} data-slot="field-separator-content">
           {children}
         </span>
       )}
     </div>
   )
 }
-
-function FieldError({
+const FieldError = ({
   className,
   children,
   errors,
   ...props
 }: React.ComponentProps<'div'> & {
-  errors?: Array<{ message?: string } | undefined>
-}) {
+  errors?: Array<
+    | {
+        message?: string
+      }
+    | undefined
+  >
+}) => {
   const content = useMemo(() => {
     if (children) {
       return children
     }
-
     if (!errors) {
       return null
     }
-
     if (errors.length === 1 && errors[0]?.message) {
       return errors[0].message
     }
-
     return (
       <ul className={styles.errorList}>
-        {errors.map(
-          (error, index) =>
-            error?.message && <li key={index}>{error.message}</li>,
-        )}
+        {errors.map((error, index) => error?.message && <li key={index}>{error.message}</li>)}
       </ul>
     )
   }, [children, errors])
-
   if (!content) {
     return null
   }
-
   return (
     <div
       role="alert"
       data-slot="field-error"
-      className={cn(styles.error, className)}
+      className={classNames(styles.error, className)}
       {...props}
     >
       {content}
     </div>
   )
 }
-
 export {
   Field,
   FieldLabel,
@@ -199,4 +153,3 @@ export {
   FieldContent,
   FieldTitle,
 }
-
